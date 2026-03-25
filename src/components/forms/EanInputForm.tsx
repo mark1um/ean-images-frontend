@@ -68,6 +68,7 @@ export function EanInputForm({ onSubmit, isLoading }: EanInputFormProps) {
             <FileText className="w-4 h-4" />
             Colar EANs
           </button>
+          {/* 
           <button
             type="button"
             onClick={() => setInputMode('file')}
@@ -81,6 +82,7 @@ export function EanInputForm({ onSubmit, isLoading }: EanInputFormProps) {
             <Upload className="w-4 h-4" />
             Upload de arquivo
           </button>
+          */}
         </div>
 
         {/* Modo texto */}

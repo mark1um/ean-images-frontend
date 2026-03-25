@@ -45,7 +45,7 @@ const benefits = [
 
 export function PricingPlansSection() {
   return (
-    <section className="space-y-5 md:space-y-6">
+    <section id="pricing" className="space-y-5 md:space-y-6">
       <div className="text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">Planos de imagens</p>
         <h2 className="mt-2 text-2xl md:text-3xl font-bold text-white">Preco simples por volume</h2>
