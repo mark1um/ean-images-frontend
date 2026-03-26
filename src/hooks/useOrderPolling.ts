@@ -37,7 +37,7 @@ export function useOrderPolling(orderId: string | null) {
         const orderStatus = await getOrderStatus(orderId);
         setStatus(orderStatus);
 
-        if (orderStatus.status === 'SENT') {
+        if (orderStatus.status === 'PAID') {
           stopPolling();
           setPollingState('completed');
         } else if (orderStatus.status === 'ERROR' || orderStatus.status === 'EXPIRED') {

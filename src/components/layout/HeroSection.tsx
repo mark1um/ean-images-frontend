@@ -28,14 +28,14 @@ export function HeroSection({ compact = false }: HeroSectionProps) {
             compact ? 'text-2xl md:text-3xl' : 'text-4xl md:text-5xl'
           )}
         >
-          Banco de Imagens EAN — Baixe Imagens de Produtos pelo Código EAN Instantaneamente
+          Baixe Imagens de Produtos pelo Código EAN Instantaneamente
         </h1>
 
         {!compact && (
           <>
-            <p className="mt-5 text-base md:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              Busque e baixe imagens de produtos pelo código EAN em segundos. Perfeito para e-commerce, 
-              marketplaces e empresas que precisam de imagens de alta qualidade. Sem cadastro, sem contrato, 
+            <p className="mt-5 text-base md:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed text-center">
+              Busque e baixe imagens de produtos pelo código EAN em segundos. Perfeito para, 
+              marketplaces, e-commerces e empresas que precisam de imagens de alta qualidade. Sem cadastro, sem contrato, 
               sem complicações. Análise instantânea com checkout seguro e entrega por e-mail.
             </p>
 

@@ -4,7 +4,7 @@ import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useOrderPolling } from '@/hooks/useOrderPolling';
 import { SuccessContent } from '@/components/ui/SuccessContent';
-import { ProcessingLoader } from '@/components/ui/ProcessingLoader';
+import { OrderConfirmation } from '@/components/ui/OrderConfirmation';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { PixPaymentCard } from '@/components/ui/PixPaymentCard';
 import type { CheckoutResponse } from '@/types';
@@ -71,20 +71,31 @@ function SucessoInner() {
   }
 
   if (status?.status === 'PAID' || status?.status === 'PROCESSING') {
-    return <ProcessingLoader status={status.status} orderId={orderId} />;
+    return <OrderConfirmation status={status} orderId={orderId} />;
   }
 
   if ((!status || status.status === 'PENDING') && checkoutData?.pix) {
     return <PixPaymentCard checkout={checkoutData} orderId={orderId} />;
   }
 
-  return <ProcessingLoader status={status?.status ?? 'PAID'} orderId={orderId} />;
+  // Fallback: mostrar OrderConfirmation se tiver status válido
+  if (status) {
+    return <OrderConfirmation status={status} orderId={orderId} />;
+  }
+
+  // Último recurso: mensagem de carregamento
+  return (
+    <ErrorState
+      title="Carregando..."
+      message="Aguarde um momento enquanto processamos seu pedido."
+    />
+  );
 }
 
 export default function SucessoPage() {
   return (
     <main className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
-      <Suspense fallback={<ProcessingLoader status="PAID" orderId="" />}>
+      <Suspense fallback={<OrderConfirmation status={{ status: 'PAID' } as any} orderId="" />}>
         <SucessoInner />
       </Suspense>
     </main>

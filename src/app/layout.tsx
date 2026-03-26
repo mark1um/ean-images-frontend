@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import { Header } from '@/components/layout/Header';
@@ -60,15 +60,16 @@ export const metadata: Metadata = {
     description: 'Busque imagens de produtos pelo codigo EAN. Rápido, simples, sem cadastro.',
     images: [`${siteUrl}/assets/logo-horizontal.png`],
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-  },
   formatDetection: {
     telephone: false,
     email: false,
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
