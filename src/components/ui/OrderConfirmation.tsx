@@ -42,7 +42,7 @@ export function OrderConfirmation({ status, orderId }: OrderConfirmationProps) {
           </div>
           <div className="flex items-center justify-between">
             <span className="text-slate-400">Valor Total:</span>
-            <span className="font-semibold text-cyan-400">R$ {((status?.totalPrice ?? 0) / 100).toFixed(2)}</span>
+            <span className="font-semibold text-cyan-400">R$ {((status?.totalPrice ?? 0)).toFixed(2)}</span>
           </div>
         </div>
 

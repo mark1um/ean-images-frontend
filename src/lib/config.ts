@@ -6,12 +6,12 @@ export const SUPPORT_CONFIG = {
   email: 'contato@eanimages.com.br',
   whatsapp: {
     number: '+558296094565',
-    display: '(82) 96094-565',
+    display: '(82) 99609-4565',
     url: 'https://wa.me/558296094565',
   },
   phone: {
     number: '+558296094565',
-    display: '(82) 96094-565',
+    display: '(82) 99609-4565',
     tel: 'tel:+558296094565',
   },
 };
