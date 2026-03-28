@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import './globals.css';
+import Analytics from './Analytics';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -132,6 +133,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationSchema) }}
         />
+        <Analytics />
       </head>
       <body className={inter.className}>
         <Header />
@@ -139,6 +141,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        
         <Toaster
           position="top-right"
           toastOptions={{
