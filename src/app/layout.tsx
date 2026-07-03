@@ -8,7 +8,7 @@ import Analytics from './Analytics';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ean-images.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.eanimages.com.br';
 
 export const metadata: Metadata = {
   title: 'EAN Images — Banco de Imagens de Produtos',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     siteName: 'EAN Images',
     images: [
       {
-        url: `https://eanimages.com.br/assets/logo-escura.jpg`,
+        url: `https://www.eanimages.com.br/assets/logo-escura.jpg`,
         width: 1200,
         height: 630,
         alt: 'EAN Images - Banco de Imagens de Produtos',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'EAN Images — Banco de Imagens de Produtos',
     description: 'Busque imagens de produtos pelo codigo EAN. Rápido, simples, sem cadastro.',
-    images: [`https://eanimages.com.br/assets/logo-escura.jpg`],
+    images: [`https://www.eanimages.com.br/assets/logo-escura.jpg`],
   },
   formatDetection: {
     telephone: false,
@@ -84,7 +84,7 @@ export default function RootLayout({
     '@type': 'Organization',
     name: 'EAN Images',
     url: siteUrl,
-    logo: `https://eanimages.com.br/assets/logo-escura.jpg`,
+    logo: `https://www.eanimages.com.br/assets/logo-escura.jpg`,
     description: 'Banco de imagens de produtos por EAN',
     sameAs: [
       // Adicione suas URLs de redes sociais aqui se existirem
@@ -118,8 +118,8 @@ export default function RootLayout({
     <html lang="pt-BR">
       <head>
         {/* Favicon */}
-        <link rel="icon" href="https://eanimages.com.br/assets/favicon.ico" sizes="32x32" />
-        <link rel="apple-touch-icon" href="https://eanimages.com.br/assets/logo-escura.jpg" />
+        <link rel="icon" href="https://www.eanimages.com.br/assets/favicon.ico" sizes="32x32" />
+        <link rel="apple-touch-icon" href="https://www.eanimages.com.br/assets/logo-escura.jpg" />
         
         {/* Canonical URL */}
         <link rel="canonical" href={siteUrl} />
