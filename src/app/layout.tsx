@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     siteName: 'EAN Images',
     images: [
       {
-        url: `${siteUrl}/assets/logo-horizontal.png`,
+        url: `https://eanimages.com.br/assets/logo-escura.jpg`,
         width: 1200,
         height: 630,
         alt: 'EAN Images - Banco de Imagens de Produtos',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'EAN Images — Banco de Imagens de Produtos',
     description: 'Busque imagens de produtos pelo codigo EAN. Rápido, simples, sem cadastro.',
-    images: [`${siteUrl}/assets/logo-horizontal.png`],
+    images: [`https://eanimages.com.br/assets/logo-escura.jpg`],
   },
   formatDetection: {
     telephone: false,
@@ -84,7 +84,7 @@ export default function RootLayout({
     '@type': 'Organization',
     name: 'EAN Images',
     url: siteUrl,
-    logo: `${siteUrl}/assets/logo.png`,
+    logo: `https://eanimages.com.br/assets/logo-escura.jpg`,
     description: 'Banco de imagens de produtos por EAN',
     sameAs: [
       // Adicione suas URLs de redes sociais aqui se existirem
@@ -118,8 +118,8 @@ export default function RootLayout({
     <html lang="pt-BR">
       <head>
         {/* Favicon */}
-        <link rel="icon" href="/assets/favicon.ico" sizes="32x32" />
-        <link rel="apple-touch-icon" href="/assets/logo.png" />
+        <link rel="icon" href="https://eanimages.com.br/assets/favicon.ico" sizes="32x32" />
+        <link rel="apple-touch-icon" href="https://eanimages.com.br/assets/logo-escura.jpg" />
         
         {/* Canonical URL */}
         <link rel="canonical" href={siteUrl} />
