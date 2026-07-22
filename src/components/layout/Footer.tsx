@@ -56,18 +56,18 @@ export function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4" >Empresa</h4>
             <nav className="space-y-2 flex flex-col">
-              <a href="/" className="text-slate-400 hover:text-white text-sm transition-colors">
+              <Link href="/sobre-nos" className="text-slate-400 hover:text-white text-sm transition-colors">
                 Sobre Nós
-              </a>
-              <a href="/" className="text-slate-400 hover:text-white text-sm transition-colors">
+              </Link>
+              <Link href="/contato" className="text-slate-400 hover:text-white text-sm transition-colors">
                 Contato
-              </a>
-              <a href="/" className="text-slate-400 hover:text-white text-sm transition-colors">
+              </Link>
+              <Link href="/blog" className="text-slate-400 hover:text-white text-sm transition-colors">
                 Blog
-              </a>
-              <a href="/" className="text-slate-400 hover:text-white text-sm transition-colors">
+              </Link>
+              <Link href="/status" className="text-slate-400 hover:text-white text-sm transition-colors">
                 Status
-              </a>
+              </Link>
             </nav>
           </div>
         </div>

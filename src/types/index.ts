@@ -42,6 +42,27 @@ export interface AnalyzeResponse {
   expiresAt: string;
 }
 
+// Tipos para o novo endpoint /search/batch
+export interface FoundProduct {
+  input: string;
+  ean: string;
+  name: string;
+  description: string;
+  relevanceScore: number;
+  found: boolean;
+  imageKey?: string;
+  extension?: string;
+}
+
+export interface BatchSearchResponse {
+  sessionId: string;
+  stats: AnalyzeStats;
+  foundProducts: FoundProduct[];
+  notFoundProducts: string[];
+  expiresAt: string;
+  message: string;
+}
+
 export interface CheckoutResponse {
   orderId: string;
   paymentUrl: string;
