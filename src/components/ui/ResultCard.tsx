@@ -1,6 +1,7 @@
 'use client';
 
-import { CheckCircle, XCircle, BarChart3, ShoppingCart, ArrowLeft, Tag } from 'lucide-react';
+import { CheckCircle, XCircle, BarChart3, ShoppingCart, ArrowLeft, Tag, Mail, MessageCircle } from 'lucide-react';
+import { SUPPORT_CONFIG } from '@/lib/config';
 import { formatCurrency, formatNumber } from '@/lib/utils';
 import type { AnalyzeResponse } from '@/types';
 
@@ -13,6 +14,7 @@ interface ResultCardProps {
 export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
   const { stats, pricing } = result;
   const hasImages = stats.totalFound > 0;
+  const hasNotFoundEans = stats.totalNotFound > 0;
   const coveragePercent =
     stats.totalValid > 0 ? Math.round((stats.totalFound / stats.totalValid) * 100) : 0;
 
@@ -141,6 +143,40 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
             Nenhum dos EANs informados possui imagem disponível no banco.
             Verifique os códigos e tente novamente.
           </p>
+        </div>
+      )}
+
+      {hasNotFoundEans && (
+        <div className="card border-amber-900/30 bg-amber-950/10">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2 bg-amber-600/20 rounded-xl">
+              <MessageCircle className="w-5 h-5 text-amber-400" />
+            </div>
+            <h3 className="text-lg font-bold text-white">Não encontrou o que precisa?</h3>
+          </div>
+
+          <p className="text-sm text-slate-400 mb-4">
+            Me manda um e-mail ou fala no WhatsApp que fazemos um plano personalizado para você.
+          </p>
+
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={`mailto:${SUPPORT_CONFIG.email}`}
+              className="btn-secondary inline-flex items-center justify-center gap-2"
+            >
+              <Mail className="w-4 h-4" />
+              Enviar e-mail
+            </a>
+            <a
+              href={SUPPORT_CONFIG.whatsapp.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-flex items-center justify-center gap-2"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Falar no WhatsApp
+            </a>
+          </div>
         </div>
       )}
 
