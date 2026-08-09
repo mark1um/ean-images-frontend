@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckCircle, XCircle, BarChart3, ShoppingCart, ArrowLeft, Tag, Mail, MessageCircle } from 'lucide-react';
+import { CheckCircle, XCircle, BarChart3, ShoppingCart, ArrowLeft, Tag, Mail, MessageCircle, ChevronDown } from 'lucide-react';
 import { SUPPORT_CONFIG } from '@/lib/config';
 import { formatCurrency, formatNumber } from '@/lib/utils';
 import type { AnalyzeResponse } from '@/types';
@@ -17,6 +17,8 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
   const hasNotFoundEans = stats.totalNotFound > 0;
   const coveragePercent =
     stats.totalValid > 0 ? Math.round((stats.totalFound / stats.totalValid) * 100) : 0;
+  const foundEans = result.foundEans ?? [];
+  const notFoundEans = result.notFoundEans ?? [];
 
   return (
     <div className="space-y-4">
@@ -84,6 +86,79 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
               </span>
             )}
           </div>
+        )}
+      </div>
+
+      {/* EANs identificados */}
+      <div className="card">
+        <details open>
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+            <div className="flex items-center gap-3">
+              <div className="rounded-xl bg-green-600/20 p-2">
+                <CheckCircle className="h-5 w-5 text-green-400" />
+              </div>
+              <div>
+                <h3 className="font-bold text-white">EANs encontrados</h3>
+                <p className="text-sm text-slate-400">
+                  {formatNumber(foundEans.length)} produto(s) com imagem disponível
+                </p>
+              </div>
+            </div>
+            <ChevronDown className="h-5 w-5 shrink-0 text-slate-400 transition-transform [details[open]_&]:rotate-180" />
+          </summary>
+
+          {foundEans.length > 0 ? (
+            <>
+              <p className="mt-4 border-t border-slate-800 pt-4 text-xs text-slate-400">
+                As imagens exibidas aqui são apenas previews. Após o pagamento, as imagens originais em alta qualidade serão enviadas por e-mail.
+              </p>
+              <div className="mt-3 max-h-80 space-y-2 overflow-y-auto">
+                {foundEans.map((item) => (
+                  <div
+                    key={item.ean}
+                    className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/60 p-2.5"
+                  >
+                    {item.previewUrl ? (
+                      <img
+                        src={item.previewUrl}
+                        alt={`Imagem do produto ${item.ean}`}
+                        className="h-16 w-16 shrink-0 rounded-lg bg-white object-contain p-1"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-center text-[10px] text-slate-500">
+                        Sem preview
+                      </div>
+                    )}
+                    <span className="min-w-0 break-all font-mono text-sm tracking-wide text-slate-200">
+                      {item.ean}
+                    </span>
+                    <span className="ml-auto text-xs text-green-400">Encontrado</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <p className="mt-4 border-t border-slate-800 pt-4 text-sm text-slate-400">
+              Nenhum EAN encontrado nesta análise.
+            </p>
+          )}
+        </details>
+
+        {notFoundEans.length > 0 && (
+          <details className="mt-5 border-t border-slate-800 pt-4">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm [&::-webkit-details-marker]:hidden">
+              <span className="text-amber-300">EANs sem imagem ({formatNumber(notFoundEans.length)})</span>
+              <ChevronDown className="h-4 w-4 text-slate-500 transition-transform [details[open]_&]:rotate-180" />
+            </summary>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              {notFoundEans.map((ean) => (
+                <span key={ean} className="rounded-lg bg-slate-950/60 px-3 py-2 font-mono text-xs text-slate-400">
+                  {ean}
+                </span>
+              ))}
+            </div>
+          </details>
         )}
       </div>
 

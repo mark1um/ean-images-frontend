@@ -5,6 +5,7 @@ export interface EanMatchResult {
   found: boolean;
   imageKey?: string;
   extension?: string;
+  previewUrl?: string;
 }
 
 export interface PricingBreakdownItem {
