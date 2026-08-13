@@ -56,6 +56,10 @@ export interface CheckoutResponse {
   total: number;
 }
 
+export interface LeadCaptureResponse {
+  leadId: string;
+}
+
 export interface OrderStatus {
   orderId: string;
   status: 'PENDING' | 'PAID' | 'PROCESSING' | 'SENT' | 'ERROR' | 'EXPIRED';
@@ -67,7 +71,7 @@ export interface OrderStatus {
   createdAt: string;
 }
 
-export type AppStep = 'input' | 'analyzing' | 'result' | 'checkout' | 'processing' | 'success';
+export type AppStep = 'input' | 'analyzing' | 'lead' | 'result' | 'checkout' | 'processing' | 'success';
 
 export interface AppState {
   step: AppStep;

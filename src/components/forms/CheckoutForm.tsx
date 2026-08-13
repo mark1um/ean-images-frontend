@@ -10,11 +10,13 @@ interface CheckoutFormProps {
   onSubmit: (data: { email: string; name?: string }) => void;
   onBack: () => void;
   isLoading: boolean;
+  initialEmail?: string;
+  initialName?: string;
 }
 
-export function CheckoutForm({ pricing, onSubmit, onBack, isLoading }: CheckoutFormProps) {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+export function CheckoutForm({ pricing, onSubmit, onBack, isLoading, initialEmail = '', initialName = '' }: CheckoutFormProps) {
+  const [email, setEmail] = useState(initialEmail);
+  const [name, setName] = useState(initialName);
   const [emailError, setEmailError] = useState('');
 
   function validateEmail(value: string): boolean {

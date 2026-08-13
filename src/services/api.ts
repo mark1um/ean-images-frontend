@@ -7,7 +7,7 @@
  * - Facilitar mocking em testes
  */
 
-import type { AnalyzeResponse, CheckoutResponse, OrderStatus } from '@/types';
+import type { AnalyzeResponse, CheckoutResponse, LeadCaptureResponse, OrderStatus } from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 
@@ -87,6 +87,20 @@ export async function createCheckout(params: {
   });
 
   return handleResponse<CheckoutResponse>(response);
+}
+
+export async function captureLead(params: {
+  sessionId: string;
+  email: string;
+  name?: string;
+}): Promise<LeadCaptureResponse> {
+  const response = await fetch(`${API_URL}/leads`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(params),
+  });
+
+  return handleResponse<LeadCaptureResponse>(response);
 }
 
 // ─────────────────────────────────────────────
