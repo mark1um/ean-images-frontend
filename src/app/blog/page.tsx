@@ -1,40 +1,22 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://eanimages.com.br';
+import { blogPosts } from '@/lib/blog-posts';
+import { absoluteUrl, siteName } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Blog — EAN Images',
+  title: `Blog | ${siteName}`,
   description:
     'Conteúdos sobre imagens de produtos, cadastro por EAN, e-commerce, marketplaces e organização de catálogos digitais.',
+  alternates: {
+    canonical: absoluteUrl('/blog'),
+  },
   openGraph: {
     type: 'website',
-    url: `${siteUrl}/blog`,
-    title: 'Blog — EAN Images',
+    url: absoluteUrl('/blog'),
+    title: `Blog | ${siteName}`,
     description: 'Conteúdos sobre imagens de produtos, EAN e catálogos digitais.',
   },
 };
-
-const posts = [
-  {
-    title: 'Como imagens de produto impactam a conversão no e-commerce',
-    description:
-      'Boas imagens reduzem incertezas na compra e ajudam o cliente a entender exatamente o que está adquirindo.',
-    tag: 'E-commerce',
-  },
-  {
-    title: 'Por que usar EAN no cadastro de produtos',
-    description:
-      'O EAN padroniza a identificação dos itens e facilita integrações entre fornecedores, lojas e marketplaces.',
-    tag: 'Catálogo',
-  },
-  {
-    title: 'Como organizar SKUs para vender em marketplaces',
-    description:
-      'Uma operação consistente depende de dados bem estruturados, imagens corretas e processos repetíveis.',
-    tag: 'Marketplace',
-  },
-];
 
 export default function BlogPage() {
   return (
@@ -54,22 +36,32 @@ export default function BlogPage() {
       </section>
 
       <section className="max-w-5xl mx-auto px-4 py-16 md:py-20">
-        <div className="grid md:grid-cols-3 gap-6">
-          {posts.map((post) => (
-            <article key={post.title} className="bg-slate-900/50 rounded-2xl p-6 border border-slate-700">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {blogPosts.map((post) => (
+            <article key={post.slug} className="bg-slate-900/50 rounded-lg p-6 border border-slate-700">
               <span className="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs font-semibold mb-4">
                 {post.tag}
               </span>
-              <h2 className="text-xl font-bold text-white mb-3">{post.title}</h2>
+              <h2 className="text-xl font-bold text-white mb-3">
+                <Link href={`/blog/${post.slug}`} className="hover:text-cyan-200 transition-colors">
+                  {post.title}
+                </Link>
+              </h2>
               <p className="text-slate-300">{post.description}</p>
+              <div className="mt-5 flex items-center justify-between gap-4 text-sm">
+                <span className="text-slate-400">{post.readTime}</span>
+                <Link href={`/blog/${post.slug}`} className="font-semibold text-cyan-300 hover:text-cyan-200">
+                  Ler artigo
+                </Link>
+              </div>
             </article>
           ))}
         </div>
 
-        <div className="mt-12 bg-slate-900/50 rounded-2xl p-6 md:p-8 border border-slate-700 text-center">
-          <h2 className="text-2xl font-bold text-white mb-3">Novos artigos em breve</h2>
+        <div className="mt-12 bg-slate-900/50 rounded-lg p-6 md:p-8 border border-slate-700 text-center">
+          <h2 className="text-2xl font-bold text-white mb-3">Encontre imagens por EAN</h2>
           <p className="text-slate-300 mb-6">
-            Enquanto isso, consulte o FAQ ou teste a busca de imagens por EAN.
+            Use a busca para validar EANs individuais ou listas em lote antes de comprar.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/faq" className="btn-secondary">

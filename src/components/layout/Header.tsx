@@ -34,6 +34,12 @@ export function Header() {
             FAQ
           </Link>
           <Link
+            href="/blog"
+            className="text-sm text-slate-300 hover:text-white transition-colors"
+          >
+            Blog
+          </Link>
+          <Link
             href="/#pricing"
             className="text-sm text-slate-300 hover:text-white transition-colors"
           >

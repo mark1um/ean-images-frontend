@@ -40,15 +40,15 @@ export function Footer() {
               <Link href="/faq" className="text-slate-400 hover:text-white text-sm transition-colors">
                 O que é EAN?
               </Link>
-              <Link href="/faq" className="text-slate-400 hover:text-white text-sm transition-colors">
-                EAN-8 vs EAN-13
+              <Link href="/blog/ean-gtin-codigo-barras-diferencas" className="text-slate-400 hover:text-white text-sm transition-colors">
+                EAN, GTIN e código de barras
               </Link>
-              <Link href="/faq" className="text-slate-400 hover:text-white text-sm transition-colors">
-                Segurança e Privacidade
+              <Link href="/blog/checklist-imagens-catalogo-digital" className="text-slate-400 hover:text-white text-sm transition-colors">
+                Checklist de imagens
               </Link>
-              <a href="/" className="text-slate-400 hover:text-white text-sm transition-colors">
-                Termos de Serviço
-              </a>
+              <Link href="/blog/baixar-imagens-produtos-pelo-ean" className="text-slate-400 hover:text-white text-sm transition-colors">
+                Baixar imagens pelo EAN
+              </Link>
             </nav>
           </div>
 

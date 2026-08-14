@@ -1,31 +1,38 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import './globals.css';
 import Analytics from './Analytics';
+import { Footer } from '@/components/layout/Footer';
+import { Header } from '@/components/layout/Header';
+import { absoluteUrl, siteDescription, siteName, siteUrl } from '@/lib/site';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.eanimages.com.br';
-
 export const metadata: Metadata = {
-  title: 'EAN Images — Banco de Imagens de Produtos',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${siteName} | Banco de Imagens de Produtos por EAN`,
+    template: `%s | ${siteName}`,
+  },
   description:
-    'Banco de imagens EAN: baixe imagens de produtos pelo código EAN instantaneamente. Busca rápida, simples e sem cadastro. Perfeito para e-commerce e marketplaces.',
+    'Busque e baixe imagens de produtos pelo código EAN ou GTIN. Plataforma para e-commerce, marketplace e catálogos digitais, com consulta em lote e entrega por e-mail.',
   keywords: [
     'banco de imagens EAN',
     'imagens de produtos EAN',
-    'EAN code images',
     'baixar imagens pelo EAN',
-    'código de barras',
-    'imagens de produtos',
-    'búsqueda por EAN',
+    'buscar imagem por código de barras',
+    'GTIN imagens de produtos',
+    'imagens para marketplace',
+    'cadastro de produtos e-commerce',
+    'catálogo digital',
   ],
-  authors: [{ name: 'EAN Images' }],
-  creator: 'EAN Images',
-  publisher: 'EAN Images',
+  authors: [{ name: siteName }],
+  creator: siteName,
+  publisher: siteName,
+  alternates: {
+    canonical: siteUrl,
+  },
   robots: {
     index: true,
     follow: true,
@@ -40,26 +47,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: siteUrl,
-    title: 'EAN Images — Banco de Imagens de Produtos',
-    description: 'Banco de imagens EAN: baixe imagens de produtos pelo código EAN instantaneamente.',
-    siteName: 'EAN Images',
+    title: `${siteName} | Banco de Imagens de Produtos por EAN`,
+    description: siteDescription,
+    siteName,
     images: [
       {
-        url: `https://www.eanimages.com.br/assets/logo-escura.jpg`,
+        url: absoluteUrl('/assets/logo-escura.jpg'),
         width: 1200,
         height: 630,
-        alt: 'EAN Images - Banco de Imagens de Produtos',
-        type: 'image/png',
+        alt: `${siteName} - Banco de Imagens de Produtos`,
+        type: 'image/jpeg',
       },
     ],
     locale: 'pt_BR',
-    alternateLocale: ['en_US'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'EAN Images — Banco de Imagens de Produtos',
-    description: 'Busque imagens de produtos pelo codigo EAN. Rápido, simples, sem cadastro.',
-    images: [`https://www.eanimages.com.br/assets/logo-escura.jpg`],
+    title: `${siteName} | Banco de Imagens de Produtos por EAN`,
+    description: 'Busque imagens de produtos pelo código EAN. Rápido, simples e sem cadastro.',
+    images: [absoluteUrl('/assets/logo-escura.jpg')],
   },
   formatDetection: {
     telephone: false,
@@ -78,32 +84,29 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // JSON-LD Schema para Organization
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'EAN Images',
+    name: siteName,
     url: siteUrl,
-    logo: `https://www.eanimages.com.br/assets/logo-escura.jpg`,
-    description: 'Banco de imagens de produtos por EAN',
-    sameAs: [
-      // Adicione suas URLs de redes sociais aqui se existirem
-    ],
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'Customer Service',
-      // Adicione seu email/telefone se desejar
-    },
+    logo: absoluteUrl('/assets/logo-escura.jpg'),
+    description: siteDescription,
   };
 
-  // JSON-LD Schema para WebApplication (SearchAction)
   const webApplicationSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'EAN Images',
+    name: siteName,
     url: siteUrl,
-    applicationCategory: 'ProductSearchApplication',
-    description: 'Busque e baixe imagens de produtos pelo código EAN',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    description:
+      'Busca e download de imagens de produtos pelo código EAN ou GTIN para e-commerce, marketplace e catálogos digitais.',
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      priceCurrency: 'BRL',
+    },
     potentialAction: {
       '@type': 'SearchAction',
       target: {
@@ -117,14 +120,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* Favicon */}
-        <link rel="icon" href="https://www.eanimages.com.br/assets/favicon.ico" sizes="32x32" />
-        <link rel="apple-touch-icon" href="https://www.eanimages.com.br/assets/logo-escura.jpg" />
-        
-        {/* Canonical URL */}
-        <link rel="canonical" href={siteUrl} />
-
-        {/* JSON-LD Schemas */}
+        <link rel="icon" href="/assets/favicon.ico" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/assets/logo-escura.jpg" />
+        <link rel="help" type="text/plain" href="/llms.txt" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -137,11 +135,9 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Header />
-        <main className="pt-16">
-          {children}
-        </main>
+        <main className="pt-16">{children}</main>
         <Footer />
-        
+
         <Toaster
           position="top-right"
           toastOptions={{

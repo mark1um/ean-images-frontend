@@ -1,68 +1,67 @@
 import { MetadataRoute } from 'next';
+import { blogPosts } from '@/lib/blog-posts';
+import { siteUrl } from '@/lib/site';
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ean-images.com';
+const now = new Date();
+
+const staticRoutes: MetadataRoute.Sitemap = [
+  {
+    url: siteUrl,
+    lastModified: now,
+    changeFrequency: 'daily',
+    priority: 1.0,
+  },
+  {
+    url: `${siteUrl}/faq`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  },
+  {
+    url: `${siteUrl}/como-funciona`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  },
+  {
+    url: `${siteUrl}/sobre-nos`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  },
+  {
+    url: `${siteUrl}/contato`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  },
+  {
+    url: `${siteUrl}/blog`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  },
+  {
+    url: `${siteUrl}/status`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.5,
+  },
+  {
+    url: `${siteUrl}/produto`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  },
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/faq`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/como-funciona`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sobre-nos`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contato`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/status`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/produto`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/resultado`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/sucesso`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-  ];
+  const articleRoutes = blogPosts.map((post) => ({
+    url: `${siteUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.updatedAt),
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }));
+
+  return [...staticRoutes, ...articleRoutes];
 }
