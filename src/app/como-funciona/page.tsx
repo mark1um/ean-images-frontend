@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ean-images.com';
+import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Como Funciona — Guia Completo do Banco de Imagens EAN',

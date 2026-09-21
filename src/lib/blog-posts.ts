@@ -13,6 +13,11 @@ export type BlogPost = {
     heading: string;
     body: string[];
   }>;
+  faqs?: Array<{
+    question: string;
+    answer: string;
+  }>;
+  relatedSlugs?: string[];
 };
 
 export const blogPosts: BlogPost[] = [
@@ -49,6 +54,19 @@ export const blogPosts: BlogPost[] = [
         ],
       },
     ],
+    faqs: [
+      {
+        question: 'Consigo buscar imagens de vários produtos ao mesmo tempo?',
+        answer:
+          'Sim. A busca em lote permite enviar uma lista de EANs para validar a disponibilidade de imagens antes da compra, o que ajuda equipes com muitos SKUs.',
+      },
+      {
+        question: 'O EAN evita imagem errada no cadastro?',
+        answer:
+          'Ele reduz bastante o risco, porque funciona como uma chave objetiva para diferenciar embalagens, variações e produtos parecidos.',
+      },
+    ],
+    relatedSlugs: ['checklist-imagens-catalogo-digital', 'ean-gtin-codigo-barras-diferencas'],
   },
   {
     slug: 'imagens-produto-conversao-ecommerce',
@@ -83,6 +101,19 @@ export const blogPosts: BlogPost[] = [
         ],
       },
     ],
+    faqs: [
+      {
+        question: 'Imagem de produto influencia SEO?',
+        answer:
+          'Influência direta ou indiretamente porque melhora a experiência da página, reduz dúvidas do comprador e ajuda mecanismos de busca a entenderem melhor o conteúdo do produto quando há contexto, alt text e dados corretos.',
+      },
+      {
+        question: 'Qual imagem priorizar primeiro em um catálogo grande?',
+        answer:
+          'Comece por produtos com maior tráfego, margem, recorrência, estoque parado ou abandono de carrinho, depois avance por categorias inteiras.',
+      },
+    ],
+    relatedSlugs: ['checklist-imagens-catalogo-digital', 'organizar-skus-marketplaces-ean'],
   },
   {
     slug: 'organizar-skus-marketplaces-ean',
@@ -117,6 +148,19 @@ export const blogPosts: BlogPost[] = [
         ],
       },
     ],
+    faqs: [
+      {
+        question: 'Marketplace exige EAN em todos os produtos?',
+        answer:
+          'Muitos marketplaces exigem EAN, GTIN ou outro identificador válido para categorias de varejo, mas as regras variam por canal e tipo de produto.',
+      },
+      {
+        question: 'SKU interno pode substituir EAN?',
+        answer:
+          'Não. O SKU organiza a operação interna da loja, enquanto o EAN identifica o item comercial de forma padronizada.',
+      },
+    ],
+    relatedSlugs: ['ean-gtin-codigo-barras-diferencas', 'baixar-imagens-produtos-pelo-ean'],
   },
   {
     slug: 'ean-gtin-codigo-barras-diferencas',
@@ -151,6 +195,19 @@ export const blogPosts: BlogPost[] = [
         ],
       },
     ],
+    faqs: [
+      {
+        question: 'EAN e GTIN são a mesma coisa?',
+        answer:
+          'GTIN é a família de identificadores globais. EAN-13 é uma das formas mais usadas para representar esse identificador em produtos de varejo.',
+      },
+      {
+        question: 'Por que o GTIN ajuda em dados estruturados de produto?',
+        answer:
+          'Porque ele torna mais claro qual item está sendo descrito, reduz ambiguidade e melhora a consistência entre loja, marketplace, buscadores e comparadores.',
+      },
+    ],
+    relatedSlugs: ['organizar-skus-marketplaces-ean', 'imagens-produto-conversao-ecommerce'],
   },
   {
     slug: 'checklist-imagens-catalogo-digital',
@@ -185,6 +242,207 @@ export const blogPosts: BlogPost[] = [
         ],
       },
     ],
+    faqs: [
+      {
+        question: 'O checklist deve ser feito antes ou depois da publicação?',
+        answer:
+          'O ideal é revisar antes da publicação, mas catálogos grandes também se beneficiam de auditorias periódicas para corrigir produtos sem foto, imagem desatualizada ou variação incorreta.',
+      },
+      {
+        question: 'Como nomear arquivos de imagem de produto?',
+        answer:
+          'Use uma chave estável, como EAN ou SKU, e mantenha controle de origem, data de atualização e observações de uso.',
+      },
+    ],
+    relatedSlugs: ['baixar-imagens-produtos-pelo-ean', 'imagens-produto-conversao-ecommerce'],
+  },
+  {
+    slug: 'seo-para-imagens-de-produtos',
+    title: 'SEO para imagens de produtos: como preparar fotos para buscadores',
+    description:
+      'Aprenda como nomes de arquivo, texto alternativo, contexto da página e qualidade visual ajudam imagens de produto a performar melhor na busca.',
+    tag: 'SEO',
+    publishedAt: '2026-09-14',
+    updatedAt: '2026-09-14',
+    readTime: '7 min',
+    keywords: ['SEO para imagens', 'imagem de produto SEO', 'alt text produto', 'Google Imagens e-commerce'],
+    sections: [
+      {
+        heading: 'Imagem boa precisa de contexto claro',
+        body: [
+          'Buscadores não avaliam a imagem isoladamente. Eles interpretam o arquivo junto com título da página, descrição do produto, legenda, texto alternativo, dados estruturados e links internos.',
+          'Por isso, uma foto correta por EAN ganha mais valor quando aparece em uma página com nome do produto, marca, categoria, variação e informações comerciais consistentes.',
+        ],
+      },
+      {
+        heading: 'Boas práticas para arquivo e texto alternativo',
+        body: [
+          'Use nomes de arquivo descritivos quando possível, evitando sequências genéricas como IMG_001. Em catálogos grandes, incluir EAN ou SKU no nome ajuda a rastrear origem e reduzir trocas acidentais.',
+          'O texto alternativo deve descrever o produto de forma objetiva. Em vez de repetir palavras-chave, informe marca, tipo, volume, sabor, cor ou variação quando esses detalhes forem visíveis e relevantes.',
+        ],
+      },
+      {
+        heading: 'Qualidade visual também é experiência de página',
+        body: [
+          'Imagens nítidas, leves e bem dimensionadas ajudam o usuário a confirmar o produto sem esperar carregamentos longos. Essa experiência é especialmente importante em mobile, onde a foto costuma ser o primeiro elemento analisado.',
+          'Para SEO e GEO, o objetivo não é criar marcações especiais para IA, mas entregar uma página pública, rápida, rastreável e útil para quem precisa decidir ou cadastrar o produto.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Preciso repetir a palavra-chave no alt text?',
+        answer:
+          'Não. O alt text deve ser útil e descritivo. Repetição artificial de palavras-chave pode piorar a experiência e não acrescenta valor real.',
+      },
+      {
+        question: 'O nome do arquivo com EAN ajuda?',
+        answer:
+          'Ajuda principalmente na organização e auditoria do catálogo. Para buscadores, o conjunto da página e a qualidade do conteúdo continuam sendo mais importantes.',
+      },
+    ],
+    relatedSlugs: ['imagens-produto-conversao-ecommerce', 'checklist-imagens-catalogo-digital'],
+  },
+  {
+    slug: 'auditoria-catalogo-produtos-sem-imagem',
+    title: 'Como auditar produtos sem imagem no catálogo',
+    description:
+      'Um método prático para encontrar SKUs sem imagem, priorizar correções e organizar uma rotina de enriquecimento de catálogo por EAN.',
+    tag: 'Operação',
+    publishedAt: '2026-09-14',
+    updatedAt: '2026-09-14',
+    readTime: '8 min',
+    keywords: ['produtos sem imagem', 'auditoria de catálogo', 'enriquecimento de catálogo', 'SKU sem foto'],
+    sections: [
+      {
+        heading: 'Comece separando ausência de erro visual',
+        body: [
+          'Um produto sem imagem é fácil de encontrar em relatórios, mas o maior problema costuma estar nas imagens incorretas: embalagem antiga, variação errada, kit confundido com unidade ou foto genérica.',
+          'A auditoria deve separar três grupos: produtos sem foto, produtos com foto suspeita e produtos com foto aprovada. Essa classificação reduz retrabalho e facilita acompanhar evolução por categoria.',
+        ],
+      },
+      {
+        heading: 'Use EAN como chave de conferência',
+        body: [
+          'Quando o catálogo tem EAN, a equipe ganha uma referência mais estável do que o nome do produto. Isso é útil porque fornecedores e marketplaces podem escrever o mesmo item de formas diferentes.',
+          'Ao consultar imagens por lote, é possível descobrir rapidamente quais códigos têm imagem disponível, quais precisam de produção própria e quais devem voltar para saneamento cadastral.',
+        ],
+      },
+      {
+        heading: 'Priorize pelo impacto comercial',
+        body: [
+          'A fila de correção deve começar por itens com venda recorrente, tráfego relevante, campanha ativa, alto estoque ou maior margem. Depois, avance para categorias inteiras para manter consistência visual.',
+          'Registre data de revisão, origem da imagem e responsável pela aprovação. Esse histórico ajuda a explicar mudanças e evita que uma imagem antiga volte em integrações futuras.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Com que frequência devo auditar imagens do catálogo?',
+        answer:
+          'Catálogos dinâmicos devem ser revisados de forma recorrente, especialmente após entrada de novos fornecedores, migração de ERP, troca de embalagens ou expansão para marketplaces.',
+      },
+      {
+        question: 'O que fazer quando não encontro imagem pelo EAN?',
+        answer:
+          'Valide se o EAN está correto, confira se não há troca de variação e, se necessário, encaminhe o item para produção própria de imagem ou revisão com o fornecedor.',
+      },
+    ],
+    relatedSlugs: ['baixar-imagens-produtos-pelo-ean', 'organizar-skus-marketplaces-ean'],
+  },
+  {
+    slug: 'dados-produto-google-shopping-ean',
+    title: 'EAN, imagens e dados de produto para Google Shopping',
+    description:
+      'Veja como identificadores, imagens e dados consistentes ajudam feeds de produto a ficarem mais confiáveis para canais de aquisição.',
+    tag: 'Shopping',
+    publishedAt: '2026-09-14',
+    updatedAt: '2026-09-14',
+    readTime: '7 min',
+    keywords: ['Google Shopping EAN', 'feed de produtos', 'GTIN Google Shopping', 'imagem produto Merchant Center'],
+    sections: [
+      {
+        heading: 'Feeds precisam de consistência entre campos',
+        body: [
+          'Em canais como Google Shopping, a imagem não trabalha sozinha. Ela precisa conversar com título, descrição, marca, categoria, preço, disponibilidade e identificadores como GTIN ou EAN.',
+          'Quando esses dados entram em conflito, o produto pode perder qualidade de anúncio, gerar reprovações ou criar uma experiência ruim para quem clica esperando outro item.',
+        ],
+      },
+      {
+        heading: 'Por que o EAN reduz ambiguidade',
+        body: [
+          'Produtos de varejo têm muitas variações parecidas. Um mesmo shampoo pode ter volumes, linhas, kits e refis diferentes. O EAN ajuda a confirmar exatamente qual versão está sendo oferecida.',
+          'Ao enriquecer imagens por EAN, a loja diminui a chance de associar uma foto bonita, mas incorreta, ao feed enviado para comparadores, marketplaces e campanhas.',
+        ],
+      },
+      {
+        heading: 'Checklist antes de enviar ou atualizar o feed',
+        body: [
+          'Confirme se a imagem abre publicamente, não está bloqueada por robots, carrega rápido e representa o produto vendido. Verifique também se título, GTIN/EAN, marca e categoria seguem o mesmo cadastro mestre.',
+          'Depois de publicar, monitore relatórios do Merchant Center e Search Console para identificar páginas com queda de impressão, problemas de rastreamento ou avisos de qualidade.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'EAN é obrigatório no Google Shopping?',
+        answer:
+          'Produtos que têm identificadores oficiais geralmente devem informá-los no feed. As exigências podem variar por categoria e disponibilidade real do identificador.',
+      },
+      {
+        question: 'Imagem errada pode prejudicar campanha?',
+        answer:
+          'Sim. Ela pode gerar baixa confiança, cliques desperdiçados, reprovação em canais de venda ou conversão menor porque o comprador não reconhece o item correto.',
+      },
+    ],
+    relatedSlugs: ['seo-para-imagens-de-produtos', 'ean-gtin-codigo-barras-diferencas'],
+  },
+  {
+    slug: 'geo-seo-ia-generativa-ecommerce',
+    title: 'GEO e SEO para e-commerce: o que realmente importa na busca com IA',
+    description:
+      'Um resumo prático das recomendações do Google para aparecer melhor na busca tradicional e nas experiências com IA generativa.',
+    tag: 'GEO',
+    publishedAt: '2026-09-14',
+    updatedAt: '2026-09-14',
+    readTime: '8 min',
+    keywords: ['GEO para e-commerce', 'SEO IA generativa', 'AEO GEO', 'busca com IA Google'],
+    sections: [
+      {
+        heading: 'GEO não substitui SEO',
+        body: [
+          'O Google orienta que a otimização para experiências de IA generativa continua apoiada nas mesmas bases de SEO: conteúdo útil, páginas rastreáveis, boa experiência e informações confiáveis.',
+          'Para um e-commerce ou ferramenta de catálogo, isso significa explicar problemas reais do usuário, mostrar processo, organizar conteúdo por seções claras e manter páginas técnicas acessíveis ao rastreamento.',
+        ],
+      },
+      {
+        heading: 'Conteúdo precisa trazer experiência própria',
+        body: [
+          'Páginas genéricas sobre “dicas para vender mais” dificilmente se destacam. O conteúdo mais forte nasce da prática: auditoria de SKU, erros de EAN, imagem trocada, feed reprovado, rotina de marketplace e impacto operacional.',
+          'Esse tipo de material é melhor para pessoas e também mais fácil de ser citado em respostas de IA, porque oferece detalhes específicos que não parecem apenas uma reciclagem do que já existe.',
+        ],
+      },
+      {
+        heading: 'Evite atalhos que não ajudam o usuário',
+        body: [
+          'Não é necessário criar marcações especiais para IA, dividir conteúdo artificialmente ou publicar páginas quase iguais para cada variação de consulta. Isso pode enfraquecer o site em vez de melhorar.',
+          'A estratégia mais sustentável é criar um acervo enxuto de páginas completas, interligadas e atualizadas, com dados estruturados quando eles representam fielmente o conteúdo visível.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Preciso criar um arquivo llms.txt para ranquear no Google?',
+        answer:
+          'Não para o Google. Segundo o guia oficial, a Pesquisa Google não usa arquivos llms.txt como requisito ou vantagem de ranking, embora eles possam ser mantidos para outros sistemas.',
+      },
+      {
+        question: 'Dados estruturados garantem presença em respostas de IA?',
+        answer:
+          'Não. Eles ajudam a clareza e podem qualificar páginas para recursos de pesquisa, mas não são uma marcação especial para IA nem garantem exibição.',
+      },
+    ],
+    relatedSlugs: ['seo-para-imagens-de-produtos', 'dados-produto-google-shopping-ean'],
   },
 ];
 
@@ -218,5 +476,22 @@ export function getArticleSchema(post: BlogPost) {
     },
     mainEntityOfPage: getBlogPostUrl(post.slug),
     keywords: post.keywords.join(', '),
+  };
+}
+
+export function getFaqSchema(post: BlogPost) {
+  if (!post.faqs?.length) return null;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: post.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
   };
 }

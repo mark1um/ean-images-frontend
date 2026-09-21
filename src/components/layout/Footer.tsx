@@ -78,13 +78,13 @@ export function Footer() {
             © {new Date().getFullYear()} EAN Images. Todos os direitos reservados. Banco de imagens de produtos por EAN.
           </p>
           <div className="flex gap-4 mt-4 md:mt-0">
-            <a href="#" className="text-slate-400 hover:text-white text-sm transition-colors">
+            <Link href="/politica-de-privacidade" className="text-slate-400 hover:text-white text-sm transition-colors">
               Política de Privacidade
-            </a>
+            </Link>
             <span className="text-slate-700">•</span>
-            <a href="#" className="text-slate-400 hover:text-white text-sm transition-colors">
+            <Link href="/termos-de-uso" className="text-slate-400 hover:text-white text-sm transition-colors">
               Termos de Uso
-            </a>
+            </Link>
           </div>
         </div>
       </div>

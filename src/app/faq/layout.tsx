@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ean-images.com';
+import { absoluteUrl, siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'FAQ — Perguntas Frequentes sobre EAN Images',
@@ -20,7 +19,7 @@ export const metadata: Metadata = {
     description: 'Saiba tudo sobre como buscar e baixar imagens de produtos pelo EAN.',
     images: [
       {
-        url: `${siteUrl}/assets/logo-horizontal.png`,
+        url: absoluteUrl('/assets/logo-escura.jpg'),
         width: 1200,
         height: 630,
         alt: 'EAN Images - Banco de Imagens de Produtos',

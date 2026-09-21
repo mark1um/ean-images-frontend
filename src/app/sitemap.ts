@@ -53,6 +53,18 @@ const staticRoutes: MetadataRoute.Sitemap = [
     changeFrequency: 'weekly',
     priority: 0.7,
   },
+  {
+    url: `${siteUrl}/politica-de-privacidade`,
+    lastModified: now,
+    changeFrequency: 'yearly',
+    priority: 0.4,
+  },
+  {
+    url: `${siteUrl}/termos-de-uso`,
+    lastModified: now,
+    changeFrequency: 'yearly',
+    priority: 0.4,
+  },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

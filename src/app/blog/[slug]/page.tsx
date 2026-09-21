@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { blogPosts, getArticleSchema, getBlogPost, getBlogPostUrl } from '@/lib/blog-posts';
+import { blogPosts, getArticleSchema, getBlogPost, getBlogPostUrl, getFaqSchema } from '@/lib/blog-posts';
 import { absoluteUrl, siteName } from '@/lib/site';
 
 type BlogPostPageProps = {
@@ -89,6 +89,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
       },
     ],
   };
+  const faqSchema = getFaqSchema(post);
+  const relatedPosts = post.relatedSlugs
+    ?.map((slug) => getBlogPost(slug))
+    .filter((relatedPost): relatedPost is NonNullable<typeof relatedPost> => Boolean(relatedPost));
 
   return (
     <main className="min-h-screen bg-slate-950">
@@ -100,6 +104,12 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <article className="max-w-3xl mx-auto px-4 py-16 md:py-20">
         <Link href="/blog" className="text-sm font-semibold text-cyan-300 hover:text-cyan-200">
@@ -132,6 +142,41 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             </section>
           ))}
         </div>
+
+        {post.faqs?.length && (
+          <section className="mt-12 border-t border-slate-800 pt-8">
+            <h2 className="text-2xl font-bold text-white mb-6">Perguntas frequentes</h2>
+            <div className="space-y-5">
+              {post.faqs.map((faq) => (
+                <div key={faq.question}>
+                  <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
+                  <p className="mt-2 text-slate-300 leading-relaxed">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {relatedPosts?.length && (
+          <section className="mt-12 border-t border-slate-800 pt-8">
+            <h2 className="text-2xl font-bold text-white mb-6">Continue lendo</h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {relatedPosts.map((relatedPost) => (
+                <Link
+                  key={relatedPost.slug}
+                  href={`/blog/${relatedPost.slug}`}
+                  className="block rounded-lg border border-slate-700 bg-slate-900/50 p-5 transition-colors hover:border-cyan-500/60"
+                >
+                  <span className="text-xs font-semibold uppercase tracking-wide text-cyan-300">
+                    {relatedPost.tag}
+                  </span>
+                  <h3 className="mt-2 font-semibold text-white">{relatedPost.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-400">{relatedPost.description}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="mt-12 border-t border-slate-800 pt-8">
           <h2 className="text-2xl font-bold text-white mb-3">Procure imagens por EAN</h2>

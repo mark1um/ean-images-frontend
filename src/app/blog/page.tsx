@@ -19,8 +19,29 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: `Blog ${siteName}`,
+    url: absoluteUrl('/blog'),
+    description:
+      'Guias práticos sobre imagens de produtos, EAN, GTIN, SEO para e-commerce, marketplaces e catálogos digitais.',
+    blogPost: blogPosts.map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.description,
+      url: absoluteUrl(`/blog/${post.slug}`),
+      datePublished: post.publishedAt,
+      dateModified: post.updatedAt,
+    })),
+  };
+
   return (
     <main className="min-h-screen bg-slate-950">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
       <section className="relative overflow-hidden py-16 md:py-20 border-b border-slate-800">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 pointer-events-none" />
         <div className="absolute top-8 left-1/2 -translate-x-1/2 w-[540px] h-[240px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
