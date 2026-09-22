@@ -18,6 +18,9 @@ export function CheckoutForm({ pricing, onSubmit, onBack, isLoading, initialEmai
   const [email, setEmail] = useState(initialEmail);
   const [name, setName] = useState(initialName);
   const [emailError, setEmailError] = useState('');
+  const minimumOrderTotal = 1;
+  const displayTotal = pricing.quantity > 0 ? Math.max(pricing.total, minimumOrderTotal) : pricing.total;
+  const minimumOrderAdjustment = Math.max(0, displayTotal - pricing.total);
 
   function validateEmail(value: string): boolean {
     const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -50,8 +53,13 @@ export function CheckoutForm({ pricing, onSubmit, onBack, isLoading, initialEmai
               </p>
             )}
             <p className="text-2xl font-bold text-green-400">
-              {formatCurrency(pricing.total)}
+              {formatCurrency(displayTotal)}
             </p>
+            {minimumOrderAdjustment > 0 && (
+              <p className="text-slate-500 text-xs">
+                Inclui minimo de {formatCurrency(minimumOrderTotal)}
+              </p>
+            )}
           </div>
         </div>
       </div>
@@ -133,7 +141,7 @@ export function CheckoutForm({ pricing, onSubmit, onBack, isLoading, initialEmai
             ) : (
               <>
                 <QrCode className="w-5 h-5" />
-                Gerar PIX {formatCurrency(pricing.total)}
+                Gerar PIX {formatCurrency(displayTotal)}
               </>
             )}
           </button>

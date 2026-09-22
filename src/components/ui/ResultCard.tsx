@@ -14,6 +14,9 @@ interface ResultCardProps {
 export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
   const { stats, pricing } = result;
   const hasImages = stats.totalFound > 0;
+  const minimumOrderTotal = 1;
+  const displayTotal = hasImages ? Math.max(pricing.total, minimumOrderTotal) : pricing.total;
+  const minimumOrderAdjustment = Math.max(0, displayTotal - pricing.total);
   const hasNotFoundEans = stats.totalNotFound > 0;
   const coveragePercent =
     stats.totalValid > 0 ? Math.round((stats.totalFound / stats.totalValid) * 100) : 0;
@@ -195,10 +198,19 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
               </div>
             )}
 
+            {minimumOrderAdjustment > 0 && (
+              <div className="flex justify-between text-sm pt-2 border-t border-slate-800">
+                <span className="text-slate-400">Valor minimo do pedido</span>
+                <span className="text-slate-300 font-medium">
+                  + {formatCurrency(minimumOrderAdjustment)}
+                </span>
+              </div>
+            )}
+
             <div className="flex justify-between items-center pt-3 border-t border-slate-700">
               <span className="text-white font-bold text-lg">Total</span>
               <span className="text-2xl font-bold text-green-400">
-                {formatCurrency(pricing.total)}
+                {formatCurrency(displayTotal)}
               </span>
             </div>
           </div>
