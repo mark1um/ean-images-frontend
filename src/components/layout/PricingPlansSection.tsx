@@ -4,40 +4,40 @@ const plans = [
   {
     name: 'Starter',
     range: 'Ate 50 imagens',
-    price: 'R$ 0,50',
+    price: 'R$ 0,90',
     highlight: false,
-    note: 'Ideal para testes, cadastros pequenos e reposicao rapida.',
+    note: 'Ideal para testes, cadastros pequenos e reposição rapida.',
     info: '*Pagamento mínimo de R$ 1,00.'
   },
   {
     name: 'Pro',
     range: '51 a 200 imagens',
-    price: 'R$ 0,30',
-    highlight: true,
-    note: 'Melhor custo para lojas e operacoes com volume recorrente.',
+    price: 'R$ 0,75',
+    highlight: false,
+    note: 'Melhor custo para lojas e operações com volume recorrente.',
   },
   {
     name: 'Scale',
     range: 'Acima de 200 imagens',
-    price: 'R$ 0,20',
-    highlight: false,
-    note: 'Faixa de maior economia para lotes grandes e operacoes intensas.',
+    price: 'R$ 0,40',
+    highlight: true,
+    note: 'Faixa de maior economia para lotes grandes e operações intensas.',
   },
 ];
 
 const benefits = [
   {
-    title: 'Entrega automatica',
-    description: 'As imagens sao enviadas em ZIP para o e-mail cadastrado apos confirmacao.',
+    title: 'Entrega automática',
+    description: 'As imagens são enviadas em ZIP para o e-mail cadastrado apos confirmacão.',
     icon: FileArchive,
   },
   {
-    title: 'Processo rapido',
-    description: 'Voce confere disponibilidade e preco antes de pagar, em poucos segundos.',
+    title: 'Processo rápido',
+    description: 'Você confere disponibilidade e preco antes de pagar, em poucos segundos.',
     icon: Clock3,
   },
   {
-    title: 'Suporte em operacao',
+    title: 'Suporte em operação',
     description: 'Fluxo desenhado para facilitar compras pontuais e lotes recorrentes.',
     icon: Headset,
   },
@@ -48,10 +48,10 @@ export function PricingPlansSection() {
     <section id="pricing" className="space-y-5 md:space-y-6">
       <div className="text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">Planos de imagens</p>
-        <h2 className="mt-2 text-2xl md:text-3xl font-bold text-white">Preco simples por volume</h2>
+        <h2 className="mt-2 text-2xl md:text-3xl font-bold text-white">Preço simples por volume</h2>
         <p className="mt-2 text-sm md:text-base text-slate-400 max-w-2xl mx-auto">
           Escolha o volume, valide a disponibilidade dos EANs e finalize no checkout.
-          Valores por imagem com reducao progressiva por faixa.
+          Valores por imagem com redução progressiva por faixa.
         </p>
       </div>
 
