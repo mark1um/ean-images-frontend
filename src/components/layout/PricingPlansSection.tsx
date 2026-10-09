@@ -4,7 +4,7 @@ const plans = [
   {
     name: 'Starter',
     range: 'Ate 50 imagens',
-    price: 'R$ 0,90',
+    price: 'R$ 0,20',
     highlight: false,
     note: 'Ideal para testes, cadastros pequenos e reposição rapida.',
     info: '*Pagamento mínimo de R$ 1,00.'
@@ -12,14 +12,14 @@ const plans = [
   {
     name: 'Pro',
     range: '51 a 200 imagens',
-    price: 'R$ 0,75',
+    price: 'R$ 0,15',
     highlight: false,
     note: 'Melhor custo para lojas e operações com volume recorrente.',
   },
   {
     name: 'Scale',
     range: 'Acima de 200 imagens',
-    price: 'R$ 0,40',
+    price: 'R$ 0,10',
     highlight: true,
     note: 'Faixa de maior economia para lotes grandes e operações intensas.',
   },
