@@ -16,6 +16,17 @@ export const SUPPORT_CONFIG = {
   },
 };
 
+/** Valor mínimo cobrado por pedido (mesma regra do backend: MIN_ORDER_TOTAL) */
+export const MIN_ORDER_TOTAL = 1;
+
+/** A partir de quantos EANs mostramos o atendimento para lotes grandes */
+export const LARGE_BATCH_MIN_EANS = 100;
+
+/** Link do WhatsApp com mensagem já escrita */
+export function whatsappLink(message: string): string {
+  return `${SUPPORT_CONFIG.whatsapp.url}?text=${encodeURIComponent(message)}`;
+}
+
 export const PROCESSING_CONFIG = {
   estimatedTimeMin: 5,
   estimatedTimeMax: 10,

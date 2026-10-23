@@ -95,7 +95,7 @@ export function LeadCaptureForm({ stats, onSubmit, onBack, isLoading }: LeadCapt
 
       <div className="flex items-start gap-2 rounded-xl bg-slate-800/30 p-3 text-xs text-slate-500">
         <Lock className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-green-400" />
-        <span>Usaremos seu e-mail para enviar comunicados sobre sua busca e ofertas da EAN Images.</span>
+        <span>Usamos seu e-mail só para enviar o resultado e informações desta consulta. Sem spam, e você pode sair quando quiser.</span>
       </div>
 
       <div className="flex gap-3 pt-1">

@@ -27,7 +27,7 @@ const faqItems: FAQItem[] = [
     id: 'faq-2',
     question: 'Como faço para baixar imagens de produtos pelo EAN?',
     answer:
-      'É muito simples! Acesse a EAN Images, insira o código EAN (8 ou 13 dígitos) ou faça upload de um arquivo com múltiplos EANs. Nossa plataforma analisa instantaneamente e mostra a disponibilidade de imagens. Selecione as imagens que deseja, faça o pagamento via PIX (seguro), e receba o download imediato das imagens em um arquivo ZIP por e-mail.',
+      'É muito simples! Acesse a EAN Images, insira o código EAN (8 ou 13 dígitos) ou faça upload de um arquivo com múltiplos EANs. Nossa plataforma analisa instantaneamente e mostra a disponibilidade de imagens. Selecione as imagens que deseja, faça o pagamento via PIX (seguro), e receba as imagens em um arquivo ZIP no seu e-mail em poucos minutos.',
     keywords: ['baixar imagens', 'EAN', 'como fazer'],
   },
   {
@@ -184,7 +184,7 @@ export default function FAQPage() {
             Pronto para começar a buscar imagens por EAN?
           </h2>
           <p className="text-slate-300 mb-8">
-            Sem cadastro, sem assinatura. Apenas busque, pague o que usar e receba por e-mail.
+            Sem criar conta, sem assinatura. Apenas busque, pague o que usar e receba por e-mail.
           </p>
           <a
             href="/"

@@ -1,7 +1,8 @@
 'use client';
 
 import { CheckCircle, XCircle, BarChart3, ShoppingCart, ArrowLeft, Tag, Mail, MessageCircle, ChevronDown } from 'lucide-react';
-import { SUPPORT_CONFIG } from '@/lib/config';
+import { LARGE_BATCH_MIN_EANS, MIN_ORDER_TOTAL, SUPPORT_CONFIG, whatsappLink } from '@/lib/config';
+import { trackEvent } from '@/lib/analytics';
 import { formatCurrency, formatNumber } from '@/lib/utils';
 import type { AnalyzeResponse } from '@/types';
 
@@ -14,7 +15,7 @@ interface ResultCardProps {
 export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
   const { stats, pricing } = result;
   const hasImages = stats.totalFound > 0;
-  const minimumOrderTotal = 1;
+  const minimumOrderTotal = MIN_ORDER_TOTAL;
   const displayTotal = hasImages ? Math.max(pricing.total, minimumOrderTotal) : pricing.total;
   const minimumOrderAdjustment = Math.max(0, displayTotal - pricing.total);
   const hasNotFoundEans = stats.totalNotFound > 0;
@@ -22,6 +23,37 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
     stats.totalValid > 0 ? Math.round((stats.totalFound / stats.totalValid) * 100) : 0;
   const foundEans = result.foundEans ?? [];
   const notFoundEans = result.notFoundEans ?? [];
+
+  // Quantas imagens cabem no valor mínimo (ex.: R$ 1,00 / R$ 0,20 = 5)
+  const imagesInMinimum =
+    pricing.pricePerUnit > 0 ? Math.floor(minimumOrderTotal / pricing.pricePerUnit + 1e-9) : 0;
+  const extraImagesForFree = Math.max(0, imagesInMinimum - stats.totalFound);
+
+  const isLargeBatch = stats.totalValid >= LARGE_BATCH_MIN_EANS;
+  const whatsappMessage = isLargeBatch
+    ? `Olá! Consultei ${stats.totalValid} EANs no site da EAN Images: ${stats.totalFound} têm imagem e ${stats.totalNotFound} ficaram sem. Vocês conseguem um plano para esse lote?`
+    : `Olá! Consultei EANs no site da EAN Images e ${stats.totalNotFound} ficaram sem imagem. Vocês conseguem essas imagens?`;
+
+  // Lista limitada: links mailto muito longos não abrem em alguns clientes de e-mail
+  const emailEanList = notFoundEans.slice(0, 100);
+  const emailBody = [
+    whatsappMessage,
+    '',
+    'EANs sem imagem:',
+    ...emailEanList,
+    ...(notFoundEans.length > emailEanList.length
+      ? [`(+ ${notFoundEans.length - emailEanList.length} outros)`]
+      : []),
+  ].join('\n');
+
+  function handleWhatsappClick() {
+    trackEvent('whatsapp_click', {
+      location: 'result',
+      large_batch: isLargeBatch,
+      total_valid: stats.totalValid,
+      total_not_found: stats.totalNotFound,
+    });
+  }
 
   return (
     <div className="space-y-4">
@@ -200,7 +232,7 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
 
             {minimumOrderAdjustment > 0 && (
               <div className="flex justify-between text-sm pt-2 border-t border-slate-800">
-                <span className="text-slate-400">Valor minimo do pedido</span>
+                <span className="text-slate-400">Ajuste para o pedido mínimo</span>
                 <span className="text-slate-300 font-medium">
                   + {formatCurrency(minimumOrderAdjustment)}
                 </span>
@@ -218,6 +250,18 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
           <p className="text-xs text-slate-500 mt-3">
             Você receberá {formatNumber(stats.totalFound)} imagens em um arquivo ZIP por e-mail.
           </p>
+
+          {minimumOrderAdjustment > 0 && (
+            <div className="mt-4 rounded-xl border border-cyan-800/40 bg-cyan-950/20 p-3 text-xs text-cyan-200">
+              O pedido mínimo é {formatCurrency(minimumOrderTotal)} (custo do PIX).
+              {extraImagesForFree > 0 && (
+                <>
+                  {' '}Por esse mesmo valor você leva até <strong>{formatNumber(imagesInMinimum)} imagens</strong>:
+                  faça uma nova consulta incluindo mais {formatNumber(extraImagesForFree)} EAN(s) sem pagar nada a mais.
+                </>
+              )}
+            </div>
+          )}
         </div>
       )}
 
@@ -234,34 +278,48 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
       )}
 
       {hasNotFoundEans && (
-        <div className="card border-amber-900/30 bg-amber-950/10">
+        <div
+          className={
+            isLargeBatch
+              ? 'card border-emerald-700/50 bg-emerald-950/20'
+              : 'card border-amber-900/30 bg-amber-950/10'
+          }
+        >
           <div className="flex items-center gap-3 mb-3">
-            <div className="p-2 bg-amber-600/20 rounded-xl">
-              <MessageCircle className="w-5 h-5 text-amber-400" />
+            <div className={isLargeBatch ? 'p-2 bg-emerald-600/20 rounded-xl' : 'p-2 bg-amber-600/20 rounded-xl'}>
+              <MessageCircle className={isLargeBatch ? 'w-5 h-5 text-emerald-400' : 'w-5 h-5 text-amber-400'} />
             </div>
-            <h3 className="text-lg font-bold text-white">Não encontrou o que precisa?</h3>
+            <h3 className="text-lg font-bold text-white">
+              {isLargeBatch
+                ? `Lote grande? Buscamos as ${formatNumber(stats.totalNotFound)} imagens que faltam`
+                : 'Não encontrou o que precisa?'}
+            </h3>
           </div>
 
           <p className="text-sm text-slate-400 mb-4">
-            Me manda um e-mail ou fala no WhatsApp que fazemos um plano personalizado para você.
+            {isLargeBatch
+              ? 'Para lotes com mais de 100 EANs montamos um plano personalizado: buscamos as imagens que faltam e fazemos um preço para o lote inteiro. Fale com a gente, a mensagem já vai pronta.'
+              : 'Mande uma mensagem no WhatsApp ou por e-mail que tentamos conseguir essas imagens para você.'}
           </p>
 
           <div className="flex flex-wrap gap-3">
             <a
-              href={`mailto:${SUPPORT_CONFIG.email}`}
-              className="btn-secondary inline-flex items-center justify-center gap-2"
-            >
-              <Mail className="w-4 h-4" />
-              Enviar e-mail
-            </a>
-            <a
-              href={SUPPORT_CONFIG.whatsapp.url}
+              href={whatsappLink(whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleWhatsappClick}
               className="btn-primary inline-flex items-center justify-center gap-2"
             >
               <MessageCircle className="w-4 h-4" />
               Falar no WhatsApp
+            </a>
+            <a
+              href={`mailto:${SUPPORT_CONFIG.email}?subject=${encodeURIComponent('EANs sem imagem')}&body=${encodeURIComponent(emailBody)}`}
+              onClick={() => trackEvent('email_click', { location: 'result', large_batch: isLargeBatch })}
+              className="btn-secondary inline-flex items-center justify-center gap-2"
+            >
+              <Mail className="w-4 h-4" />
+              Enviar por e-mail
             </a>
           </div>
         </div>

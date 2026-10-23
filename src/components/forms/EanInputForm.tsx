@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { useDropzone, type FileRejection } from 'react-dropzone';
+import toast from 'react-hot-toast';
 import { Upload, FileText, X, ChevronRight, Tag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -17,9 +18,17 @@ export function EanInputForm({ onSubmit, isLoading }: EanInputFormProps) {
   const [couponCode, setCouponCode] = useState('');
   const [showCoupon, setShowCoupon] = useState(false);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+  const onDrop = useCallback((acceptedFiles: File[], rejections: FileRejection[]) => {
     if (acceptedFiles[0]) {
       setSelectedFile(acceptedFiles[0]);
+      return;
+    }
+
+    const code = rejections[0]?.errors[0]?.code;
+    if (code === 'file-too-large') {
+      toast.error('Arquivo muito grande. Máximo permitido: 5MB');
+    } else if (code) {
+      toast.error('Formato não suportado. Use .xlsx, .csv ou .txt');
     }
   }, []);
 
@@ -68,7 +77,6 @@ export function EanInputForm({ onSubmit, isLoading }: EanInputFormProps) {
             <FileText className="w-4 h-4" />
             Colar EANs
           </button>
-          {/* 
           <button
             type="button"
             onClick={() => setInputMode('file')}
@@ -80,9 +88,8 @@ export function EanInputForm({ onSubmit, isLoading }: EanInputFormProps) {
             )}
           >
             <Upload className="w-4 h-4" />
-            Upload de arquivo
+            Enviar planilha
           </button>
-          */}
         </div>
 
         {/* Modo texto */}
@@ -131,7 +138,10 @@ export function EanInputForm({ onSubmit, isLoading }: EanInputFormProps) {
                   {isDragActive ? 'Solte o arquivo aqui' : 'Arraste ou clique para selecionar'}
                 </p>
                 <p className="text-slate-500 text-sm mt-1">
-                  .txt, .csv ou .xlsx — máximo 5MB e 10.000 EANs
+                  .xlsx, .csv ou .txt — máximo 5MB e 10.000 EANs
+                </p>
+                <p className="text-slate-600 text-xs mt-2">
+                  Lemos todas as células da primeira aba. Outras colunas (nome, preço) são ignoradas.
                 </p>
               </div>
             ) : (

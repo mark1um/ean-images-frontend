@@ -34,9 +34,9 @@ export function HeroSection({ compact = false }: HeroSectionProps) {
         {!compact && (
           <>
             <p className="mt-5 text-base md:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed text-center">
-              Busque e baixe imagens de produtos pelo código EAN em segundos. Perfeito para, 
-              marketplaces, e-commerces e empresas que precisam de imagens de alta qualidade. Sem cadastro, sem contrato, 
-              sem complicações. Análise instantânea com checkout seguro e entrega por e-mail.
+              Consulte seus EANs em segundos e veja quais imagens temos antes de pagar. Perfeito para
+              marketplaces, e-commerces e empresas que precisam de imagens de alta qualidade. Sem criar conta,
+              sem contrato: pague por PIX e receba o ZIP no seu e-mail em poucos minutos.
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-3 text-sm">
@@ -46,11 +46,11 @@ export function HeroSection({ compact = false }: HeroSectionProps) {
               </div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 border border-slate-700 rounded-full text-slate-300">
                 <ShieldCheck className="w-4 h-4 text-emerald-300" />
-                <span>Pagamento 100% Seguro</span>
+                <span>Pagamento seguro via PIX</span>
               </div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 border border-slate-700 rounded-full text-slate-300">
                 <Mail className="w-4 h-4 text-blue-300" />
-                <span>Download Imediato</span>
+                <span>Entrega por e-mail em minutos</span>
               </div>
             </div>
           </>

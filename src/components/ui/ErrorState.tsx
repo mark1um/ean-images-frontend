@@ -1,5 +1,6 @@
-import { AlertTriangle, ArrowRight, Mail } from 'lucide-react';
+import { AlertTriangle, ArrowRight, Mail, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
+import { SUPPORT_CONFIG } from '@/lib/config';
 
 interface ErrorStateProps {
   title: string;
@@ -23,14 +24,24 @@ export function ErrorState({ title, message, showContact = false }: ErrorStatePr
         </div>
 
         {showContact && (
-          <div className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-xl text-sm text-slate-400">
-            <Mail className="w-4 h-4 text-blue-400 flex-shrink-0" />
-            <span>
-              Dúvidas? Entre em contato:{' '}
-              <a href="mailto:suporte@seudominio.com.br" className="text-blue-400 hover:underline">
-                suporte@seudominio.com.br
-              </a>
-            </span>
+          <div className="space-y-2 p-3 bg-slate-800/50 rounded-xl text-sm text-slate-400 text-left">
+            <p className="text-slate-300 font-medium">Precisa de ajuda? Fale com a gente:</p>
+            <a
+              href={`mailto:${SUPPORT_CONFIG.email}`}
+              className="flex items-center gap-2 text-blue-400 hover:underline"
+            >
+              <Mail className="w-4 h-4 flex-shrink-0" />
+              {SUPPORT_CONFIG.email}
+            </a>
+            <a
+              href={SUPPORT_CONFIG.whatsapp.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-green-400 hover:underline"
+            >
+              <MessageCircle className="w-4 h-4 flex-shrink-0" />
+              WhatsApp {SUPPORT_CONFIG.whatsapp.display}
+            </a>
           </div>
         )}
 

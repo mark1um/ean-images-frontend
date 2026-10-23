@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ArrowLeft, QrCode, Lock, Mail, User } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
+import { MIN_ORDER_TOTAL } from '@/lib/config';
 import type { PricingResult } from '@/types';
 
 interface CheckoutFormProps {
@@ -18,7 +19,7 @@ export function CheckoutForm({ pricing, onSubmit, onBack, isLoading, initialEmai
   const [email, setEmail] = useState(initialEmail);
   const [name, setName] = useState(initialName);
   const [emailError, setEmailError] = useState('');
-  const minimumOrderTotal = 1;
+  const minimumOrderTotal = MIN_ORDER_TOTAL;
   const displayTotal = pricing.quantity > 0 ? Math.max(pricing.total, minimumOrderTotal) : pricing.total;
   const minimumOrderAdjustment = Math.max(0, displayTotal - pricing.total);
 
@@ -57,7 +58,7 @@ export function CheckoutForm({ pricing, onSubmit, onBack, isLoading, initialEmai
             </p>
             {minimumOrderAdjustment > 0 && (
               <p className="text-slate-500 text-xs">
-                Inclui minimo de {formatCurrency(minimumOrderTotal)}
+                Pedido mínimo: {formatCurrency(minimumOrderTotal)}
               </p>
             )}
           </div>

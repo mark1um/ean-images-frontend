@@ -135,7 +135,7 @@ export default function ComoFuncionaPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-cyan-400 mt-1">✓</span>
-                  <span>Download imediato</span>
+                  <span>Entrega por e-mail em minutos</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-cyan-400 mt-1">✓</span>

@@ -69,6 +69,14 @@ export interface OrderStatus {
   sentAt?: string;
   zipExpiresAt?: string;
   createdAt: string;
+  /** PIX ainda válido (quando o pedido está aguardando pagamento) */
+  pix?: CheckoutResponse['pix'];
+  /** true quando o PIX anterior expirou e o cliente pode gerar outro */
+  canRetryPayment?: boolean;
+}
+
+export interface RestoreLeadResponse extends AnalyzeResponse {
+  lead: { email: string; name?: string };
 }
 
 export type AppStep = 'input' | 'analyzing' | 'lead' | 'result' | 'checkout' | 'processing' | 'success';

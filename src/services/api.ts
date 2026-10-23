@@ -7,7 +7,13 @@
  * - Facilitar mocking em testes
  */
 
-import type { AnalyzeResponse, CheckoutResponse, LeadCaptureResponse, OrderStatus } from '@/types';
+import type {
+  AnalyzeResponse,
+  CheckoutResponse,
+  LeadCaptureResponse,
+  OrderStatus,
+  RestoreLeadResponse,
+} from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 
@@ -23,7 +29,7 @@ class ApiError extends Error {
 }
 
 async function handleResponse<T>(response: Response): Promise<T> {
-  const data = await response.json();
+  const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
     throw new ApiError(
@@ -109,6 +115,22 @@ export async function captureLead(params: {
 export async function getOrderStatus(orderId: string): Promise<OrderStatus> {
   const response = await fetch(`${API_URL}/order/${orderId}/status`);
   return handleResponse<OrderStatus>(response);
+}
+
+// ─────────────────────────────────────────────
+// Gerar novo PIX (quando o anterior expirou)
+// ─────────────────────────────────────────────
+export async function repayOrder(orderId: string): Promise<CheckoutResponse> {
+  const response = await fetch(`${API_URL}/order/${orderId}/repay`, { method: 'POST' });
+  return handleResponse<CheckoutResponse>(response);
+}
+
+// ─────────────────────────────────────────────
+// Reabrir resultado a partir do e-mail de lembrete
+// ─────────────────────────────────────────────
+export async function restoreLead(leadId: string): Promise<RestoreLeadResponse> {
+  const response = await fetch(`${API_URL}/leads/${leadId}/restore`, { method: 'POST' });
+  return handleResponse<RestoreLeadResponse>(response);
 }
 
 export { ApiError };
