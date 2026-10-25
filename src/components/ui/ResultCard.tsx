@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckCircle, XCircle, BarChart3, ShoppingCart, ArrowLeft, Tag, Mail, MessageCircle, ChevronDown } from 'lucide-react';
+import { CheckCircle, XCircle, BarChart3, ShoppingCart, ArrowLeft, Tag, Mail, MessageCircle, ChevronDown, Package } from 'lucide-react';
 import { LARGE_BATCH_MIN_EANS, MIN_ORDER_TOTAL, SUPPORT_CONFIG, whatsappLink } from '@/lib/config';
 import { trackEvent } from '@/lib/analytics';
 import { formatCurrency, formatNumber } from '@/lib/utils';
@@ -25,8 +25,9 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
   const notFoundEans = result.notFoundEans ?? [];
 
   // Quantas imagens cabem no valor mínimo (ex.: R$ 1,00 / R$ 0,20 = 5)
+  const firstTierPrice = pricing.breakdown[0]?.kind !== 'package' ? pricing.breakdown[0]?.pricePerUnit ?? 0 : 0;
   const imagesInMinimum =
-    pricing.pricePerUnit > 0 ? Math.floor(minimumOrderTotal / pricing.pricePerUnit + 1e-9) : 0;
+    firstTierPrice > 0 ? Math.floor(minimumOrderTotal / firstTierPrice + 1e-9) : 0;
   const extraImagesForFree = Math.max(0, imagesInMinimum - stats.totalFound);
 
   const isLargeBatch = stats.totalValid >= LARGE_BATCH_MIN_EANS;
@@ -209,14 +210,28 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
 
           <div className="space-y-3">
             {pricing.breakdown.map((item, i) => (
-              <div key={i} className="flex justify-between text-sm">
+              <div key={i} className="flex justify-between gap-3 text-sm">
                 <span className="text-slate-400">{item.label}</span>
-                <span className="text-slate-300">
-                  {formatNumber(item.quantity)} × {formatCurrency(item.pricePerUnit)} ={' '}
+                <span className="text-slate-300 text-right">
+                  {item.kind === 'package' ? (
+                    <>{formatNumber(item.quantity)} imagens ={' '}</>
+                  ) : (
+                    <>{formatNumber(item.quantity)} × {formatCurrency(item.pricePerUnit)} ={' '}</>
+                  )}
                   <span className="text-white font-medium">{formatCurrency(item.subtotal)}</span>
                 </span>
               </div>
             ))}
+
+            {pricing.package && pricing.package.savings > 0 && (
+              <div className="flex justify-between gap-3 text-sm text-emerald-300">
+                <span className="flex items-center gap-1.5">
+                  <Package className="w-3.5 h-3.5" />
+                  Economia com o pacote
+                </span>
+                <span className="font-medium">{formatCurrency(pricing.package.savings)}</span>
+              </div>
+            )}
 
             {pricing.discount > 0 && (
               <div className="flex justify-between text-sm pt-2 border-t border-slate-800">

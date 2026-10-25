@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { ArrowLeft, QrCode, Lock, Mail, User } from 'lucide-react';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, formatNumber } from '@/lib/utils';
 import { MIN_ORDER_TOTAL } from '@/lib/config';
 import type { PricingResult } from '@/types';
 
@@ -42,9 +42,15 @@ export function CheckoutForm({ pricing, onSubmit, onBack, isLoading, initialEmai
 
         <div className="flex justify-between items-center p-4 bg-slate-800/50 rounded-xl">
           <div>
-            <p className="text-slate-300 font-medium">{pricing.quantity} imagens</p>
+            <p className="text-slate-300 font-medium">{formatNumber(pricing.quantity)} imagens</p>
             <p className="text-slate-500 text-sm">
-              {formatCurrency(pricing.pricePerUnit)} por imagem
+              {pricing.package
+                ? pricing.quantity > pricing.package.size
+                  ? `Pacote ${formatNumber(pricing.package.size)} + ${formatNumber(pricing.quantity - pricing.package.size)} imagens extras`
+                  : `Pacote até ${formatNumber(pricing.package.size)} imagens · preço fechado`
+                : pricing.breakdown.length > 1
+                  ? `${formatCurrency(pricing.pricePerUnit)} por imagem, em média`
+                  : `${formatCurrency(pricing.pricePerUnit)} por imagem`}
             </p>
           </div>
           <div className="text-right">

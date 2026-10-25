@@ -9,6 +9,8 @@ export interface EanMatchResult {
 }
 
 export interface PricingBreakdownItem {
+  /** tier = faixa por imagem, package = pacote de preço fechado, extra = imagens além do pacote */
+  kind?: 'tier' | 'package' | 'extra';
   label: string;
   quantity: number;
   pricePerUnit: number;
@@ -23,6 +25,13 @@ export interface PricingResult {
   total: number;
   couponApplied?: string;
   breakdown: PricingBreakdownItem[];
+  /** Presente quando o pacote de preço fechado saiu mais barato */
+  package?: {
+    size: number;
+    price: number;
+    extraPricePerUnit: number;
+    savings: number;
+  };
 }
 
 export interface AnalyzeStats {
