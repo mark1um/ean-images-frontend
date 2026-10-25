@@ -48,7 +48,7 @@ const faqItems: FAQItem[] = [
     id: 'faq-5',
     question: 'Quanto custa para baixar imagens de produtos?',
     answer:
-      'Até 1.000 imagens por R$ 99. Para poucas imagens, você paga só o que usar: no máximo R$ 0,20 por imagem, com pedido mínimo de R$ 1,00. Lotes maiores: até 3.000 imagens por R$ 179 e até 10.000 por R$ 299. Você só paga pelas imagens encontradas, não há assinatura e o valor exato aparece antes de pagar via PIX.',
+      'Até 1.000 imagens por R$ 99. Para poucas imagens, você paga só o que usar: R$ 0,10 por imagem, com pedido mínimo de R$ 1,00 (ex.: 50 imagens = R$ 5,00). Lotes maiores: até 3.000 imagens por R$ 179 e até 10.000 por R$ 299. Você só paga pelas imagens encontradas, não há assinatura e o valor exato aparece antes de pagar via PIX.',
     keywords: ['preço', 'custo', 'valor'],
   },
   {

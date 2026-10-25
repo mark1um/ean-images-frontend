@@ -3,8 +3,7 @@
  *
  * O valor cobrado é sempre calculado no servidor. Esta cópia serve só para
  * a seção de preços e os exemplos. Ao mudar os valores, atualize também:
- * - faixas: tabela pricing_rules no banco
- * - pacotes: ean-images-backend/src/config/pricing.ts
+ * ean-images-backend/src/config/pricing.ts (preço por imagem e pacotes)
  */
 
 export interface PriceTier {
@@ -19,11 +18,8 @@ export interface PricePackage {
   extraPricePerUnit: number;
 }
 
-export const PRICING_TIERS: PriceTier[] = [
-  { from: 1, to: 50, pricePerUnit: 0.2 },
-  { from: 51, to: 200, pricePerUnit: 0.15 },
-  { from: 201, to: null, pricePerUnit: 0.1 },
-];
+// Preço único por imagem (sem faixas)
+export const PRICING_TIERS: PriceTier[] = [{ from: 1, to: null, pricePerUnit: 0.1 }];
 
 export const PRICING_PACKAGES: PricePackage[] = [
   { size: 1000, price: 99, extraPricePerUnit: 0.04 },
@@ -43,13 +39,13 @@ function tieredCents(quantity: number): number {
   return cents;
 }
 
-/** Preço só pelas faixas por imagem (sem pacote). */
+/** Preço só por imagem (sem pacote). */
 export function tieredPrice(quantity: number): number {
   if (!Number.isInteger(quantity) || quantity <= 0) return 0;
   return tieredCents(quantity) / 100;
 }
 
-/** Mesmo cálculo do servidor: o menor valor entre faixas e pacotes. */
+/** Mesmo cálculo do servidor: o menor valor entre preço por imagem e pacotes. */
 export function estimatePrice(quantity: number): number {
   if (!Number.isInteger(quantity) || quantity <= 0) return 0;
 

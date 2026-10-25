@@ -4,7 +4,7 @@ import { PRICING_PACKAGES, PRICING_TIERS, estimatePrice } from '@/lib/pricing';
 import { formatCurrency, formatNumber } from '@/lib/utils';
 
 const [mainPackage, ...largerPackages] = PRICING_PACKAGES;
-const maxUnitPrice = PRICING_TIERS[0].pricePerUnit;
+const unitPrice = PRICING_TIERS[0].pricePerUnit;
 
 const examples = [10, 100, 500];
 
@@ -56,8 +56,9 @@ export function PricingPlansSection() {
         <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
           <p className="text-sm font-semibold text-white">Poucas imagens?</p>
           <p className="text-sm text-slate-300 mt-4 leading-relaxed">
-            Pague só o que usar: no máximo {formatCurrency(maxUnitPrice)} por imagem, a partir de{' '}
-            {formatCurrency(MIN_ORDER_TOTAL)}.
+            Pague só o que usar: {formatCurrency(unitPrice)} por imagem, a partir de{' '}
+            {formatCurrency(MIN_ORDER_TOTAL)}. O valor nunca passa de {formatCurrency(mainPackage.price)} até{' '}
+            {formatNumber(mainPackage.size)} imagens.
           </p>
           <div className="mt-4 grid grid-cols-3 gap-2">
             {examples.map((qty) => (
