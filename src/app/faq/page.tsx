@@ -48,7 +48,7 @@ const faqItems: FAQItem[] = [
     id: 'faq-5',
     question: 'Quanto custa para baixar imagens de produtos?',
     answer:
-      'O preço cai conforme o volume: as primeiras 50 imagens custam R$ 0,20 cada, da 51ª à 200ª R$ 0,15 e, acima de 200, R$ 0,10. Para lotes grandes há pacotes de preço fechado: até 1.000 imagens por R$ 99, até 3.000 por R$ 179 e até 10.000 por R$ 299. O sistema aplica sempre o menor valor e você só paga pelas imagens encontradas, com pedido mínimo de R$ 1,00. Não há assinatura e você vê o valor antes de pagar via PIX.',
+      'Até 1.000 imagens por R$ 99. Para poucas imagens, você paga só o que usar: no máximo R$ 0,20 por imagem, com pedido mínimo de R$ 1,00. Lotes maiores: até 3.000 imagens por R$ 179 e até 10.000 por R$ 299. Você só paga pelas imagens encontradas, não há assinatura e o valor exato aparece antes de pagar via PIX.',
     keywords: ['preço', 'custo', 'valor'],
   },
   {
@@ -62,7 +62,7 @@ const faqItems: FAQItem[] = [
     id: 'faq-7',
     question: 'Posso fazer upload de um arquivo com múltiplos EANs?',
     answer:
-      'Sim! Você pode fazer upload de um arquivo Excel, CSV ou texto com múltiplos códigos EAN. Nossa plataforma processa instantaneamente todos os EANs, mostra a disponibilidade de imagens para cada um, e calcula o preço total com desconto por volume e pacotes de preço fechado. Isso torna muito mais eficiente para empresas que precisam de muitas imagens.',
+      'Sim! Você pode fazer upload de um arquivo Excel, CSV ou texto com múltiplos códigos EAN. Nossa plataforma processa instantaneamente todos os EANs, mostra a disponibilidade de imagens para cada um, e calcula o preço total na hora, com pacotes para lotes grandes. Isso torna muito mais eficiente para empresas que precisam de muitas imagens.',
     keywords: ['upload', 'arquivo', 'múltiplos EANs', 'Excel', 'CSV'],
   },
   {

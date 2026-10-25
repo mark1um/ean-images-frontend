@@ -30,6 +30,18 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
     firstTierPrice > 0 ? Math.floor(minimumOrderTotal / firstTierPrice + 1e-9) : 0;
   const extraImagesForFree = Math.max(0, imagesInMinimum - stats.totalFound);
 
+  // Resumo simples: o pacote (e as imagens extras) ou uma linha só com as imagens
+  const packageItem = pricing.breakdown.find((item) => item.kind === 'package');
+  const extraItem = pricing.breakdown.find((item) => item.kind === 'extra');
+  const summaryLines = packageItem
+    ? [
+        { label: `Pacote até ${formatNumber(pricing.package?.size ?? packageItem.quantity)} imagens`, value: packageItem.subtotal, isPackage: true },
+        ...(extraItem && extraItem.quantity > 0
+          ? [{ label: `${formatNumber(extraItem.quantity)} imagens extras`, value: extraItem.subtotal, isPackage: false }]
+          : []),
+      ]
+    : [{ label: `${formatNumber(pricing.quantity)} imagens`, value: pricing.subtotal, isPackage: false }];
+
   const isLargeBatch = stats.totalValid >= LARGE_BATCH_MIN_EANS;
   const whatsappMessage = isLargeBatch
     ? `Olá! Consultei ${stats.totalValid} EANs no site da EAN Images: ${stats.totalFound} têm imagem e ${stats.totalNotFound} ficaram sem. Vocês conseguem um plano para esse lote?`
@@ -209,29 +221,15 @@ export function ResultCard({ result, onContinue, onReset }: ResultCardProps) {
           </div>
 
           <div className="space-y-3">
-            {pricing.breakdown.map((item, i) => (
-              <div key={i} className="flex justify-between gap-3 text-sm">
-                <span className="text-slate-400">{item.label}</span>
-                <span className="text-slate-300 text-right">
-                  {item.kind === 'package' ? (
-                    <>{formatNumber(item.quantity)} imagens ={' '}</>
-                  ) : (
-                    <>{formatNumber(item.quantity)} × {formatCurrency(item.pricePerUnit)} ={' '}</>
-                  )}
-                  <span className="text-white font-medium">{formatCurrency(item.subtotal)}</span>
+            {summaryLines.map((line) => (
+              <div key={line.label} className="flex justify-between gap-3 text-sm">
+                <span className="text-slate-400 flex items-center gap-1.5">
+                  {line.isPackage && <Package className="w-3.5 h-3.5 text-cyan-300" />}
+                  {line.label}
                 </span>
+                <span className="text-white font-medium text-right">{formatCurrency(line.value)}</span>
               </div>
             ))}
-
-            {pricing.package && pricing.package.savings > 0 && (
-              <div className="flex justify-between gap-3 text-sm text-emerald-300">
-                <span className="flex items-center gap-1.5">
-                  <Package className="w-3.5 h-3.5" />
-                  Economia com o pacote
-                </span>
-                <span className="font-medium">{formatCurrency(pricing.package.savings)}</span>
-              </div>
-            )}
 
             {pricing.discount > 0 && (
               <div className="flex justify-between text-sm pt-2 border-t border-slate-800">

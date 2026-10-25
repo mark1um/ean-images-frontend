@@ -47,10 +47,8 @@ export function CheckoutForm({ pricing, onSubmit, onBack, isLoading, initialEmai
               {pricing.package
                 ? pricing.quantity > pricing.package.size
                   ? `Pacote ${formatNumber(pricing.package.size)} + ${formatNumber(pricing.quantity - pricing.package.size)} imagens extras`
-                  : `Pacote até ${formatNumber(pricing.package.size)} imagens · preço fechado`
-                : pricing.breakdown.length > 1
-                  ? `${formatCurrency(pricing.pricePerUnit)} por imagem, em média`
-                  : `${formatCurrency(pricing.pricePerUnit)} por imagem`}
+                  : `Pacote até ${formatNumber(pricing.package.size)} imagens`
+                : 'Entrega em ZIP no seu e-mail'}
             </p>
           </div>
           <div className="text-right">

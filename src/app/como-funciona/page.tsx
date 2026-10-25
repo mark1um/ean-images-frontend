@@ -169,7 +169,7 @@ export default function ComoFuncionaPage() {
             <div className="bg-slate-900/50 rounded-lg p-6 border border-slate-700">
               <h3 className="text-xl font-bold text-white mb-2">Preços Justos</h3>
               <p className="text-slate-300">
-                Pague apenas pelas imagens encontradas. Desconto por volume e pacotes de preço fechado para lotes grandes. Sem taxas ocultas.
+                Pague apenas pelas imagens encontradas. Até 1.000 imagens por R$ 99. Sem taxas ocultas.
               </p>
             </div>
             <div className="bg-slate-900/50 rounded-lg p-6 border border-slate-700">
