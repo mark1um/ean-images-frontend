@@ -149,7 +149,7 @@ export default function FAQPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950">
       {/* Schema JSON-LD */}
       <script
         type="application/ld+json"
@@ -194,6 +194,6 @@ export default function FAQPage() {
           </a>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

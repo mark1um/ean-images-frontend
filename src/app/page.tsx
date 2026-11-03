@@ -10,6 +10,7 @@ import { LeadCaptureForm } from '@/components/forms/LeadCaptureForm';
 import { AnalyzingLoader } from '@/components/ui/AnalyzingLoader';
 import { HeroSection } from '@/components/layout/HeroSection';
 import { PricingPlansSection } from '@/components/layout/PricingPlansSection';
+import { HomeInfoSection } from '@/components/layout/HomeInfoSection';
 import { analyzeEans, analyzeFile, captureLead, createCheckout, restoreLead } from '@/services/api';
 import { ApiError } from '@/services/api';
 import { trackEvent } from '@/lib/analytics';
@@ -184,7 +185,7 @@ export default function HomePage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950">
       <HeroSection compact={step !== 'input'} />
 
       <div
@@ -194,6 +195,7 @@ export default function HomePage() {
           <div className="animate-slide-up space-y-8">
             <EanInputForm onSubmit={handleAnalyze} isLoading={isLoading} />
             <PricingPlansSection />
+            <HomeInfoSection />
           </div>
         )}
 
@@ -233,6 +235,6 @@ export default function HomePage() {
           </div>
         )}
       </div>
-    </main>
+    </div>
   );
 }

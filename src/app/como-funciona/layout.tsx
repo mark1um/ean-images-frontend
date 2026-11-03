@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { absoluteUrl, siteUrl } from '@/lib/site';
+import { absoluteUrl, defaultOgImage, siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Como funciona: baixar imagens de produtos pelo EAN em 3 passos',
@@ -15,18 +15,11 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${siteUrl}/como-funciona` },
   openGraph: {
+    images: [defaultOgImage],
     type: 'website',
     url: `${siteUrl}/como-funciona`,
     title: 'Como Funciona — Banco de Imagens EAN',
     description: 'Guia completo para buscar e comprar imagens de produtos pelo EAN.',
-    images: [
-      {
-        url: absoluteUrl('/assets/logo-escura.jpg'),
-        width: 1200,
-        height: 630,
-        alt: 'EAN Images - Banco de Imagens de Produtos',
-      },
-    ],
   },
 };
 

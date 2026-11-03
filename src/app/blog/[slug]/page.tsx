@@ -39,21 +39,12 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
       authors: [siteName],
-      images: [
-        {
-          url: absoluteUrl('/assets/logo-escura.jpg'),
-          width: 1200,
-          height: 630,
-          alt: `${siteName} - ${post.title}`,
-        },
-      ],
       locale: 'pt_BR',
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: [absoluteUrl('/assets/logo-escura.jpg')],
     },
   };
 }
@@ -95,7 +86,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     .filter((relatedPost): relatedPost is NonNullable<typeof relatedPost> => Boolean(relatedPost));
 
   return (
-    <main className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getArticleSchema(post)) }}
@@ -188,6 +179,6 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           </Link>
         </section>
       </article>
-    </main>
+    </div>
   );
 }

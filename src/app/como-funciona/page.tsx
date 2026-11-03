@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { siteUrl } from '@/lib/site';
+import { defaultOgImage, siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Como funciona: baixar imagens de produtos pelo EAN em 3 passos',
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     'e-commerce',
   ],
   openGraph: {
+    images: [defaultOgImage],
     type: 'website',
     url: `${siteUrl}/como-funciona`,
     title: 'Como Funciona — Banco de Imagens EAN',
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function ComoFuncionaPage() {
   return (
-    <main className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950">
       {/* Hero Section */}
       <section className="relative overflow-hidden py-16 md:py-20 border-b border-slate-800">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 pointer-events-none" />
@@ -215,6 +216,6 @@ export default function ComoFuncionaPage() {
           </a>
         </section>
       </section>
-    </main>
+    </div>
   );
 }

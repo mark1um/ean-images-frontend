@@ -34,7 +34,7 @@ const sections = [
 
 export default function TermosDeUsoPage() {
   return (
-    <main className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950">
       <section className="relative overflow-hidden border-b border-slate-800 py-16 md:py-20">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 pointer-events-none" />
         <div className="absolute top-8 left-1/2 h-[240px] w-[540px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
@@ -66,6 +66,6 @@ export default function TermosDeUsoPage() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

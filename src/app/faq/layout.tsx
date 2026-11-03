@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { absoluteUrl, siteUrl } from '@/lib/site';
+import { absoluteUrl, defaultOgImage, siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Perguntas frequentes sobre imagens de produtos por EAN',
@@ -14,18 +14,11 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${siteUrl}/faq` },
   openGraph: {
+    images: [defaultOgImage],
     type: 'website',
     url: `${siteUrl}/faq`,
     title: 'FAQ — Perguntas Frequentes sobre EAN Images',
     description: 'Saiba tudo sobre como buscar e baixar imagens de produtos pelo EAN.',
-    images: [
-      {
-        url: absoluteUrl('/assets/logo-escura.jpg'),
-        width: 1200,
-        height: 630,
-        alt: 'EAN Images - Banco de Imagens de Produtos',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',

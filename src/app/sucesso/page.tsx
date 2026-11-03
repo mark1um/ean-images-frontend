@@ -166,10 +166,10 @@ function SucessoInner() {
 
 export default function SucessoPage() {
   return (
-    <main className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
       <Suspense fallback={<PageLoading />}>
         <SucessoInner />
       </Suspense>
-    </main>
+    </div>
   );
 }

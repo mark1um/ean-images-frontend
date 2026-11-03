@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CheckCircle2, Clock, Server } from 'lucide-react';
 
-import { siteUrl } from '@/lib/site';
+import { defaultOgImage, siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: { absolute: 'Status dos serviços | EAN Images' },
@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     'Acompanhe o status dos principais serviços da EAN Images: busca por EAN, pagamentos, entrega por e-mail e API.',
   alternates: { canonical: `${siteUrl}/status` },
   openGraph: {
+    images: [defaultOgImage],
     type: 'website',
     url: `${siteUrl}/status`,
     title: 'Status dos serviços da EAN Images',
@@ -26,7 +27,7 @@ const services = [
 
 export default function StatusPage() {
   return (
-    <main className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950">
       <section className="relative overflow-hidden py-16 md:py-20 border-b border-slate-800">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 pointer-events-none" />
         <div className="absolute top-8 left-1/2 -translate-x-1/2 w-[540px] h-[240px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -80,6 +81,6 @@ export default function StatusPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

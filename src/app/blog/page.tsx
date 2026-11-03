@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { blogPosts } from '@/lib/blog-posts';
-import { absoluteUrl, siteName } from '@/lib/site';
+import { absoluteUrl, defaultOgImage, siteName } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Blog sobre EAN, imagens de produtos e e-commerce',
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     canonical: absoluteUrl('/blog'),
   },
   openGraph: {
+    images: [defaultOgImage],
     type: 'website',
     url: absoluteUrl('/blog'),
     title: `Blog | ${siteName}`,
@@ -37,7 +38,7 @@ export default function BlogPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
@@ -94,6 +95,6 @@ export default function BlogPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

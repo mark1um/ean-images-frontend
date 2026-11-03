@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Mail, MessageCircle, Phone } from 'lucide-react';
 import { SUPPORT_CONFIG } from '@/lib/config';
 
-import { siteUrl } from '@/lib/site';
+import { defaultOgImage, siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Contato: suporte e vendas de imagens de produtos por EAN',
@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     'Entre em contato com a EAN Images para suporte, dúvidas comerciais ou ajuda com imagens de produtos por EAN.',
   alternates: { canonical: `${siteUrl}/contato` },
   openGraph: {
+    images: [defaultOgImage],
     type: 'website',
     url: `${siteUrl}/contato`,
     title: 'Contato: suporte e vendas de imagens de produtos por EAN',
@@ -43,7 +44,7 @@ const contactOptions = [
 
 export default function ContatoPage() {
   return (
-    <main className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950">
       <section className="relative overflow-hidden py-16 md:py-20 border-b border-slate-800">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 pointer-events-none" />
         <div className="absolute top-8 left-1/2 -translate-x-1/2 w-[540px] h-[240px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -92,6 +93,6 @@ export default function ContatoPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -52,22 +52,12 @@ export const metadata: Metadata = {
     title: `${siteName} | Banco de Imagens de Produtos por EAN`,
     description: siteDescription,
     siteName,
-    images: [
-      {
-        url: absoluteUrl('/assets/logo-escura.jpg'),
-        width: 1200,
-        height: 630,
-        alt: `${siteName} - Banco de Imagens de Produtos`,
-        type: 'image/jpeg',
-      },
-    ],
     locale: 'pt_BR',
   },
   twitter: {
     card: 'summary_large_image',
     title: `${siteName} | Banco de Imagens de Produtos por EAN`,
     description: 'Busque imagens de produtos pelo código EAN. Consulta grátis, PIX e entrega por e-mail, sem cadastro.',
-    images: [absoluteUrl('/assets/logo-escura.jpg')],
   },
   formatDetection: {
     telephone: false,
