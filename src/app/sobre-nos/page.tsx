@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://eanimages.com.br';
+import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Sobre Nós — EAN Images',
+  title: { absolute: 'Sobre a EAN Images | Banco de imagens de produtos por EAN' },
   description:
     'Conheça a EAN Images, plataforma para encontrar imagens de produtos pelo código EAN de forma rápida, simples e segura.',
+  alternates: { canonical: `${siteUrl}/sobre-nos` },
   openGraph: {
     type: 'website',
     url: `${siteUrl}/sobre-nos`,
-    title: 'Sobre Nós — EAN Images',
+    title: 'Sobre a EAN Images: banco de imagens de produtos por EAN',
     description: 'Plataforma para encontrar imagens de produtos pelo código EAN.',
   },
 };

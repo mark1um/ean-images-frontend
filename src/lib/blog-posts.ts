@@ -22,6 +22,268 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'onde-conseguir-fotos-de-produtos-para-loja-virtual',
+    title: 'Onde conseguir fotos de produtos para loja virtual sem fotografar',
+    description:
+      'Comparamos as opções para conseguir imagens de produtos para e-commerce: fotografar, pedir ao fornecedor, copiar da internet ou buscar pelo código EAN.',
+    tag: 'E-commerce',
+    publishedAt: '2026-11-03',
+    updatedAt: '2026-11-03',
+    readTime: '7 min',
+    keywords: [
+      'fotos de produtos para loja virtual',
+      'onde conseguir imagens de produtos',
+      'imagens de produtos para e-commerce',
+      'banco de imagens de produtos',
+      'foto de produto pelo código de barras',
+    ],
+    sections: [
+      {
+        heading: 'O problema: centenas de produtos e nenhuma foto',
+        body: [
+          'Quem abre uma loja virtual, um delivery de mercado ou passa a vender em marketplace quase sempre esbarra no mesmo ponto: o estoque já existe, mas as fotos não. Sem imagem, o produto não é aprovado em vários canais e, quando é, vende muito menos.',
+          'Para lojas com poucos itens, fotografar resolve. Para quem tem centenas ou milhares de SKUs de marcas conhecidas, como mercados, farmácias, pet shops, lojas de cosméticos e distribuidores, fotografar tudo vira um projeto caro e lento.',
+        ],
+      },
+      {
+        heading: 'Opção 1: fotografar os produtos',
+        body: [
+          'Dá controle total sobre ângulo, luz e fundo. O custo está no tempo: separar o produto, montar o fundo, fotografar, tratar e renomear cada arquivo. Mesmo com estúdio montado, a produção costuma ficar em dezenas de fotos por dia.',
+          'Faz sentido para produtos próprios, artesanais, sem código de barras ou em que a foto é diferencial de venda.',
+        ],
+      },
+      {
+        heading: 'Opção 2: pedir ao fornecedor ou ao fabricante',
+        body: [
+          'É a fonte mais confiável, mas depende de cada fornecedor responder, enviar arquivos com nomes padronizados e manter o material atualizado. Na prática, o retorno chega aos poucos, em formatos diferentes, e ainda precisa ser conferido produto a produto.',
+        ],
+      },
+      {
+        heading: 'Opção 3: copiar imagens da internet',
+        body: [
+          'Parece rápido, mas cada imagem precisa ser procurada, conferida e renomeada à mão. O risco de pegar a versão errada da embalagem, outro tamanho ou um sabor diferente é alto, e algumas imagens têm marca d’água ou baixa resolução.',
+        ],
+      },
+      {
+        heading: 'Opção 4: buscar as imagens pelo código EAN',
+        body: [
+          'Como o EAN (código de barras) identifica um produto específico, ele funciona como chave de busca: você envia a lista de EANs e recebe as imagens já associadas a cada código. Isso elimina a busca por nome e a renomeação manual.',
+          'Na EAN Images, a consulta é gratuita: você cola os EANs ou envia uma planilha (Excel ou CSV) e vê quantas imagens existem antes de pagar. Só paga pelas imagens encontradas: R$ 0,10 por imagem, ou até 1.000 imagens por R$ 99. O pagamento é por PIX e o ZIP chega no e-mail em minutos, com cada arquivo nomeado pelo EAN.',
+        ],
+      },
+      {
+        heading: 'Qual opção escolher',
+        body: [
+          'Para produtos industrializados com código de barras, comece pela busca por EAN e fotografe só o que não for encontrado. Assim, o trabalho de fotografia fica concentrado nos itens que realmente precisam.',
+          'Para produtos próprios ou sem EAN, a fotografia continua sendo o caminho.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Qual a forma mais rápida de conseguir fotos para muitos produtos?',
+        answer:
+          'Para produtos com código de barras, buscar as imagens pelo EAN em lote. Na EAN Images você envia uma planilha com os EANs, vê na hora quantas imagens existem e recebe todas em um ZIP por e-mail após o PIX.',
+      },
+      {
+        question: 'Quanto custa conseguir imagens de produtos pelo EAN?',
+        answer:
+          'Na EAN Images, R$ 0,10 por imagem encontrada (mínimo de R$ 1,00), até 1.000 imagens por R$ 99, até 3.000 por R$ 179 e até 10.000 por R$ 299. A consulta de disponibilidade é gratuita.',
+      },
+      {
+        question: 'Preciso criar conta para baixar as imagens?',
+        answer: 'Não. Basta informar os EANs, um e-mail para entrega e pagar por PIX.',
+      },
+    ],
+    relatedSlugs: ['baixar-imagens-produtos-pelo-ean', 'quanto-custa-foto-de-produto-ecommerce'],
+  },
+  {
+    slug: 'imagens-de-produtos-mercado-livre-shopee',
+    title: 'Imagens de produtos para Mercado Livre, Shopee e Amazon: como conseguir em lote',
+    description:
+      'O que os marketplaces costumam exigir das fotos de produtos e como conseguir imagens para centenas de anúncios usando o código EAN.',
+    tag: 'Marketplace',
+    publishedAt: '2026-11-03',
+    updatedAt: '2026-11-03',
+    readTime: '6 min',
+    keywords: [
+      'imagens para Mercado Livre',
+      'fotos de produtos Shopee',
+      'imagens de produtos marketplace',
+      'fundo branco produto marketplace',
+      'cadastro em massa marketplace',
+    ],
+    sections: [
+      {
+        heading: 'Por que a foto trava o cadastro no marketplace',
+        body: [
+          'Marketplaces dependem de catálogo padronizado. Por isso pedem o código universal do produto (EAN/GTIN) e uma foto principal que mostre o item com clareza. Anúncio sem foto adequada pode ser recusado, perder exposição ou ficar fora do catálogo do produto.',
+          'Para quem sobe dezenas ou centenas de anúncios de uma vez, por planilha ou integrador (ERP, hub de marketplaces), a foto costuma ser a etapa mais lenta.',
+        ],
+      },
+      {
+        heading: 'Requisitos comuns da foto principal',
+        body: [
+          'As regras mudam com o tempo e variam por categoria, então confira sempre a central do vendedor de cada canal. Em geral, os marketplaces pedem: fundo branco ou neutro na foto principal, produto centralizado ocupando boa parte da imagem, sem textos promocionais, logotipos da loja ou marca d’água, e boa resolução (imagens quadradas a partir de 1.000 px de lado funcionam bem na maioria dos canais, com zoom).',
+          'A imagem também precisa corresponder exatamente ao produto anunciado: mesma embalagem, tamanho, sabor e versão do EAN informado.',
+        ],
+      },
+      {
+        heading: 'Como conseguir as imagens em lote pelo EAN',
+        body: [
+          '1. Exporte do seu ERP ou planilha a lista de EANs dos produtos que vai anunciar.',
+          '2. Cole a lista ou envie a planilha na EAN Images. A consulta é gratuita e mostra quais EANs têm imagem e o valor exato.',
+          '3. Pague por PIX (R$ 0,10 por imagem ou até 1.000 imagens por R$ 99) e receba o ZIP no e-mail, com cada arquivo nomeado pelo EAN.',
+          '4. Como o nome do arquivo é o próprio EAN, fica fácil associar as imagens aos anúncios na planilha de cadastro em massa ou no integrador.',
+        ],
+      },
+      {
+        heading: 'O que fazer com os EANs sem imagem',
+        body: [
+          'A consulta mostra a lista dos códigos não encontrados. Use essa lista para pedir as fotos ao fornecedor ou fotografar apenas esses itens. Na EAN Images, quem consulta recebe um aviso por e-mail quando chegam imagens novas para os EANs procurados.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Posso usar a mesma imagem no Mercado Livre, na Shopee e na Amazon?',
+        answer:
+          'Em geral sim, desde que a imagem atenda aos requisitos de cada canal (fundo, resolução e ausência de textos promocionais) e corresponda exatamente ao produto anunciado. Confira as regras atuais na central do vendedor de cada marketplace.',
+      },
+      {
+        question: 'Como associar as imagens aos anúncios em massa?',
+        answer:
+          'Na EAN Images cada arquivo vem nomeado com o EAN do produto, então basta cruzar o nome do arquivo com a coluna de EAN da sua planilha de cadastro ou do seu integrador.',
+      },
+    ],
+    relatedSlugs: ['organizar-skus-marketplaces-ean', 'checklist-imagens-catalogo-digital'],
+  },
+  {
+    slug: 'fotos-de-produtos-para-supermercado-online',
+    title: 'Fotos de produtos para supermercado online e delivery: guia para montar o catálogo',
+    description:
+      'Como mercados, atacarejos, farmácias e conveniências conseguem imagens para milhares de itens do catálogo online usando o código de barras.',
+    tag: 'Varejo',
+    publishedAt: '2026-11-03',
+    updatedAt: '2026-11-03',
+    readTime: '6 min',
+    keywords: [
+      'fotos de produtos supermercado',
+      'imagens de produtos para delivery',
+      'catálogo de supermercado online',
+      'banco de imagens supermercado',
+      'imagens para aplicativo de mercado',
+    ],
+    sections: [
+      {
+        heading: 'O desafio do catálogo de mercado',
+        body: [
+          'Um supermercado de bairro tem facilmente de 3 mil a 15 mil itens ativos. Para vender em site próprio, aplicativo de delivery ou WhatsApp com catálogo, cada item precisa de foto, e a maioria são produtos de marcas da indústria com código de barras.',
+          'Fotografar tudo é inviável na rotina da loja. Copiar da internet um a um leva semanas e gera erros de versão (embalagem antiga, tamanho diferente, sabor trocado).',
+        ],
+      },
+      {
+        heading: 'Use o EAN que já está no seu sistema',
+        body: [
+          'O sistema de frente de caixa ou ERP do mercado já tem o EAN de quase todo produto industrializado. Esse código é a forma mais segura de encontrar a imagem certa, porque identifica a versão exata do item.',
+          'Exporte a lista de produtos com o código de barras, de preferência só os ativos e com estoque, e use essa lista como base para buscar as imagens.',
+        ],
+      },
+      {
+        heading: 'Passo a passo com a EAN Images',
+        body: [
+          '1. Exporte os EANs do ERP em Excel ou CSV.',
+          '2. Envie a planilha na EAN Images. A consulta é gratuita e mostra quantos produtos têm imagem e o valor total antes do pagamento.',
+          '3. Pague por PIX. Para catálogos grandes, os pacotes saem mais em conta: até 1.000 imagens por R$ 99, até 3.000 por R$ 179 e até 10.000 por R$ 299.',
+          '4. Receba o ZIP por e-mail com os arquivos nomeados pelo EAN e importe na plataforma da loja, no app de delivery ou no catálogo.',
+        ],
+      },
+      {
+        heading: 'Itens que normalmente ficam de fora',
+        body: [
+          'Hortifrúti, açougue, padaria e produtos pesados na loja usam códigos internos e não têm imagem de fabricante. Para esses, vale um pequeno ensaio fotográfico ou imagens ilustrativas por categoria.',
+          'Os EANs não encontrados aparecem na consulta. Guarde essa lista para fotografar ou pedir aos fornecedores.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Quanto custa montar as fotos de um catálogo de supermercado?',
+        answer:
+          'Pela EAN Images, um catálogo de até 3.000 itens com imagem sai por até R$ 179 e até 10.000 itens por até R$ 299. Você vê o valor exato antes de pagar, porque só são cobradas as imagens encontradas.',
+      },
+      {
+        question: 'As imagens servem para aplicativos de delivery?',
+        answer:
+          'Sim. As imagens são entregues em arquivo, nomeadas pelo EAN, e podem ser importadas em site próprio, aplicativo de delivery, catálogo de WhatsApp ou marketplace, respeitando as regras de cada plataforma.',
+      },
+    ],
+    relatedSlugs: ['auditoria-catalogo-produtos-sem-imagem', 'baixar-imagens-produtos-pelo-ean'],
+  },
+  {
+    slug: 'quanto-custa-foto-de-produto-ecommerce',
+    title: 'Quanto custa foto de produto para e-commerce? Comparativo de custos',
+    description:
+      'Compare o custo de fotografar, terceirizar fotos e comprar imagens de produtos pelo EAN para montar o catálogo da loja virtual.',
+    tag: 'Custos',
+    publishedAt: '2026-11-03',
+    updatedAt: '2026-11-03',
+    readTime: '5 min',
+    keywords: [
+      'quanto custa foto de produto',
+      'preço foto produto e-commerce',
+      'custo imagens de produtos',
+      'fotografia de produto preço',
+      'imagens de produtos barato',
+    ],
+    sections: [
+      {
+        heading: 'O que entra no custo de uma foto de produto',
+        body: [
+          'O custo real não é só o valor pago ao fotógrafo. Entra o tempo de separar e devolver o produto ao estoque, o tratamento da imagem, a renomeação dos arquivos e a associação de cada foto ao produto certo no sistema.',
+          'Em catálogos grandes, essa parte operacional costuma pesar mais que a própria fotografia.',
+        ],
+      },
+      {
+        heading: 'Fotografia própria ou terceirizada',
+        body: [
+          'Estúdios de fotografia de produto cobram, em geral, por foto ou por diária, com valores que variam bastante conforme cidade, complexidade do produto e tratamento. Para produtos industrializados simples, o valor por foto costuma ficar na casa de alguns reais a dezenas de reais.',
+          'Fazer internamente reduz o custo por foto, mas exige equipamento, espaço e alguém dedicado à tarefa.',
+        ],
+      },
+      {
+        heading: 'Imagens pelo EAN',
+        body: [
+          'Para produtos com código de barras, a EAN Images cobra R$ 0,10 por imagem encontrada (pedido mínimo de R$ 1,00). Em volume, os pacotes reduzem o custo por imagem: até 1.000 imagens por R$ 99 (cerca de R$ 0,10 cada), até 3.000 por R$ 179 (cerca de R$ 0,06) e até 10.000 por R$ 299 (cerca de R$ 0,03).',
+          'A consulta é gratuita, você vê o valor exato antes de pagar e só paga pelas imagens que existem no banco. Os arquivos já chegam nomeados pelo EAN, o que elimina a etapa de renomear e associar.',
+        ],
+      },
+      {
+        heading: 'Exemplos de custo',
+        body: [
+          '100 produtos: R$ 10,00 pelo EAN.',
+          '500 produtos: R$ 50,00 pelo EAN.',
+          '1.000 produtos: R$ 99,00 pelo EAN.',
+          '5.000 produtos: R$ 219,00 pelo EAN (pacote de 3.000 + R$ 0,02 por imagem extra).',
+          'Combine as opções: compre pelo EAN tudo o que for encontrado e fotografe só os itens restantes.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Qual a forma mais barata de conseguir fotos de produtos?',
+        answer:
+          'Para produtos industrializados com código de barras, comprar as imagens pelo EAN costuma ser a opção mais barata: na EAN Images custa R$ 0,10 por imagem, ou menos em pacotes (até 10.000 imagens por R$ 299).',
+      },
+      {
+        question: 'Pago pelas imagens que não forem encontradas?',
+        answer:
+          'Não. A consulta mostra antes do pagamento quais EANs têm imagem, e o valor cobrado considera só as imagens encontradas.',
+      },
+    ],
+    relatedSlugs: ['onde-conseguir-fotos-de-produtos-para-loja-virtual', 'imagens-produto-conversao-ecommerce'],
+  },
+  {
     slug: 'baixar-imagens-produtos-pelo-ean',
     title: 'Como baixar imagens de produtos pelo EAN',
     description:
@@ -474,6 +736,8 @@ export function getArticleSchema(post: BlogPost) {
         url: absoluteUrl('/assets/logo-escura.jpg'),
       },
     },
+    image: absoluteUrl('/assets/logo-escura.jpg'),
+    inLanguage: 'pt-BR',
     mainEntityOfPage: getBlogPostUrl(post.slug),
     keywords: post.keywords.join(', '),
   };

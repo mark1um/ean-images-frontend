@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Como Funciona — Guia Completo do Banco de Imagens EAN',
+  title: 'Como funciona: baixar imagens de produtos pelo EAN em 3 passos',
   description:
     'Aprenda como funciona o banco de imagens EAN. Guia completo sobre como buscar, encontrar e comprar imagens de produtos pelo código EAN de forma rápida e segura.',
   keywords: [

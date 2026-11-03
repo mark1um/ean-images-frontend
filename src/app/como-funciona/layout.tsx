@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ean-images.com';
+import { absoluteUrl, siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Como Funciona — Guia Completo do Banco de Imagens EAN',
+  title: 'Como funciona: baixar imagens de produtos pelo EAN em 3 passos',
   description:
     'Aprenda como funciona o banco de imagens EAN. Guia completo sobre como buscar, encontrar e comprar imagens de produtos pelo código EAN de forma rápida e segura.',
   keywords: [
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     'banco de imagens',
     'e-commerce',
   ],
+  alternates: { canonical: `${siteUrl}/como-funciona` },
   openGraph: {
     type: 'website',
     url: `${siteUrl}/como-funciona`,
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     description: 'Guia completo para buscar e comprar imagens de produtos pelo EAN.',
     images: [
       {
-        url: `${siteUrl}/assets/logo-horizontal.png`,
+        url: absoluteUrl('/assets/logo-escura.jpg'),
         width: 1200,
         height: 630,
         alt: 'EAN Images - Banco de Imagens de Produtos',

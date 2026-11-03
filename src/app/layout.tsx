@@ -4,6 +4,8 @@ import { Toaster } from 'react-hot-toast';
 import Analytics from './Analytics';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { MIN_ORDER_TOTAL, SUPPORT_CONFIG } from '@/lib/config';
+import { PRICING_PACKAGES, PRICING_TIERS } from '@/lib/pricing';
 import { absoluteUrl, siteDescription, siteName, siteUrl } from '@/lib/site';
 import './globals.css';
 
@@ -64,7 +66,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `${siteName} | Banco de Imagens de Produtos por EAN`,
-    description: 'Busque imagens de produtos pelo código EAN. Rápido, simples e sem cadastro.',
+    description: 'Busque imagens de produtos pelo código EAN. Consulta grátis, PIX e entrega por e-mail, sem cadastro.',
     images: [absoluteUrl('/assets/logo-escura.jpg')],
   },
   formatDetection: {
@@ -87,11 +89,43 @@ export default function RootLayout({
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${siteUrl}/#organization`,
     name: siteName,
     url: siteUrl,
     logo: absoluteUrl('/assets/logo-escura.jpg'),
     description: siteDescription,
+    email: SUPPORT_CONFIG.email,
+    areaServed: 'BR',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: SUPPORT_CONFIG.email,
+      telephone: SUPPORT_CONFIG.phone.number,
+      availableLanguage: 'Portuguese',
+    },
   };
+
+  const webSiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${siteUrl}/#website`,
+    name: siteName,
+    alternateName: ['EAN Images Brasil', 'eanimages.com.br'],
+    url: siteUrl,
+    inLanguage: 'pt-BR',
+    publisher: { '@id': `${siteUrl}/#organization` },
+  };
+
+  const unitPrice = PRICING_TIERS[0].pricePerUnit;
+  const brl = (value: number) => `R$ ${value.toFixed(2).replace('.', ',')}`;
+  const priceOffer = (name: string, price: number, description: string) => ({
+    '@type': 'Offer',
+    name,
+    price: price.toFixed(2),
+    priceCurrency: 'BRL',
+    description,
+    availability: 'https://schema.org/InStock',
+  });
 
   const webApplicationSchema = {
     '@context': 'https://schema.org',
@@ -100,20 +134,30 @@ export default function RootLayout({
     url: siteUrl,
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web',
+    inLanguage: 'pt-BR',
     description:
-      'Busca e download de imagens de produtos pelo código EAN ou GTIN para e-commerce, marketplace e catálogos digitais.',
+      'Busca e download de imagens de produtos pelo código EAN ou GTIN para e-commerce, marketplace e catálogos digitais. Consulta grátis da disponibilidade, pagamento por PIX e entrega em ZIP por e-mail.',
+    provider: { '@id': `${siteUrl}/#organization` },
     offers: {
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
+      '@type': 'AggregateOffer',
       priceCurrency: 'BRL',
-    },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${siteUrl}/?ean={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
+      lowPrice: unitPrice.toFixed(2),
+      highPrice: Math.max(...PRICING_PACKAGES.map((p) => p.price)).toFixed(2),
+      offerCount: PRICING_PACKAGES.length + 1,
+      offers: [
+        priceOffer(
+          'Imagem avulsa',
+          unitPrice,
+          `${brl(unitPrice)} por imagem encontrada, pedido mínimo de ${brl(MIN_ORDER_TOTAL)}.`
+        ),
+        ...PRICING_PACKAGES.map((p) =>
+          priceOffer(
+            `Pacote ${p.size.toLocaleString('pt-BR')} imagens`,
+            p.price,
+            `Até ${p.size.toLocaleString('pt-BR')} imagens por ${brl(p.price)}.`
+          )
+        ),
+      ],
     },
   };
 
@@ -130,6 +174,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
         />
         <Analytics />
       </head>

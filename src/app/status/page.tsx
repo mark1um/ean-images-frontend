@@ -2,16 +2,17 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CheckCircle2, Clock, Server } from 'lucide-react';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://eanimages.com.br';
+import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Status — EAN Images',
+  title: { absolute: 'Status dos serviços | EAN Images' },
   description:
     'Acompanhe o status dos principais serviços da EAN Images: busca por EAN, pagamentos, entrega por e-mail e API.',
+  alternates: { canonical: `${siteUrl}/status` },
   openGraph: {
     type: 'website',
     url: `${siteUrl}/status`,
-    title: 'Status — EAN Images',
+    title: 'Status dos serviços da EAN Images',
     description: 'Status dos principais serviços da EAN Images.',
   },
 };

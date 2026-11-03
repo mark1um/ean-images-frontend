@@ -4,7 +4,7 @@ import { blogPosts } from '@/lib/blog-posts';
 import { absoluteUrl, siteName } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: `Blog | ${siteName}`,
+  title: 'Blog sobre EAN, imagens de produtos e e-commerce',
   description:
     'Conteúdos sobre imagens de produtos, cadastro por EAN, e-commerce, marketplaces e organização de catálogos digitais.',
   alternates: {

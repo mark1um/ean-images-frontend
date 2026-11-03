@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { absoluteUrl, siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'FAQ — Perguntas Frequentes sobre EAN Images',
+  title: 'Perguntas frequentes sobre imagens de produtos por EAN',
   description:
     'Perguntas frequentes sobre como buscar e baixar imagens de produtos pelo código EAN. Saiba tudo sobre preços, pagamentos, qualidade e suporte.',
   keywords: [
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     'EAN código de barras',
     'banco de imagens',
   ],
+  alternates: { canonical: `${siteUrl}/faq` },
   openGraph: {
     type: 'website',
     url: `${siteUrl}/faq`,

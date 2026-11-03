@@ -8,6 +8,11 @@ const nextConfig = {
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
   },
 
+  // /produto era uma cópia antiga da home: manda tudo para a página principal
+  async redirects() {
+    return [{ source: '/produto', destination: '/', permanent: true }];
+  },
+
   // Headers de segurança
   async headers() {
     return [

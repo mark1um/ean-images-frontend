@@ -43,8 +43,14 @@ export function Footer() {
               <Link href="/blog/ean-gtin-codigo-barras-diferencas" className="text-slate-400 hover:text-white text-sm transition-colors">
                 EAN, GTIN e código de barras
               </Link>
-              <Link href="/blog/checklist-imagens-catalogo-digital" className="text-slate-400 hover:text-white text-sm transition-colors">
-                Checklist de imagens
+              <Link href="/blog/imagens-de-produtos-mercado-livre-shopee" className="text-slate-400 hover:text-white text-sm transition-colors">
+                Imagens para marketplaces
+              </Link>
+              <Link href="/blog/fotos-de-produtos-para-supermercado-online" className="text-slate-400 hover:text-white text-sm transition-colors">
+                Fotos para supermercado online
+              </Link>
+              <Link href="/blog/quanto-custa-foto-de-produto-ecommerce" className="text-slate-400 hover:text-white text-sm transition-colors">
+                Quanto custa foto de produto
               </Link>
               <Link href="/blog/baixar-imagens-produtos-pelo-ean" className="text-slate-400 hover:text-white text-sm transition-colors">
                 Baixar imagens pelo EAN

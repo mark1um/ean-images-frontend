@@ -24,7 +24,7 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
   const url = getBlogPostUrl(post.slug);
 
   return {
-    title: `${post.title} | ${siteName}`,
+    title: post.title,
     description: post.description,
     keywords: post.keywords,
     alternates: {

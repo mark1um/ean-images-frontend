@@ -2,66 +2,62 @@ import { MetadataRoute } from 'next';
 import { blogPosts } from '@/lib/blog-posts';
 import { siteUrl } from '@/lib/site';
 
-const now = new Date();
+// Data da última mudança de conteúdo das páginas fixas. Atualize ao editar
+// o texto delas; data que muda a cada deploy faz o Google ignorar o campo.
+const pagesUpdatedAt = new Date('2026-11-03');
 
 const staticRoutes: MetadataRoute.Sitemap = [
   {
     url: siteUrl,
-    lastModified: now,
+    lastModified: pagesUpdatedAt,
     changeFrequency: 'daily',
     priority: 1.0,
   },
   {
     url: `${siteUrl}/faq`,
-    lastModified: now,
+    lastModified: pagesUpdatedAt,
     changeFrequency: 'weekly',
     priority: 0.9,
   },
   {
     url: `${siteUrl}/como-funciona`,
-    lastModified: now,
+    lastModified: pagesUpdatedAt,
     changeFrequency: 'weekly',
     priority: 0.9,
   },
   {
     url: `${siteUrl}/sobre-nos`,
-    lastModified: now,
+    lastModified: pagesUpdatedAt,
     changeFrequency: 'monthly',
     priority: 0.8,
   },
   {
     url: `${siteUrl}/contato`,
-    lastModified: now,
+    lastModified: pagesUpdatedAt,
     changeFrequency: 'monthly',
     priority: 0.8,
   },
   {
     url: `${siteUrl}/blog`,
-    lastModified: now,
+    lastModified: pagesUpdatedAt,
     changeFrequency: 'weekly',
     priority: 0.8,
   },
   {
     url: `${siteUrl}/status`,
-    lastModified: now,
+    lastModified: pagesUpdatedAt,
     changeFrequency: 'weekly',
     priority: 0.5,
   },
   {
-    url: `${siteUrl}/produto`,
-    lastModified: now,
-    changeFrequency: 'weekly',
-    priority: 0.7,
-  },
-  {
     url: `${siteUrl}/politica-de-privacidade`,
-    lastModified: now,
+    lastModified: pagesUpdatedAt,
     changeFrequency: 'yearly',
     priority: 0.4,
   },
   {
     url: `${siteUrl}/termos-de-uso`,
-    lastModified: now,
+    lastModified: pagesUpdatedAt,
     changeFrequency: 'yearly',
     priority: 0.4,
   },

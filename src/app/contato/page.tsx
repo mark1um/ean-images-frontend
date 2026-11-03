@@ -2,16 +2,17 @@ import type { Metadata } from 'next';
 import { Mail, MessageCircle, Phone } from 'lucide-react';
 import { SUPPORT_CONFIG } from '@/lib/config';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://eanimages.com.br';
+import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Contato — EAN Images',
+  title: 'Contato: suporte e vendas de imagens de produtos por EAN',
   description:
     'Entre em contato com a EAN Images para suporte, dúvidas comerciais ou ajuda com imagens de produtos por EAN.',
+  alternates: { canonical: `${siteUrl}/contato` },
   openGraph: {
     type: 'website',
     url: `${siteUrl}/contato`,
-    title: 'Contato — EAN Images',
+    title: 'Contato: suporte e vendas de imagens de produtos por EAN',
     description: 'Fale com a EAN Images sobre suporte, dúvidas comerciais e pedidos.',
   },
 };

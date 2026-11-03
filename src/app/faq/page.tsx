@@ -41,7 +41,7 @@ const faqItems: FAQItem[] = [
     id: 'faq-4',
     question: 'Preciso fazer cadastro ou assinar uma assinatura?',
     answer:
-      'Não! A EAN Images funciona 100% sem cadastro. Você não precisa criar conta, pagar assinatura recorrente ou se comprometer com contrato. Basta inserir seu EAN, pagá lo que deseja (apenas pelo que usa), e receber as imagens por e-mail. Simples, transparente e sem burocracias.',
+      'Não! A EAN Images funciona 100% sem cadastro. Você não precisa criar conta, pagar assinatura recorrente ou se comprometer com contrato. Basta inserir seu EAN, pagar pelo que deseja (apenas pelo que usa), e receber as imagens por e-mail. Simples, transparente e sem burocracias.',
     keywords: ['sem cadastro', 'sem assinatura', 'simples'],
   },
   {
