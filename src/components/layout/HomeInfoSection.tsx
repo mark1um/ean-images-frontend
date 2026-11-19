@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ChevronDown, ClipboardList, FileArchive, QrCode, ShoppingBag, Store, Truck } from 'lucide-react';
+import { ChevronDown, ClipboardList, FileArchive, QrCode, ShoppingBag, Store, Truck, Code2 } from 'lucide-react';
 import { MIN_ORDER_TOTAL } from '@/lib/config';
 import { PRICING_PACKAGES, PRICING_TIERS } from '@/lib/pricing';
 import { formatCurrency, formatNumber } from '@/lib/utils';
@@ -49,6 +49,12 @@ const audiences = [
     href: '/blog/organizar-skus-marketplaces-ean',
     icon: Truck,
   },
+  {
+    title: 'Desenvolvedores e sistemas (API)',
+    description: 'ERPs, PDVs e integradores buscam foto, nome e descrição pelo EAN via API, a partir de R$ 0,035 por imagem.',
+    href: '/api-ean',
+    icon: Code2,
+  },
 ];
 
 const faqs = [
@@ -71,6 +77,11 @@ const faqs = [
   {
     question: 'Preciso criar conta?',
     answer: 'Não. Basta informar os EANs, um e-mail para a entrega e pagar por PIX.',
+  },
+  {
+    question: 'Tem API para integrar ao meu sistema?',
+    answer:
+      'Sim. A EAN Images API devolve foto, nome e descrição do produto pelo EAN para ERPs, PDVs, marketplaces e lojas virtuais. A consulta é grátis e a liberação custa a partir de R$ 0,035 por imagem, via PIX. Veja em eanimages.com.br/api-ean.',
   },
   {
     question: 'Em quanto tempo recebo as imagens?',
@@ -128,7 +139,7 @@ export function HomeInfoSection() {
             Feito para quem tem muitos produtos com EAN
           </h2>
         </div>
-        <div className="mt-6 grid gap-3 md:grid-cols-3">
+        <div className="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {audiences.map((item) => (
             <Link
               key={item.title}

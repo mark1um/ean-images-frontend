@@ -1,5 +1,11 @@
 import { absoluteUrl, siteName } from '@/lib/site';
 
+export type CodeBlock = {
+  code: string;
+  /** Rótulo exibido acima do bloco, ex.: "curl" ou "Python". */
+  label?: string;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -11,16 +17,441 @@ export type BlogPost = {
   keywords: string[];
   sections: Array<{
     heading: string;
-    body: string[];
+    /** Parágrafos; um objeto { code } vira bloco de código (exemplos de API). */
+    body: Array<string | CodeBlock>;
   }>;
   faqs?: Array<{
     question: string;
     answer: string;
   }>;
   relatedSlugs?: string[];
+  /** Chamada final do artigo. Sem ela, aponta para a busca de imagens do site. */
+  cta?: {
+    title: string;
+    text: string;
+    href: string;
+    label: string;
+  };
 };
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: 'api-imagens-produtos-ean',
+    title: 'API de imagens de produtos por EAN: guia de integração com exemplos',
+    description:
+      'Como buscar foto, nome e descrição de produtos pelo código de barras (EAN/GTIN) via API REST, com exemplos em curl, JavaScript e Python, custos e boas práticas.',
+    tag: 'API',
+    publishedAt: '2026-11-19',
+    updatedAt: '2026-11-19',
+    readTime: '8 min',
+    keywords: [
+      'API de imagens de produtos',
+      'API EAN',
+      'API imagem por código de barras',
+      'API GTIN imagens',
+      'buscar foto de produto pelo EAN API',
+      'API dados de produto',
+    ],
+    sections: [
+      {
+        heading: 'Resposta rápida',
+        body: [
+          'Uma API de imagens de produtos por EAN recebe o número do código de barras e devolve a foto do produto, normalmente com nome e descrição. A EAN Images API faz isso para produtos vendidos no Brasil: a consulta de disponibilidade é grátis, a liberação custa 1 crédito pela imagem e 1 pelos dados, e os créditos saem a partir de R$ 0,05, pagos via PIX.',
+          'A documentação completa está em developers.eanimages.com.br/docs. Abaixo está o fluxo de integração do começo ao fim.',
+        ],
+      },
+      {
+        heading: 'Por que usar o EAN como chave',
+        body: [
+          'O EAN (ou GTIN) identifica uma versão específica de um produto: marca, sabor, tamanho e embalagem. Buscar foto pelo nome do produto traz resultados parecidos, mas errados com frequência ("500 ml" no lugar de "1 L", sabor diferente, embalagem antiga). Pelo EAN, a correspondência é exata e o arquivo já pode ser nomeado pelo código.',
+          'A API aceita EAN-8, UPC de 12 dígitos, EAN-13 e GTIN-14. Códigos com dígito verificador inválido são recusados antes de qualquer cobrança.',
+        ],
+      },
+      {
+        heading: 'Passo 1: consultar a disponibilidade (grátis)',
+        body: [
+          'Antes de gastar créditos, pergunte se o produto existe no catálogo. Para um EAN, a chamada funciona até sem chave:',
+          { label: 'curl', code: 'curl https://api.eanimages.com.br/v1/availability/7891910000197' },
+          {
+            label: 'Resposta',
+            code: '{\n  "ean": "7891910000197",\n  "available": true,\n  "image": { "available": true, "format": "jpg", "credits": 1 },\n  "data":  { "available": true, "hasName": true, "hasDescription": true, "credits": 1 }\n}',
+          },
+          'Com chave, POST /v1/availability aceita até 1.000 EANs por chamada e devolve um resumo com quantos têm imagem, quantos têm dados e quantos créditos custaria liberar tudo. A cota diária de consultas é de 20.000 EANs por conta.',
+        ],
+      },
+      {
+        heading: 'Passo 2: liberar imagem e dados',
+        body: [
+          'Crie a conta em developers.eanimages.com.br, gere uma chave no painel e envie até 100 EANs por chamada. O campo include escolhe o que liberar: "image", "data" ou os dois.',
+          {
+            label: 'JavaScript (Node 18+)',
+            code: "const res = await fetch('https://api.eanimages.com.br/v1/products/unlock', {\n  method: 'POST',\n  headers: {\n    Authorization: `Bearer ${process.env.EANIMAGES_API_KEY}`,\n    'Content-Type': 'application/json',\n  },\n  body: JSON.stringify({ eans: ['7891910000197'], include: ['image', 'data'] }),\n});\nconst { items, creditsCharged, balance } = await res.json();\nconsole.log(items[0].data?.name, items[0].image?.downloadUrl);",
+          },
+          {
+            label: 'Python',
+            code: "import os, requests\n\nres = requests.post(\n    'https://api.eanimages.com.br/v1/products/unlock',\n    headers={'Authorization': f\"Bearer {os.environ['EANIMAGES_API_KEY']}\"},\n    json={'eans': ['7891910000197'], 'include': ['image', 'data']},\n    timeout=30,\n)\nres.raise_for_status()\nitem = res.json()['items'][0]\nprint(item['data']['name'], item['image']['downloadUrl'])",
+          },
+          'A resposta traz, para cada EAN, o link de download da imagem (com data de expiração), o nome do arquivo já com o EAN e, nos dados, nome, descrição em HTML e descrição em texto. Se o saldo não cobre o lote inteiro, nada é cobrado e a API responde 402.',
+        ],
+      },
+      {
+        heading: 'Passo 3: guardar a imagem no seu storage',
+        body: [
+          'O downloadUrl é temporário. Baixe o arquivo e grave no seu próprio storage (S3, R2, disco do servidor ou a mídia da plataforma de e-commerce). Se precisar de um link novo depois, GET /v1/products/{ean}/image redireciona para o download sem cobrar de novo: o que sua conta já liberou continua seu.',
+        ],
+      },
+      {
+        heading: 'Quanto custa',
+        body: [
+          'Consultar é grátis. Liberar custa 1 crédito por imagem e 1 crédito por dados (nome + descrição). Os créditos avulsos vão de R$ 0,05 (pacote de 100 por R$ 5) a R$ 0,035 (10.000 por R$ 350) e não vencem. Há também planos mensais com cota, pagos via PIX um mês por vez, sem renovação automática. A tabela atualizada fica em eanimages.com.br/api-ean.',
+          'Para testar sem gastar, use uma chave eani_test_: ela não cobra e devolve dados de exemplo. Conta nova também ganha créditos de boas-vindas.',
+        ],
+      },
+      {
+        heading: 'Boas práticas de integração',
+        body: [
+          'Consulte em lote antes de liberar e libere só o que for usar. Trate o 402 (saldo ou cota insuficiente) mostrando ao usuário quanto falta. Respeite o 429 (limite de requisições) com espera e nova tentativa. Guarde o EAN junto do arquivo para não liberar de novo o mesmo produto. E monitore o saldo com GET /v1/account para não ser surpreendido no meio de uma importação.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Qual API devolve a imagem do produto pelo código de barras?',
+        answer:
+          'A EAN Images API recebe o EAN/GTIN e devolve a imagem do produto (JPG ou PNG), além de nome e descrição quando disponíveis. A consulta é grátis e a liberação custa a partir de R$ 0,035 por imagem, via PIX.',
+      },
+      {
+        question: 'Dá para testar a API sem pagar?',
+        answer:
+          'Sim. A consulta de disponibilidade é gratuita, a chave de teste eani_test_ não cobra e conta nova recebe créditos de boas-vindas.',
+      },
+      {
+        question: 'Quantos EANs posso enviar por chamada?',
+        answer: 'Até 1.000 EANs por consulta de disponibilidade e até 100 EANs por chamada de liberação.',
+      },
+    ],
+    relatedSlugs: ['consultar-produto-codigo-de-barras-api', 'cadastro-automatico-produtos-erp-ean'],
+    cta: {
+      title: 'Teste a EAN Images API',
+      text: 'Crie a conta, gere sua chave e faça a primeira chamada em minutos. Consulta grátis e pagamento via PIX.',
+      href: '/api-ean',
+      label: 'Conhecer a API',
+    },
+  },
+  {
+    slug: 'consultar-produto-codigo-de-barras-api',
+    title: 'Como consultar produto pelo código de barras via API (foto, nome e descrição)',
+    description:
+      'Veja como transformar um código de barras (EAN/GTIN) em foto, nome e descrição do produto com uma chamada de API, e o que fazer quando o produto não é encontrado.',
+    tag: 'API',
+    publishedAt: '2026-11-19',
+    updatedAt: '2026-11-19',
+    readTime: '6 min',
+    keywords: [
+      'consultar produto pelo código de barras',
+      'API código de barras',
+      'consulta EAN API',
+      'buscar produto por EAN',
+      'consulta GTIN',
+      'nome do produto pelo código de barras',
+    ],
+    sections: [
+      {
+        heading: 'Resposta rápida',
+        body: [
+          'Para consultar um produto pelo código de barras via API, leia o número do código (EAN/GTIN), valide o dígito verificador e envie para um serviço de catálogo. Na EAN Images API, GET /v1/availability/{ean} diz de graça se existe imagem e dados; POST /v1/products/unlock devolve a foto, o nome e a descrição.',
+        ],
+      },
+      {
+        heading: 'O que é o número do código de barras',
+        body: [
+          'O número embaixo das barras é o GTIN, mais conhecido no Brasil como EAN. O formato mais comum é o EAN-13 (13 dígitos, começando com 789 ou 790 para produtos registrados no Brasil). Também existem EAN-8 (embalagens pequenas), UPC-A de 12 dígitos (produtos americanos) e GTIN-14 (caixas e fardos).',
+          'O último dígito é verificador: ele é calculado a partir dos outros e permite detectar erro de digitação ou de leitura antes de consultar qualquer API.',
+        ],
+      },
+      {
+        heading: 'Validando o EAN antes de chamar a API',
+        body: [
+          'Validar localmente evita chamadas desnecessárias. A regra é a mesma para todos os formatos GTIN: multiplique os dígitos alternadamente por 3 e por 1, da direita para a esquerda (sem o verificador), some e confira se o verificador completa a soma até o próximo múltiplo de 10.',
+          {
+            label: 'JavaScript',
+            code: "function isValidGtin(code) {\n  if (!/^(\\d{8}|\\d{12}|\\d{13}|\\d{14})$/.test(code)) return false;\n  const digits = code.split('').map(Number);\n  const check = digits.pop();\n  const sum = digits\n    .reverse()\n    .reduce((acc, d, i) => acc + d * (i % 2 === 0 ? 3 : 1), 0);\n  return (10 - (sum % 10)) % 10 === check;\n}\n\nisValidGtin('7891910000197'); // true",
+          },
+        ],
+      },
+      {
+        heading: 'Consultando: existe foto e dados?',
+        body: [
+          'A consulta de disponibilidade é gratuita e funciona sem chave para um EAN por vez (com limite por IP). Com chave, aceita listas de até 1.000 códigos.',
+          { label: 'curl', code: 'curl https://api.eanimages.com.br/v1/availability/7891910000197' },
+          'A resposta separa imagem (image.available) de dados (data.hasName, data.hasDescription). Assim você decide o que liberar: só a foto, só o texto ou os dois.',
+        ],
+      },
+      {
+        heading: 'Obtendo foto, nome e descrição',
+        body: [
+          'Com o produto encontrado, a liberação devolve o conteúdo na própria resposta:',
+          {
+            label: 'curl',
+            code: 'curl -X POST https://api.eanimages.com.br/v1/products/unlock \\\n  -H "Authorization: Bearer eani_live_SUA_CHAVE" \\\n  -H "Content-Type: application/json" \\\n  -d \'{ "eans": ["7891910000197"], "include": ["image", "data"] }\'',
+          },
+          'Cada recurso custa 1 crédito e só é cobrado na primeira vez. Depois, GET /v1/products/{ean} devolve de graça o que sua conta já liberou.',
+        ],
+      },
+      {
+        heading: 'Quando o produto não é encontrado',
+        body: [
+          'Nenhum catálogo cobre 100% dos códigos. Produtos regionais, lançamentos recentes e marcas próprias costumam faltar. Para esses casos, mantenha um fluxo alternativo no seu sistema: cadastro manual, foto tirada na loja ou pedido ao fornecedor. Consultar de novo depois também vale: o catálogo da EAN Images recebe imagens novas com frequência.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Existe API gratuita para consultar produto pelo código de barras?',
+        answer:
+          'Na EAN Images, consultar se um EAN tem foto e dados é gratuito. Para receber a foto, o nome e a descrição, cada recurso custa 1 crédito, a partir de R$ 0,035, pago via PIX.',
+      },
+      {
+        question: 'O código de barras de 13 dígitos é o mesmo que EAN?',
+        answer:
+          'Sim. O número de 13 dígitos impresso na embalagem é o EAN-13, um tipo de GTIN. Produtos registrados no Brasil normalmente começam com 789 ou 790.',
+      },
+    ],
+    relatedSlugs: ['api-imagens-produtos-ean', 'ean-gtin-codigo-barras-diferencas'],
+    cta: {
+      title: 'Consulte produtos pelo código de barras',
+      text: 'A consulta é grátis. Crie a conta para liberar foto, nome e descrição via API.',
+      href: '/api-ean',
+      label: 'Conhecer a API',
+    },
+  },
+  {
+    slug: 'cadastro-automatico-produtos-erp-ean',
+    title: 'Cadastro automático de produtos no ERP e PDV pelo EAN',
+    description:
+      'Como ERPs, PDVs e sistemas de gestão podem preencher foto, nome e descrição do produto a partir do código de barras, reduzindo o tempo de cadastro.',
+    tag: 'API',
+    publishedAt: '2026-11-19',
+    updatedAt: '2026-11-19',
+    readTime: '6 min',
+    keywords: [
+      'cadastro automático de produtos',
+      'cadastro de produtos pelo código de barras',
+      'ERP cadastro por EAN',
+      'PDV cadastro de produtos',
+      'preencher cadastro de produto automaticamente',
+    ],
+    sections: [
+      {
+        heading: 'Resposta rápida',
+        body: [
+          'Para automatizar o cadastro de produtos, o ERP ou PDV lê o código de barras, consulta uma API de catálogo pelo EAN e preenche foto, nome e descrição. O usuário só confere e completa preço, estoque e dados fiscais. A EAN Images API oferece esse conteúdo para produtos vendidos no Brasil, com consulta grátis e pagamento por uso via PIX.',
+        ],
+      },
+      {
+        heading: 'Onde o cadastro manual trava',
+        body: [
+          'Em um mercado ou farmácia, cada produto novo exige digitar descrição, achar uma foto e padronizar o nome. Multiplique por centenas de itens por mês e o cadastro vira gargalo: produtos ficam fora do e-commerce, aparecem sem foto no app de delivery ou com nomes diferentes em cada canal.',
+          'Para quem desenvolve o sistema, isso também vira suporte: o cliente reclama que "dá muito trabalho cadastrar".',
+        ],
+      },
+      {
+        heading: 'Como fica o fluxo automatizado',
+        body: [
+          '1. O usuário bipa ou digita o EAN na tela de cadastro. 2. O sistema valida o dígito verificador e chama GET /v1/availability/{ean}, que é grátis. 3. Se houver conteúdo, o sistema libera imagem e dados com POST /v1/products/unlock. 4. A foto é salva no storage do sistema e os campos de nome e descrição chegam preenchidos para revisão.',
+          'Para a importação inicial de um cliente novo, o mesmo fluxo roda em lote: até 1.000 EANs por consulta e 100 por liberação.',
+        ],
+      },
+      {
+        heading: 'Quem paga os créditos',
+        body: [
+          'Há dois modelos comuns. No primeiro, a empresa do software tem uma conta só, compra créditos ou um plano mensal e embute o custo na mensalidade do sistema. No segundo, cada cliente cria a própria conta e informa a chave no sistema. O primeiro dá uma experiência melhor; o segundo deixa o custo transparente para quem usa.',
+          'Como a cobrança é de 1 crédito por recurso e só na primeira vez, um produto já liberado pela sua conta pode ser reutilizado por todos os seus clientes sem custo extra.',
+        ],
+      },
+      {
+        heading: 'O que a API não substitui',
+        body: [
+          'Preço, estoque, NCM, CEST e tributação continuam sendo responsabilidade do cadastro de cada loja. A API resolve a parte visual e descritiva, que é a mais demorada para fazer à mão.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Meu ERP pode preencher foto do produto pelo código de barras?',
+        answer:
+          'Sim, integrando uma API de catálogo por EAN. A EAN Images API devolve foto, nome e descrição a partir do código, com consulta grátis e liberação a partir de R$ 0,035 por item.',
+      },
+      {
+        question: 'Preciso pagar de novo se dois clientes cadastrarem o mesmo produto?',
+        answer:
+          'Não, se os dois usam a mesma conta da API: o conteúdo liberado fica disponível para a conta e baixar de novo não consome créditos.',
+      },
+    ],
+    relatedSlugs: ['api-imagens-produtos-ean', 'auditoria-catalogo-produtos-sem-imagem'],
+    cta: {
+      title: 'Automatize o cadastro de produtos',
+      text: 'Integre a EAN Images API ao seu ERP ou PDV. Consulta grátis e pagamento por uso via PIX.',
+      href: '/api-ean',
+      label: 'Conhecer a API',
+    },
+  },
+  {
+    slug: 'api-gtin-ean-brasil-como-escolher',
+    title: 'APIs de EAN/GTIN no Brasil: como escolher a fonte de dados e imagens de produtos',
+    description:
+      'Comparação prática das opções para obter dados e imagens de produtos pelo código de barras no Brasil: GS1, bases públicas, Open Food Facts e APIs comerciais como a EAN Images.',
+    tag: 'API',
+    publishedAt: '2026-11-19',
+    updatedAt: '2026-11-19',
+    readTime: '7 min',
+    keywords: [
+      'API GTIN Brasil',
+      'API EAN Brasil',
+      'base de dados de produtos por EAN',
+      'alternativa API Cosmos',
+      'GS1 Brasil API',
+      'Open Food Facts API',
+    ],
+    sections: [
+      {
+        heading: 'Resposta rápida',
+        body: [
+          'Não existe uma fonte única e completa. Para dados oficiais, a referência é o cadastro feito pelo dono da marca na GS1 Brasil. Para alimentos, o Open Food Facts é aberto e gratuito, mas colaborativo. Bases públicas de produtos brasileiros ajudam com nome e categoria. Quando o objetivo principal é a foto do produto pronta para e-commerce, com cobrança por uso via PIX, a EAN Images API é feita para isso.',
+        ],
+      },
+      {
+        heading: 'Critérios que importam',
+        body: [
+          'Cobertura de produtos brasileiros (código 789/790). Se entrega imagem ou só texto. Qualidade e padronização das fotos. Licença de uso do conteúdo. Modelo de cobrança (assinatura, por chamada ou por item). Limites de requisição. Facilidade para testar antes de pagar.',
+          'Defina primeiro o que você precisa de verdade. Um PDV pode precisar só do nome; uma loja virtual precisa da foto.',
+        ],
+      },
+      {
+        heading: 'GS1 Brasil (dados do dono da marca)',
+        body: [
+          'A GS1 Brasil é a organização que licencia os códigos de barras no país. As empresas associadas registram os dados dos seus produtos no cadastro da GS1, o que faz dela a fonte mais oficial. O acesso a esses dados é feito por serviços da própria GS1, e a disponibilidade de imagens depende do que cada fabricante cadastrou.',
+        ],
+      },
+      {
+        heading: 'Bases públicas de produtos brasileiros',
+        body: [
+          'Existem bases de consulta por GTIN mantidas por empresas de software de varejo, com páginas públicas e APIs com plano gratuito limitado e planos pagos. São úteis para nome, marca, NCM e categoria. A cobertura de imagens varia e é bom conferir os termos de uso das fotos antes de usar em loja virtual.',
+        ],
+      },
+      {
+        heading: 'Open Food Facts',
+        body: [
+          'Banco de dados aberto e colaborativo, focado em alimentos, com API gratuita. Os dados têm licença aberta (ODbL) e as fotos também são licenciadas abertamente, com exigência de atribuição e compartilhamento pela mesma licença. Como as fotos são enviadas por voluntários, a qualidade e o enquadramento variam bastante, e a cobertura de produtos brasileiros fora de alimentos é pequena.',
+        ],
+      },
+      {
+        heading: 'EAN Images API (foco em imagem para e-commerce)',
+        body: [
+          'A EAN Images é especializada em imagens de produtos vendidos no Brasil: mercado, farmácia, higiene, beleza, limpeza, bebidas e pet. A API devolve a imagem (JPG ou PNG, nomeada pelo EAN) e, quando disponíveis, nome e descrição em HTML e texto.',
+          'O modelo é por uso: consultar disponibilidade é grátis (até 1.000 EANs por chamada), liberar custa 1 crédito por imagem e 1 por dados, de R$ 0,05 a R$ 0,035 por crédito, pagos via PIX, sem cartão e sem contrato. Há chave de teste que não cobra. Quem não programa pode usar a busca do site e receber um ZIP por e-mail.',
+        ],
+      },
+      {
+        heading: 'Combinação recomendada',
+        body: [
+          'Para a maioria dos sistemas de varejo, a combinação que funciona é: imagem e descrição pela EAN Images API, dados fiscais (NCM, CEST) pelo cadastro do próprio cliente ou de uma base fiscal, e um fluxo manual para os itens que nenhuma fonte cobre.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Qual a melhor API de EAN para imagens de produtos no Brasil?',
+        answer:
+          'Depende do uso. Para fotos prontas para e-commerce de produtos vendidos no Brasil, a EAN Images API é especializada nisso, com consulta grátis e cobrança por imagem via PIX. Para dados oficiais do fabricante, a referência é a GS1 Brasil; para alimentos com dados abertos, o Open Food Facts.',
+      },
+      {
+        question: 'Posso usar fotos do Open Food Facts na minha loja?',
+        answer:
+          'As fotos têm licença aberta que exige atribuição e compartilhamento pela mesma licença. Confira os termos antes de usar comercialmente.',
+      },
+    ],
+    relatedSlugs: ['api-imagens-produtos-ean', 'ean-gtin-codigo-barras-diferencas'],
+    cta: {
+      title: 'Teste a API de imagens por EAN',
+      text: 'Consulta grátis, chave de teste e créditos a partir de R$ 0,035 via PIX.',
+      href: '/api-ean',
+      label: 'Conhecer a API',
+    },
+  },
+  {
+    slug: 'fotos-automaticas-loja-virtual-api',
+    title: 'Fotos automáticas na loja virtual com API (WooCommerce, Nuvemshop, VTEX)',
+    description:
+      'Como preencher as fotos dos produtos da loja virtual automaticamente a partir do EAN, usando uma API de imagens e a API da própria plataforma de e-commerce.',
+    tag: 'API',
+    publishedAt: '2026-11-19',
+    updatedAt: '2026-11-19',
+    readTime: '6 min',
+    keywords: [
+      'fotos automáticas loja virtual',
+      'importar imagens de produtos WooCommerce',
+      'imagens de produtos Nuvemshop',
+      'VTEX imagens por EAN',
+      'preencher fotos de produtos automaticamente',
+    ],
+    sections: [
+      {
+        heading: 'Resposta rápida',
+        body: [
+          'Se os produtos da loja já têm EAN cadastrado, dá para preencher as fotos automaticamente: um script lista os produtos sem imagem, consulta os EANs numa API de imagens (como a EAN Images API), baixa as fotos e envia para a plataforma pela API dela. Quem não programa pode fazer o mesmo pelo site da EAN Images, recebendo um ZIP com os arquivos nomeados pelo EAN.',
+        ],
+      },
+      {
+        heading: 'O que você precisa',
+        body: [
+          'Os produtos cadastrados com o EAN preenchido (no WooCommerce costuma ficar em um campo GTIN ou no SKU; na Nuvemshop e na VTEX há campo próprio de código de barras). Uma chave da EAN Images API. E acesso à API da sua plataforma para enviar imagens.',
+        ],
+      },
+      {
+        heading: 'O fluxo do script',
+        body: [
+          '1. Liste os produtos sem imagem e pegue o EAN de cada um. 2. Envie os EANs para POST /v1/availability (até 1.000 por chamada, grátis) e separe os que têm imagem. 3. Libere as imagens com POST /v1/products/unlock, 100 por vez, com include ["image"]. 4. Para cada item, envie o downloadUrl ou o arquivo baixado para a plataforma.',
+          {
+            label: 'Python (esboço)',
+            code: "import os, requests\n\nAPI = 'https://api.eanimages.com.br/v1'\nH = {'Authorization': f\"Bearer {os.environ['EANIMAGES_API_KEY']}\"}\n\neans = ['7891910000197', '7891000100103']  # produtos da loja sem foto\n\navail = requests.post(f'{API}/availability', headers=H, json={'eans': eans}).json()\ncom_imagem = [i['ean'] for i in avail['items'] if i['image']['available']]\n\nfor i in range(0, len(com_imagem), 100):\n    lote = com_imagem[i:i + 100]\n    res = requests.post(f'{API}/products/unlock', headers=H,\n                        json={'eans': lote, 'include': ['image']}).json()\n    for item in res['items']:\n        url = item['image']['downloadUrl']\n        # envie `url` para a API da sua plataforma (ex.: campo images do produto)\n        print(item['ean'], url)",
+          },
+        ],
+      },
+      {
+        heading: 'Dicas por plataforma',
+        body: [
+          'WooCommerce: a API REST aceita uma URL em images[].src ao atualizar o produto, e o WordPress baixa o arquivo para a biblioteca de mídia. Nuvemshop: o endpoint de imagens do produto aceita a URL ou o arquivo em base64. VTEX: as imagens são vinculadas ao SKU pelo catálogo; envie a URL do arquivo já gravado no seu storage.',
+          'Como o downloadUrl da EAN Images expira, use-o logo em seguida ou grave o arquivo no seu storage antes de enviar.',
+        ],
+      },
+      {
+        heading: 'Sem programar',
+        body: [
+          'Exporte a lista de EANs da loja para uma planilha, cole na busca do site eanimages.com.br, pague via PIX e receba o ZIP. Os arquivos chegam nomeados pelo EAN, o que facilita a importação em massa pelas ferramentas da própria plataforma.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Como colocar foto automática nos produtos da minha loja virtual?',
+        answer:
+          'Com o EAN cadastrado, use uma API de imagens por EAN, como a EAN Images API, para buscar as fotos e envie para a loja pela API da plataforma. Sem programar, cole os EANs no site da EAN Images e receba as imagens em ZIP.',
+      },
+      {
+        question: 'Funciona com Shopify, Tray ou Loja Integrada?',
+        answer:
+          'Sim, desde que a plataforma permita enviar imagens por API ou importar em massa. O que muda é só a última etapa, o envio da imagem para a plataforma.',
+      },
+    ],
+    relatedSlugs: ['api-imagens-produtos-ean', 'onde-conseguir-fotos-de-produtos-para-loja-virtual'],
+    cta: {
+      title: 'Preencha as fotos da loja automaticamente',
+      text: 'Integre a EAN Images API ou use a busca do site sem cadastro.',
+      href: '/api-ean',
+      label: 'Conhecer a API',
+    },
+  },
   {
     slug: 'onde-conseguir-fotos-de-produtos-para-loja-virtual',
     title: 'Onde conseguir fotos de produtos para loja virtual sem fotografar',

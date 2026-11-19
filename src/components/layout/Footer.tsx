@@ -30,6 +30,12 @@ export function Footer() {
               <Link href="/#pricing" className="text-slate-400 hover:text-white text-sm transition-colors">
                 Tabela de Preços
               </Link>
+              <Link href="/api-ean" className="text-slate-400 hover:text-white text-sm transition-colors">
+                API para desenvolvedores
+              </Link>
+              <a href="https://developers.eanimages.com.br/docs" className="text-slate-400 hover:text-white text-sm transition-colors">
+                Documentação da API
+              </a>
             </nav>
           </div>
 
@@ -54,6 +60,12 @@ export function Footer() {
               </Link>
               <Link href="/blog/baixar-imagens-produtos-pelo-ean" className="text-slate-400 hover:text-white text-sm transition-colors">
                 Baixar imagens pelo EAN
+              </Link>
+              <Link href="/blog/api-imagens-produtos-ean" className="text-slate-400 hover:text-white text-sm transition-colors">
+                API de imagens por EAN
+              </Link>
+              <Link href="/blog/cadastro-automatico-produtos-erp-ean" className="text-slate-400 hover:text-white text-sm transition-colors">
+                Cadastro automático no ERP
               </Link>
             </nav>
           </div>

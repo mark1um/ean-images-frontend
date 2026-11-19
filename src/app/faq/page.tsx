@@ -80,6 +80,13 @@ const faqItems: FAQItem[] = [
     keywords: ['EAN-8', 'EAN-13', 'diferença'],
   },
   {
+    id: 'faq-api',
+    question: 'A EAN Images tem API para buscar imagens de produtos pelo EAN?',
+    answer:
+      'Sim. A EAN Images API (developers.eanimages.com.br) devolve a imagem, o nome e a descrição do produto a partir do EAN/GTIN, para integrar a ERPs, PDVs, marketplaces e lojas virtuais. Consultar a disponibilidade é grátis; liberar custa 1 crédito pela imagem e 1 pelos dados, de R$ 0,05 a R$ 0,035 por crédito, pagos via PIX. Detalhes em eanimages.com.br/api-ean.',
+    keywords: ['API', 'integração', 'desenvolvedores'],
+  },
+  {
     id: 'faq-10',
     question: 'Tenho dúvidas ou problemas na plataforma. Como entrar em contato?',
     answer:

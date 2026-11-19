@@ -40,6 +40,12 @@ export function Header() {
             Blog
           </Link>
           <Link
+            href="/api-ean"
+            className="text-sm text-slate-300 hover:text-white transition-colors"
+          >
+            API
+          </Link>
+          <Link
             href="/#pricing"
             className="text-sm text-slate-300 hover:text-white transition-colors"
           >

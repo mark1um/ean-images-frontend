@@ -14,6 +14,12 @@ const staticRoutes: MetadataRoute.Sitemap = [
     priority: 1.0,
   },
   {
+    url: `${siteUrl}/api-ean`,
+    lastModified: new Date('2026-11-19'),
+    changeFrequency: 'weekly',
+    priority: 0.95,
+  },
+  {
     url: `${siteUrl}/faq`,
     lastModified: pagesUpdatedAt,
     changeFrequency: 'weekly',

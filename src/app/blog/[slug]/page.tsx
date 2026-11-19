@@ -81,6 +81,12 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     ],
   };
   const faqSchema = getFaqSchema(post);
+  const cta = post.cta ?? {
+    title: 'Procure imagens por EAN',
+    text: 'Cole um EAN ou envie uma planilha para verificar a disponibilidade de imagens de produtos.',
+    href: '/',
+    label: 'Buscar imagens agora',
+  };
   const relatedPosts = post.relatedSlugs
     ?.map((slug) => getBlogPost(slug))
     .filter((relatedPost): relatedPost is NonNullable<typeof relatedPost> => Boolean(relatedPost));
@@ -124,11 +130,24 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             <section key={section.heading}>
               <h2 className="text-2xl font-bold text-white mb-4">{section.heading}</h2>
               <div className="space-y-4">
-                {section.body.map((paragraph) => (
-                  <p key={paragraph} className="text-slate-300 leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
+                {section.body.map((block, index) =>
+                  typeof block === 'string' ? (
+                    <p key={block} className="text-slate-300 leading-relaxed">
+                      {block}
+                    </p>
+                  ) : (
+                    <figure key={`code-${index}`} className="rounded-lg border border-slate-700 bg-slate-900">
+                      {block.label && (
+                        <figcaption className="border-b border-slate-700 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
+                          {block.label}
+                        </figcaption>
+                      )}
+                      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-cyan-100">
+                        <code>{block.code}</code>
+                      </pre>
+                    </figure>
+                  )
+                )}
               </div>
             </section>
           ))}
@@ -170,12 +189,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         )}
 
         <section className="mt-12 border-t border-slate-800 pt-8">
-          <h2 className="text-2xl font-bold text-white mb-3">Procure imagens por EAN</h2>
-          <p className="text-slate-300 mb-6">
-            Cole um EAN ou envie uma planilha para verificar a disponibilidade de imagens de produtos.
-          </p>
-          <Link href="/" className="btn-primary inline-block">
-            Buscar imagens agora
+          <h2 className="text-2xl font-bold text-white mb-3">{cta.title}</h2>
+          <p className="text-slate-300 mb-6">{cta.text}</p>
+          <Link href={cta.href} className="btn-primary inline-block">
+            {cta.label}
           </Link>
         </section>
       </article>
