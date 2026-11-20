@@ -259,7 +259,7 @@ export default async function ApiEanPage() {
               <li>✓ Aceita EAN-8, UPC (12 dígitos), EAN-13 e GTIN-14.</li>
               <li>✓ Devolve imagem em JPG ou PNG, nomeada pelo EAN, e nome + descrição (HTML e texto) quando disponíveis.</li>
               <li>✓ Consultar disponibilidade é grátis; até 1.000 EANs por chamada.</li>
-              <li>✓ Só usa crédito ao liberar: 1 pela imagem, 1 pelos dados. Baixar de novo é grátis.</li>
+              <li>✓ Só usa crédito para pegar a foto e os dados: 1 pela foto, 1 pelos dados. Baixar de novo é grátis.</li>
               <li>✓ Pagamento via PIX, sem cartão, sem contrato e sem renovação automática.</li>
               <li>✓ Chave de teste (eani_test_) que não cobra, para integrar antes de pagar.</li>
             </ul>
@@ -271,8 +271,8 @@ export default async function ApiEanPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Como funciona</h2>
           <div className="grid gap-4 md:grid-cols-3">
             {[
-              { step: '1. Consulte (grátis)', text: 'Pergunte se temos imagem e dados de um EAN ou de uma lista. Nada é cobrado.' },
-              { step: '2. Libere (créditos)', text: 'Libere a imagem e/ou os dados dos produtos encontrados. Se o saldo não cobre o lote, nada é cobrado.' },
+              { step: '1. Consulte (grátis)', text: 'Pergunte se temos foto e dados de um EAN ou de uma lista. A consulta responde sim ou não: ela não entrega a foto. Nada é cobrado.' },
+              { step: '2. Pegue a foto e os dados (créditos)', text: 'Peça a foto e/ou o nome e a descrição dos produtos encontrados: 1 crédito cada, só na primeira vez. A resposta traz o link da foto. Se o saldo não cobre o lote, nada é cobrado.' },
               { step: '3. Use', text: 'Baixe a imagem pelo link e grave nome e descrição no seu sistema. O conteúdo liberado fica disponível para a sua conta.' },
             ].map((item) => (
               <div key={item.step} className="rounded-lg border border-slate-700 bg-slate-900/50 p-5">
@@ -287,14 +287,16 @@ export default async function ApiEanPage() {
         <section className="space-y-6">
           <h2 className="text-2xl md:text-3xl font-bold text-white">Exemplo: teste agora, sem cadastro</h2>
           <p className="text-slate-300 leading-relaxed">
-            A consulta de um EAN funciona até sem chave. Rode no terminal:
+            A consulta de um EAN funciona até sem chave. Ela responde se temos a foto e os dados, mas ainda não
+            entrega a foto. Rode no terminal:
           </p>
           <Code label="Requisição" code={availabilityExample} />
           <Code label="Resposta" code={availabilityResponse} />
-          <h3 className="text-xl font-semibold text-white pt-4">Liberar imagem e dados</h3>
+          <h3 className="text-xl font-semibold text-white pt-4">Pegar a foto e os dados</h3>
           <p className="text-slate-300 leading-relaxed">
-            Com a chave criada no painel, libere até 100 EANs por chamada. A resposta já traz o link de download da
-            imagem e o conteúdo do produto:
+            Para receber a foto, o nome e a descrição, use a chave criada no painel no endpoint de liberação (até 100
+            EANs por chamada, 1 crédito pela foto e 1 pelos dados). A resposta traz o link de download da foto e o
+            conteúdo do produto:
           </p>
           <Code label="Requisição" code={unlockExample} />
           <Code label="Resposta (resumida)" code={unlockResponse} />
