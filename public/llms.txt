@@ -34,7 +34,7 @@ API REST para sistemas que precisam buscar imagem e dados de produtos pelo EAN/G
 - POST /v1/availability: consulta grátis em lote, até 1.000 EANs por chamada (cota de 20.000 por dia).
 - POST /v1/products/unlock: entrega a foto (JPG/PNG, nomeada pelo EAN) e/ou dados (nome, descrição em HTML e texto) de até 100 EANs.
 - Custo: 1 crédito pela imagem e 1 crédito pelos dados, cobrados só na primeira vez; baixar de novo é grátis.
-- Preços (BRL, via PIX): créditos avulsos que não vencem — 100 por R$ 5,00; 500 por R$ 22,50; 2.000 por R$ 80,00; 10.000 por R$ 350,00 (R$ 0,05 a R$ 0,035 por crédito). Planos mensais sem renovação automática — 300 créditos/mês por R$ 14,90; 1.500 por R$ 59,90; 5.000 por R$ 179,90.
+- Preços (BRL, via PIX): créditos avulsos que não vencem — 100 por R$ 5,00; 500 por R$ 22,50; 2.000 por R$ 80,00; 10.000 por R$ 350,00 (R$ 0,05 a R$ 0,035 por crédito). Planos mensais sem renovação automática — 300 créditos/mês por R$ 14,90; 1.500 por R$ 59,90; 5.000 por R$ 179,90. Plano personalizado: o cliente escolhe de 300 a 200.000 créditos por mês, de R$ 0,05 a R$ 0,029 por crédito.
 - Sem cartão e sem contrato. Chave de teste eani_test_ que não cobra; conta nova ganha créditos de boas-vindas.
 
 ## Para quem é
