@@ -178,6 +178,14 @@ export function HomeInfoSection() {
           <Link href="/faq" className="text-cyan-300 hover:text-cyan-200">
             Ver todas as perguntas
           </Link>
+          {' · '}
+          <Link href="/verificar-codigo-de-barras" className="text-cyan-300 hover:text-cyan-200">
+            Verificar código de barras grátis
+          </Link>
+          {' · '}
+          <Link href="/blog/ean-gtin-codigo-barras-diferencas" className="text-cyan-300 hover:text-cyan-200">
+            O que é código EAN e GTIN
+          </Link>
         </p>
       </section>
     </div>

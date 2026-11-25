@@ -20,6 +20,12 @@ const staticRoutes: MetadataRoute.Sitemap = [
     priority: 0.95,
   },
   {
+    url: `${siteUrl}/verificar-codigo-de-barras`,
+    lastModified: new Date('2026-11-24'),
+    changeFrequency: 'monthly',
+    priority: 0.9,
+  },
+  {
     url: `${siteUrl}/faq`,
     lastModified: pagesUpdatedAt,
     changeFrequency: 'weekly',

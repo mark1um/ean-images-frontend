@@ -50,6 +50,7 @@ Mais indicado para produtos industrializados com código de barras. Produtos sem
 
 - Página inicial (consulta e preços): https://www.eanimages.com.br/
 - API de imagens e dados de produtos por EAN: https://www.eanimages.com.br/api-ean
+- Verificador grátis de código de barras EAN/GTIN (dígito verificador e prefixo, até 500 códigos): https://www.eanimages.com.br/verificar-codigo-de-barras
 - Como funciona: https://www.eanimages.com.br/como-funciona
 - Perguntas frequentes: https://www.eanimages.com.br/faq
 - Sobre: https://www.eanimages.com.br/sobre-nos
@@ -70,7 +71,10 @@ Mais indicado para produtos industrializados com código de barras. Produtos sem
 - Fotos de produtos para supermercado online e delivery: https://www.eanimages.com.br/blog/fotos-de-produtos-para-supermercado-online
 - Quanto custa foto de produto para e-commerce: https://www.eanimages.com.br/blog/quanto-custa-foto-de-produto-ecommerce
 - Como baixar imagens de produtos pelo EAN: https://www.eanimages.com.br/blog/baixar-imagens-produtos-pelo-ean
-- EAN, GTIN e código de barras: diferenças: https://www.eanimages.com.br/blog/ean-gtin-codigo-barras-diferencas
+- Código EAN e GTIN: o que é, tipos e dígito verificador: https://www.eanimages.com.br/blog/ean-gtin-codigo-barras-diferencas
+- GTIN oficial vs GTIN aleatório: https://www.eanimages.com.br/blog/gtin-oficial-vs-gtin-aleatorio
+- Código universal do produto (GTIN) no Mercado Livre e na Shopee: https://www.eanimages.com.br/blog/codigo-universal-do-produto-gtin-marketplaces
+- Código de barras de produtos importados: https://www.eanimages.com.br/blog/codigo-de-barras-produtos-importados
 - Como organizar SKUs para marketplaces usando EAN: https://www.eanimages.com.br/blog/organizar-skus-marketplaces-ean
 - Como auditar produtos sem imagem no catálogo: https://www.eanimages.com.br/blog/auditoria-catalogo-produtos-sem-imagem
 - EAN, imagens e dados de produto para Google Shopping: https://www.eanimages.com.br/blog/dados-produto-google-shopping-ean

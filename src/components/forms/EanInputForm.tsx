@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useDropzone, type FileRejection } from 'react-dropzone';
 import toast from 'react-hot-toast';
 import { Upload, FileText, X, ChevronRight, Tag } from 'lucide-react';
@@ -17,6 +17,12 @@ export function EanInputForm({ onSubmit, isLoading }: EanInputFormProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [couponCode, setCouponCode] = useState('');
   const [showCoupon, setShowCoupon] = useState(false);
+
+  // Links como /?ean=789...,789... (ex.: vindos do verificador de código de barras) já preenchem a busca.
+  useEffect(() => {
+    const fromUrl = new URLSearchParams(window.location.search).get('ean');
+    if (fromUrl) setEanText(fromUrl.split(',').map((ean) => ean.trim()).filter(Boolean).join('\n'));
+  }, []);
 
   const onDrop = useCallback((acceptedFiles: File[], rejections: FileRejection[]) => {
     if (acceptedFiles[0]) {

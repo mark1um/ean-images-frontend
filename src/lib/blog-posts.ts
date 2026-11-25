@@ -587,7 +587,7 @@ export const blogPosts: BlogPost[] = [
           'Na EAN Images cada arquivo vem nomeado com o EAN do produto, então basta cruzar o nome do arquivo com a coluna de EAN da sua planilha de cadastro ou do seu integrador.',
       },
     ],
-    relatedSlugs: ['organizar-skus-marketplaces-ean', 'checklist-imagens-catalogo-digital'],
+    relatedSlugs: ['codigo-universal-do-produto-gtin-marketplaces', 'organizar-skus-marketplaces-ean', 'checklist-imagens-catalogo-digital'],
   },
   {
     slug: 'fotos-de-produtos-para-supermercado-online',
@@ -853,54 +853,426 @@ export const blogPosts: BlogPost[] = [
           'Não. O SKU organiza a operação interna da loja, enquanto o EAN identifica o item comercial de forma padronizada.',
       },
     ],
-    relatedSlugs: ['ean-gtin-codigo-barras-diferencas', 'baixar-imagens-produtos-pelo-ean'],
+    relatedSlugs: ['ean-gtin-codigo-barras-diferencas', 'codigo-universal-do-produto-gtin-marketplaces', 'baixar-imagens-produtos-pelo-ean'],
   },
   {
     slug: 'ean-gtin-codigo-barras-diferencas',
-    title: 'EAN, GTIN e código de barras: diferenças para cadastro de produtos',
+    title: 'Código EAN e GTIN: o que é, tipos e como funciona o código de barras',
     description:
-      'Guia direto sobre EAN, GTIN, código de barras e como esses identificadores ajudam a padronizar cadastros digitais.',
+      'O que é código EAN, o que é GTIN e qual a diferença. Tipos (EAN-13, EAN-8, UPC, GTIN-14), o que significam os números, como calcular o dígito verificador e como conseguir um código oficial.',
     tag: 'Catálogo',
     publishedAt: '2026-08-14',
-    updatedAt: '2026-08-14',
-    readTime: '5 min',
-    keywords: ['EAN', 'GTIN', 'código de barras', 'identificador de produto'],
+    updatedAt: '2026-11-24',
+    readTime: '9 min',
+    keywords: [
+      'código EAN',
+      'o que é código EAN',
+      'o que é GTIN',
+      'GTIN EAN',
+      'código de barras EAN',
+      'código GTIN',
+      'código universal do produto',
+      'diferença entre EAN e GTIN',
+      'EAN-13',
+      'GTIN-14',
+    ],
     sections: [
       {
-        heading: 'Entendendo os termos',
+        heading: 'Resposta rápida',
         body: [
-          'GTIN é a família de identificadores globais de itens comerciais. EAN-13 é uma das formas mais conhecidas de representar esse identificador em produtos vendidos no varejo brasileiro.',
-          'O código de barras é a representação visual que pode ser lida por scanners. O número abaixo dele é o identificador que sistemas de e-commerce, ERP e marketplaces costumam armazenar.',
+          'Código EAN é o número de 13 dígitos (às vezes 8) impresso embaixo do código de barras dos produtos. Ele identifica uma versão exata de um item: marca, sabor, tamanho e embalagem. GTIN (Global Trade Item Number) é o nome oficial da família de códigos da GS1 da qual o EAN faz parte. Na prática, EAN-13 e GTIN-13 são o mesmo número.',
+          'Marketplaces chamam esse número de "código universal do produto" (Mercado Livre), "GTIN" (Shopee, Google, Amazon) ou "código de barras". Na nota fiscal eletrônica, ele vai no campo cEAN. É sempre o mesmo código.',
         ],
       },
       {
-        heading: 'Por que isso importa para SEO de produto',
+        heading: 'O que é GTIN',
         body: [
-          'Dados estruturados de produto ficam mais confiáveis quando identificadores como GTIN/EAN estão corretos. Isso ajuda buscadores, comparadores e plataformas de venda a entenderem qual item está sendo anunciado.',
-          'Além disso, uma base com EAN correto facilita associação com imagens, descrições, categorias e variações legítimas do produto.',
+          'GTIN é o padrão global da GS1, organização sem fins lucrativos que administra os códigos de barras no mundo (no Brasil, a GS1 Brasil). O padrão tem quatro tamanhos: GTIN-8, GTIN-12, GTIN-13 e GTIN-14. Todos seguem a mesma regra de formação e o mesmo cálculo de dígito verificador.',
+          'Por isso, quando um sistema pede "GTIN/EAN", ele aceita qualquer um desses tamanhos. Um GTIN mais curto pode ser escrito com zeros à esquerda até 14 dígitos sem mudar de significado: 7891910000197 e 07891910000197 são o mesmo código.',
+        ],
+      },
+      {
+        heading: 'EAN e GTIN: qual a diferença',
+        body: [
+          'EAN (European Article Number) é o nome antigo, de quando o padrão era europeu. Em 2005 os sistemas EAN e UPC (dos EUA) foram unificados sob o nome GTIN. O nome EAN continuou popular no Brasil, por isso você vê "código EAN" no ERP, "GTIN" no marketplace e "código de barras" na conversa com o fornecedor.',
+          'Resumo: EAN-13 = GTIN-13, EAN-8 = GTIN-8, UPC-A = GTIN-12. O código de barras é o desenho de barras que o leitor do caixa lê; o EAN/GTIN é o número que esse desenho representa.',
+        ],
+      },
+      {
+        heading: 'Tipos de código: EAN-13, EAN-8, UPC e GTIN-14',
+        body: [
+          'EAN-13 (GTIN-13): 13 dígitos, o mais comum no varejo brasileiro. Está em quase todo produto de supermercado, farmácia e loja.',
+          'EAN-8 (GTIN-8): 8 dígitos, usado em embalagens pequenas onde o EAN-13 não cabe, como chicletes, batons e esmaltes.',
+          'UPC-A (GTIN-12): 12 dígitos, padrão dos EUA e Canadá. Aparece em produtos importados de lá. Para usar em sistemas brasileiros, basta acrescentar um 0 à esquerda.',
+          'GTIN-14 (também chamado DUN-14): 14 dígitos, usado em caixas, fardos e outras embalagens de transporte. O primeiro dígito (indicador, de 1 a 8) diferencia a caixa da unidade. Por exemplo, a caixa com 12 unidades de um produto tem GTIN-14 diferente do EAN-13 da unidade. No cadastro de loja virtual, use o EAN da unidade vendida.',
+        ],
+      },
+      {
+        heading: 'O que significam os números do código EAN',
+        body: [
+          'Um EAN-13 brasileiro tem quatro partes. Os três primeiros dígitos são o prefixo da GS1 do país onde a empresa licenciou o código: 789 ou 790 no Brasil. Depois vem o número da empresa, atribuído pela GS1. Em seguida, o número do item, escolhido pela própria empresa para cada produto. O último dígito é o verificador.',
+          'Atenção a um mito comum: o prefixo 789 não garante que o produto foi fabricado no Brasil. Ele só mostra que a empresa dona do código é associada à GS1 Brasil. Um produto feito na China por uma marca brasileira pode ter 789, e um produto brasileiro exportado por uma empresa estrangeira pode ter outro prefixo.',
+          'Códigos que começam com 2 (de 20 a 29) são de uso interno da loja, como as etiquetas da balança do açougue e da padaria. Eles não identificam o produto fora daquela loja e não servem para marketplace.',
+        ],
+      },
+      {
+        heading: 'Como calcular o dígito verificador',
+        body: [
+          'O último dígito do EAN é calculado a partir dos outros. Isso permite que o leitor do caixa, o ERP e o marketplace recusem um código digitado errado. O cálculo para EAN-13:',
+          '1) Pegue os 12 primeiros dígitos. 2) Multiplique os que estão em posição ímpar (1º, 3º, 5º...) por 1 e os de posição par (2º, 4º, 6º...) por 3. 3) Some tudo. 4) O dígito verificador é quanto falta para a próxima dezena (se a soma já termina em 0, ele é 0).',
+          {
+            label: 'Exemplo: 7891910000197',
+            code: 'Dígitos:  7  8  9  1  9  1  0  0  0  0  1  9\nPesos:    1  3  1  3  1  3  1  3  1  3  1  3\nProduto:  7 24  9  3  9  3  0  0  0  0  1 27   → soma = 83\n\nPróxima dezena: 90  →  90 - 83 = 7  →  dígito verificador = 7',
+          },
+          'Para não fazer a conta na mão, use o verificador de código de barras da EAN Images (eanimages.com.br/verificar-codigo-de-barras). Ele confere até 500 códigos de uma vez, de graça, direto no navegador.',
+        ],
+      },
+      {
+        heading: 'Como conseguir um código EAN para o seu produto',
+        body: [
+          'O único caminho oficial no Brasil é se associar à GS1 Brasil. A empresa paga uma taxa de filiação e uma anuidade, que variam conforme o faturamento e a quantidade de códigos, e recebe um prefixo de empresa para numerar os próprios produtos. Os códigos ficam registrados no Cadastro Nacional de Produtos, consultado por varejistas, marketplaces e pela SEFAZ.',
+          'Sites que vendem "EAN avulso" ou geram GTIN de graça entregam números que não estão registrados em nome da sua empresa. Isso pode causar recusa de anúncios e rejeição de nota fiscal. Explicamos os riscos no artigo sobre GTIN oficial vs GTIN aleatório.',
+          'Quem revende produtos de outras marcas não precisa criar código: deve usar o EAN que já vem impresso na embalagem do fabricante.',
+        ],
+      },
+      {
+        heading: 'Onde o código EAN é usado no e-commerce',
+        body: [
+          'Marketplaces: Mercado Livre, Shopee, Amazon e Magalu usam o GTIN para agrupar anúncios do mesmo produto, preencher a ficha técnica e decidir em qual catálogo o item entra. Código errado pode jogar o produto no catálogo de outro item.',
+          'Google Shopping: o Merchant Center usa o GTIN para identificar o produto e comparar ofertas. Produtos de marca sem GTIN correto podem ter alcance limitado.',
+          'Nota fiscal: a NF-e tem o campo cEAN, e a SEFAZ valida GTINs com prefixo brasileiro no cadastro da GS1.',
+          'Fotos e dados: o EAN é a chave mais confiável para buscar a foto e a descrição certas de um produto, porque não depende de como cada fornecedor escreve o nome. É assim que a EAN Images entrega imagens de produtos: você cola a lista de EANs e baixa as fotos já nomeadas pelo código.',
         ],
       },
       {
         heading: 'Erros comuns no cadastro',
         body: [
-          'Os erros mais frequentes são cadastrar EAN incompleto, usar o EAN de outra variação, misturar SKU interno com código de barras ou reutilizar o mesmo identificador em produtos diferentes.',
-          'Uma rotina de revisão por EAN ajuda a encontrar inconsistências antes que elas afetem anúncios, integrações ou experiência de compra.',
+          'Planilha que corta o zero à esquerda (um UPC 012345678905 vira 12345678905, com 11 dígitos). Formate a coluna como texto antes de colar os códigos.',
+          'Excel que mostra o EAN como 7,89191E+12. O número foi convertido para notação científica e pode perder os últimos dígitos. De novo: coluna em formato texto.',
+          'Usar o GTIN-14 da caixa no anúncio da unidade, ou o EAN de uma variação (sabor, cor, tamanho) em outra.',
+          'Colocar o SKU interno no campo de GTIN. SKU é o código da sua loja; GTIN é o código global do produto.',
         ],
       },
     ],
     faqs: [
       {
-        question: 'EAN e GTIN são a mesma coisa?',
+        question: 'O que é código EAN?',
         answer:
-          'GTIN é a família de identificadores globais. EAN-13 é uma das formas mais usadas para representar esse identificador em produtos de varejo.',
+          'É o número, normalmente de 13 dígitos, que fica embaixo do código de barras de um produto e identifica uma versão exata dele (marca, tamanho, sabor, embalagem). No Brasil, os EANs começam com 789 ou 790.',
       },
       {
-        question: 'Por que o GTIN ajuda em dados estruturados de produto?',
+        question: 'EAN e GTIN são a mesma coisa?',
         answer:
-          'Porque ele torna mais claro qual item está sendo descrito, reduz ambiguidade e melhora a consistência entre loja, marketplace, buscadores e comparadores.',
+          'Na prática, sim. GTIN é o nome oficial da família de códigos da GS1, e o EAN-13 é o GTIN-13. Sistemas que pedem GTIN aceitam o EAN impresso no produto.',
+      },
+      {
+        question: 'O que é código universal do produto?',
+        answer:
+          'É o nome que o Mercado Livre e outras plataformas dão ao GTIN/EAN: o número do código de barras do fabricante. Não é o SKU da sua loja.',
+      },
+      {
+        question: 'Qual a diferença entre GTIN-13 e GTIN-14?',
+        answer:
+          'O GTIN-13 (EAN-13) identifica a unidade vendida ao consumidor. O GTIN-14 identifica embalagens de transporte, como caixas e fardos, e começa com um dígito indicador.',
+      },
+      {
+        question: 'Como saber se um código EAN é válido?',
+        answer:
+          'Confira o dígito verificador: ele é calculado a partir dos outros 12 dígitos. O verificador grátis da EAN Images faz a conta para até 500 códigos de uma vez.',
+      },
+      {
+        question: 'Como conseguir código de barras para meu produto?',
+        answer:
+          'Associando sua empresa à GS1 Brasil, que fornece o prefixo e registra os códigos no Cadastro Nacional de Produtos. Revendedores devem usar o EAN que o fabricante já imprimiu na embalagem.',
       },
     ],
-    relatedSlugs: ['organizar-skus-marketplaces-ean', 'imagens-produto-conversao-ecommerce'],
+    relatedSlugs: [
+      'gtin-oficial-vs-gtin-aleatorio',
+      'codigo-universal-do-produto-gtin-marketplaces',
+      'codigo-de-barras-produtos-importados',
+      'baixar-imagens-produtos-pelo-ean',
+    ],
+    cta: {
+      title: 'Verifique seus códigos de barras',
+      text: 'Cole até 500 EANs para conferir o dígito verificador e o prefixo, e veja quais produtos já têm foto disponível.',
+      href: '/verificar-codigo-de-barras',
+      label: 'Verificar códigos grátis',
+    },
+  },
+  {
+    slug: 'gtin-oficial-vs-gtin-aleatorio',
+    title: 'GTIN oficial vs GTIN aleatório: riscos de usar código gerado na internet',
+    description:
+      'Qual a diferença entre um GTIN oficial da GS1 e um código EAN gerado em site ou comprado avulso, o que acontece em marketplaces e na nota fiscal, e quando você nem precisa criar um GTIN.',
+    tag: 'Catálogo',
+    publishedAt: '2026-11-24',
+    updatedAt: '2026-11-24',
+    readTime: '6 min',
+    keywords: [
+      'GTIN oficial vs GTIN aleatório',
+      'GTIN aleatório',
+      'gerador de EAN',
+      'comprar código EAN',
+      'GTIN falso',
+      'EAN avulso',
+      'GS1 Brasil',
+    ],
+    sections: [
+      {
+        heading: 'Resposta rápida',
+        body: [
+          'GTIN oficial é o código emitido a partir do prefixo que a GS1 Brasil atribui à sua empresa e que fica registrado em seu nome no Cadastro Nacional de Produtos. GTIN aleatório é um número montado por um gerador on-line ou revendido por terceiros: tem 13 dígitos e o dígito verificador certo, mas não pertence à sua empresa.',
+          'O aleatório passa na validação matemática, mas falha na verificação de dono. Marketplaces, o Google e a SEFAZ conseguem checar o dono do prefixo, e é aí que os problemas aparecem.',
+        ],
+      },
+      {
+        heading: 'Por que um código aleatório "parece" válido',
+        body: [
+          'O dígito verificador só prova que o número foi bem formado. Qualquer pessoa consegue calcular um dígito verificador correto para qualquer sequência de 12 dígitos. É exatamente o que os geradores fazem.',
+          'O que um gerador não consegue fazer é registrar o código em nome da sua empresa. O prefixo que ele usa pertence a outra empresa, ou a ninguém. Muitas vezes o mesmo número já está em um produto real de outra marca.',
+        ],
+      },
+      {
+        heading: 'O que pode dar errado',
+        body: [
+          'Nota fiscal rejeitada: a SEFAZ confere os GTINs com prefixo brasileiro (789 e 790) no Cadastro Centralizado de GTIN da GS1 Brasil. Código que não está lá, ou que está registrado para outro produto, pode fazer a NF-e ser rejeitada.',
+          'Anúncio no catálogo errado: Mercado Livre, Amazon e Shopee agrupam anúncios pelo GTIN. Se o seu número já pertence a outro produto, seu anúncio pode ser associado à ficha de outro item, perder a buy box ou ser removido por informação incorreta.',
+          'Google Shopping limitado: o Merchant Center compara o GTIN com o prefixo da marca. Divergência entre marca e dono do prefixo pode gerar avisos e limitar o alcance do produto.',
+          'Problema com grandes varejistas: redes de supermercado e farmácia costumam exigir GTIN oficial no cadastro de fornecedores e podem recusar o produto.',
+          'Retrabalho: trocar o código depois exige mexer em embalagem, cadastro, anúncios, etiquetas e histórico de vendas.',
+        ],
+      },
+      {
+        heading: 'E os códigos vendidos "avulsos"?',
+        body: [
+          'Alguns sites vendem EANs avulsos tirados de prefixos antigos, comprados antes das regras atuais. O código pode até ser único, mas fica registrado em nome de outra empresa, não da sua marca. Para quem vende só em loja própria pode passar despercebido. Para marketplace, Google Shopping e nota fiscal, o risco é o mesmo do código aleatório.',
+        ],
+      },
+      {
+        heading: 'Quando você não precisa criar um GTIN',
+        body: [
+          'Revendedor: se você revende produtos de outras marcas, use o EAN que o fabricante imprimiu na embalagem. Criar um código novo para um produto que já tem GTIN é erro, mesmo que seja oficial.',
+          'Produto sem código: artesanato, produtos feitos sob encomenda, peças usadas e kits montados pela loja normalmente podem ser anunciados sem GTIN. Mercado Livre e Shopee têm a opção de informar que o produto não tem código, e na NF-e o campo cEAN aceita "SEM GTIN".',
+          'Marca própria que vai crescer: se você fabrica ou manda fabricar com a sua marca e quer vender em marketplace e varejo, o caminho é se associar à GS1 Brasil.',
+        ],
+      },
+      {
+        heading: 'Como conferir um código antes de usar',
+        body: [
+          'Primeiro, confira se o número é bem formado no verificador de código de barras da EAN Images (grátis, até 500 códigos). Depois, consulte o dono do código no Verified by GS1 ou no Cadastro Nacional de Produtos da GS1 Brasil. Se a empresa que aparece não é a sua nem a do fabricante, não use o código.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'GTIN gerado na internet funciona?',
+        answer:
+          'Ele passa na validação do dígito verificador, mas não está registrado em nome da sua empresa. Pode causar rejeição de NF-e, anúncios no catálogo errado e problemas no Google Shopping.',
+      },
+      {
+        question: 'Posso comprar código EAN avulso?',
+        answer:
+          'Existem vendedores, mas o código continua registrado em nome de outra empresa. O único GTIN em nome da sua marca é o emitido a partir de um prefixo da GS1 Brasil.',
+      },
+      {
+        question: 'Preciso de GTIN para vender no Mercado Livre ou na Shopee?',
+        answer:
+          'Para produtos de marca que têm código de barras, sim: informe o GTIN do fabricante. Produtos sem código, como artesanato ou kits próprios, podem ser anunciados com a opção de produto sem GTIN.',
+      },
+      {
+        question: 'Revendedor precisa se associar à GS1?',
+        answer:
+          'Não para os produtos que revende: basta usar o EAN impresso na embalagem pelo fabricante. A associação é necessária para quem cria produtos com marca própria.',
+      },
+    ],
+    relatedSlugs: [
+      'ean-gtin-codigo-barras-diferencas',
+      'codigo-universal-do-produto-gtin-marketplaces',
+      'imagens-de-produtos-mercado-livre-shopee',
+    ],
+    cta: {
+      title: 'Confira seus GTINs em segundos',
+      text: 'Cole os códigos e veja na hora quais têm dígito verificador errado ou tamanho inválido.',
+      href: '/verificar-codigo-de-barras',
+      label: 'Abrir o verificador grátis',
+    },
+  },
+  {
+    slug: 'codigo-universal-do-produto-gtin-marketplaces',
+    title: 'Código universal do produto (GTIN): o que é e como preencher no Mercado Livre e na Shopee',
+    description:
+      'O que é o código universal do produto pedido pelo Mercado Livre, o GTIN da Shopee e da Amazon, onde encontrar o número, o que fazer quando o produto não tem código e os erros que derrubam anúncios.',
+    tag: 'Marketplaces',
+    publishedAt: '2026-11-24',
+    updatedAt: '2026-11-24',
+    readTime: '6 min',
+    keywords: [
+      'código universal do produto',
+      'código universal de produto Mercado Livre',
+      'o que é GTIN Shopee',
+      'GTIN Shopee',
+      'GTIN Mercado Livre',
+      'produto sem GTIN',
+      'código de barras marketplace',
+    ],
+    sections: [
+      {
+        heading: 'Resposta rápida',
+        body: [
+          'Código universal do produto é o GTIN, o mesmo número do código de barras (EAN) impresso na embalagem pelo fabricante. O Mercado Livre usa o nome "código universal de produto"; a Shopee, a Amazon e o Google chamam de GTIN; ERPs costumam chamar de EAN. É sempre o mesmo número, normalmente com 13 dígitos e começando com 789 ou 790 em produtos registrados no Brasil.',
+        ],
+      },
+      {
+        heading: 'Onde encontrar o código universal do produto',
+        body: [
+          'Na embalagem: é o número embaixo das barras. Ignore códigos internos, lote, validade e o código de barras da etiqueta de preço da loja.',
+          'Na nota fiscal de compra: o campo cEAN (ou "GTIN") da NF-e do fornecedor traz o código da unidade. Se aparecer "SEM GTIN", o fornecedor não informou.',
+          'No cadastro do fornecedor ou distribuidor: a planilha de produtos normalmente tem a coluna EAN.',
+          'Cuidado com a caixa: o código impresso na caixa de transporte (GTIN-14 ou DUN-14) é diferente do código da unidade. No anúncio, use o da unidade que o cliente recebe.',
+        ],
+      },
+      {
+        heading: 'Por que os marketplaces pedem o GTIN',
+        body: [
+          'O GTIN diz ao marketplace exatamente qual produto você está vendendo. Com ele, a plataforma junta seu anúncio ao catálogo do produto, preenche a ficha técnica, mostra seu preço ao lado dos concorrentes e evita anúncios duplicados.',
+          'Para o vendedor, isso costuma significar mais visibilidade: produtos com GTIN correto entram no catálogo e aparecem em buscas e comparações onde anúncios soltos não aparecem.',
+        ],
+      },
+      {
+        heading: 'No Mercado Livre',
+        body: [
+          'Ao criar o anúncio, o Mercado Livre pede o "código universal de produto". Com o código certo, ele sugere a ficha do catálogo já preenchida. Se o produto realmente não tem código (artesanato, produto feito por você, kit montado pela loja), existe a opção de informar que ele não tem código universal, com o motivo.',
+          'Evite marcar "não tem código" para produtos de marca que têm EAN na embalagem. A plataforma pode pedir correção ou restringir o anúncio.',
+        ],
+      },
+      {
+        heading: 'Na Shopee',
+        body: [
+          'Na Shopee, o campo se chama GTIN e aparece no cadastro do produto e de cada variação. Cada variação (cor, tamanho, sabor) que tem código próprio deve receber o seu GTIN. Produtos sem código podem ser cadastrados com a opção de produto sem GTIN.',
+          'Vendedores que emitem nota pela Shopee ou por integração com ERP precisam do GTIN certo também para a NF-e, que valida códigos brasileiros no cadastro da GS1.',
+        ],
+      },
+      {
+        heading: 'Erros que derrubam anúncios',
+        body: [
+          'Usar SKU interno, código do fornecedor ou número de lote no campo GTIN.',
+          'Colocar o mesmo GTIN em variações diferentes, ou o GTIN de uma variação em outra.',
+          'Usar código gerado na internet ou comprado avulso. Veja os riscos em GTIN oficial vs GTIN aleatório.',
+          'Código com dígito a menos por causa da planilha (zero à esquerda cortado ou notação científica no Excel). Confira a lista no verificador de código de barras antes de subir em massa.',
+        ],
+      },
+      {
+        heading: 'Do GTIN à foto do anúncio',
+        body: [
+          'Com a lista de GTINs em mãos, você também resolve as fotos. Na EAN Images, você cola os códigos, vê de graça quais têm imagem e baixa os arquivos já nomeados pelo EAN, prontos para subir em massa no Mercado Livre, na Shopee ou na Amazon.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'O que é código universal do produto no Mercado Livre?',
+        answer:
+          'É o GTIN/EAN do produto, o número do código de barras impresso na embalagem pelo fabricante. Não é o SKU da sua loja.',
+      },
+      {
+        question: 'O que é GTIN na Shopee?',
+        answer:
+          'É o código de barras global do produto (EAN-13, EAN-8, UPC ou GTIN-14). A Shopee usa o GTIN para identificar o produto e para dados da nota fiscal.',
+      },
+      {
+        question: 'E se o meu produto não tem código de barras?',
+        answer:
+          'Produtos sem código, como artesanato ou kits montados pela loja, podem ser anunciados com a opção de produto sem GTIN. Se você tem marca própria e quer escalar, o caminho é se associar à GS1 Brasil.',
+      },
+      {
+        question: 'Posso usar o mesmo GTIN em dois anúncios?',
+        answer:
+          'Pode ter mais de um anúncio do mesmo produto, mas cada variação diferente (cor, tamanho, sabor) tem seu próprio GTIN. Repetir o código em variações diferentes é erro de cadastro.',
+      },
+    ],
+    relatedSlugs: [
+      'ean-gtin-codigo-barras-diferencas',
+      'imagens-de-produtos-mercado-livre-shopee',
+      'organizar-skus-marketplaces-ean',
+      'gtin-oficial-vs-gtin-aleatorio',
+    ],
+  },
+  {
+    slug: 'codigo-de-barras-produtos-importados',
+    title: 'Código de barras de produtos importados: precisa de EAN brasileiro?',
+    description:
+      'Produto importado pode usar o código de barras de origem? Quando é preciso um EAN brasileiro, o que fazer com UPC de 12 dígitos e produtos sem código, e como cadastrar importados em marketplaces.',
+    tag: 'Catálogo',
+    publishedAt: '2026-11-24',
+    updatedAt: '2026-11-24',
+    readTime: '5 min',
+    keywords: [
+      'código de barras produtos importados',
+      'EAN produto importado',
+      'GTIN produto importado',
+      'UPC para EAN',
+      'código de barras importado',
+    ],
+    sections: [
+      {
+        heading: 'Resposta rápida',
+        body: [
+          'Não precisa trocar. O GTIN é global: um produto importado com código de barras de origem (EAN de outro país ou UPC dos EUA) pode ser vendido no Brasil, anunciado em marketplace e informado na NF-e com esse mesmo código. Você só precisa de um EAN brasileiro quando a marca do produto é sua, como em importação com marca própria (private label), ou quando o produto chega sem código nenhum.',
+        ],
+      },
+      {
+        heading: 'Por que o código de origem vale no Brasil',
+        body: [
+          'Todas as organizações GS1 do mundo usam o mesmo padrão. O prefixo (por exemplo 690 a 699 na China, 450 a 459 e 490 a 499 no Japão, 000 a 139 nos EUA) só indica onde a empresa dona do código se registrou. Não é um código "do país", e não precisa ser convertido.',
+          'Um produto de marca estrangeira com código de origem continua identificado pelo mesmo GTIN no Mercado Livre, na Amazon, no Google Shopping e em qualquer ERP.',
+        ],
+      },
+      {
+        heading: 'UPC de 12 dígitos: o que fazer',
+        body: [
+          'Produtos dos EUA e do Canadá costumam ter UPC-A, com 12 dígitos. Ele é um GTIN-12 válido. Se o seu sistema só aceita 13 dígitos, acrescente um 0 à esquerda: 012345678905 vira 0012345678905. O dígito verificador continua o mesmo.',
+          'Na planilha, formate a coluna como texto. Se ela for numérica, o Excel apaga o zero inicial e o código fica inválido.',
+        ],
+      },
+      {
+        heading: 'Quando o importador precisa de código próprio',
+        body: [
+          'Marca própria: se você manda fabricar na China (ou em qualquer lugar) com a sua marca, os códigos devem ser da sua empresa. O fabricante não deve usar o prefixo dele, e um código gerado na internet traz os riscos de GTIN aleatório. Associe a empresa à GS1 Brasil e imprima o código na embalagem antes do embarque.',
+          'Produto sem código: algumas mercadorias chegam sem código de barras. Se forem revendidas em varejo ou marketplace como produto de marca, o dono da marca deve providenciar o GTIN. Para itens genéricos, os marketplaces costumam aceitar o anúncio sem GTIN.',
+          'Kits e combos montados no Brasil: um kit novo, montado pelo importador, é um item novo e precisa de GTIN próprio se for vendido como produto de catálogo.',
+        ],
+      },
+      {
+        heading: 'Cuidados no cadastro de importados',
+        body: [
+          'Confira os códigos da invoice ou da lista do fornecedor no verificador de código de barras antes de cadastrar. Erros de digitação são comuns em listas montadas à mão.',
+          'Não confunda o código da unidade com o da caixa master (GTIN-14). Anuncie com o código da unidade.',
+          'Para fotos, o código de origem também funciona como chave: busque pelo EAN ou UPC na EAN Images para ver se há imagem disponível antes de contratar fotografia.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Produto importado precisa de código de barras brasileiro?',
+        answer:
+          'Não. O código de barras de origem é um GTIN global e vale no Brasil. Só é preciso código próprio quando a marca é sua (private label) ou quando o produto não tem código.',
+      },
+      {
+        question: 'Posso usar UPC no Mercado Livre e na NF-e?',
+        answer:
+          'Sim. O UPC-A é um GTIN-12. Se o sistema exigir 13 dígitos, acrescente um zero à esquerda.',
+      },
+      {
+        question: 'O fabricante chinês pode colocar o código dele no meu produto?',
+        answer:
+          'Para produto com a sua marca, não é o recomendado: o código ficaria registrado para outra empresa. O ideal é usar GTINs do prefixo da sua empresa na GS1 Brasil.',
+      },
+    ],
+    relatedSlugs: [
+      'ean-gtin-codigo-barras-diferencas',
+      'gtin-oficial-vs-gtin-aleatorio',
+      'codigo-universal-do-produto-gtin-marketplaces',
+    ],
   },
   {
     slug: 'checklist-imagens-catalogo-digital',

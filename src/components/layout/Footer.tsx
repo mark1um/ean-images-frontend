@@ -46,8 +46,14 @@ export function Footer() {
               <Link href="/faq" className="text-slate-400 hover:text-white text-sm transition-colors">
                 O que é EAN?
               </Link>
+              <Link href="/verificar-codigo-de-barras" className="text-slate-400 hover:text-white text-sm transition-colors">
+                Verificar código de barras
+              </Link>
               <Link href="/blog/ean-gtin-codigo-barras-diferencas" className="text-slate-400 hover:text-white text-sm transition-colors">
-                EAN, GTIN e código de barras
+                O que é código EAN e GTIN
+              </Link>
+              <Link href="/blog/codigo-universal-do-produto-gtin-marketplaces" className="text-slate-400 hover:text-white text-sm transition-colors">
+                Código universal do produto
               </Link>
               <Link href="/blog/imagens-de-produtos-mercado-livre-shopee" className="text-slate-400 hover:text-white text-sm transition-colors">
                 Imagens para marketplaces
