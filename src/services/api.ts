@@ -134,3 +134,25 @@ export async function restoreLead(leadId: string): Promise<RestoreLeadResponse> 
 }
 
 export { ApiError };
+
+// ─────────────────────────────────────────────
+// Pedido de remoção de conteúdo (titular de direitos)
+// ─────────────────────────────────────────────
+export async function submitContentRemoval(params: {
+  name: string;
+  email: string;
+  company?: string;
+  role: 'titular' | 'representante';
+  eans?: string;
+  urls?: string;
+  description: string;
+  goodFaith: true;
+  website?: string;
+}): Promise<{ requestId: string }> {
+  const response = await fetch(`${API_URL}/content-removal`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(params),
+  });
+  return handleResponse<{ requestId: string }>(response);
+}

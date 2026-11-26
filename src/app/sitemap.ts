@@ -62,6 +62,12 @@ const staticRoutes: MetadataRoute.Sitemap = [
     priority: 0.5,
   },
   {
+    url: `${siteUrl}/remocao-de-conteudo`,
+    lastModified: new Date('2026-11-26'),
+    changeFrequency: 'yearly',
+    priority: 0.4,
+  },
+  {
     url: `${siteUrl}/politica-de-privacidade`,
     lastModified: pagesUpdatedAt,
     changeFrequency: 'yearly',
@@ -69,7 +75,7 @@ const staticRoutes: MetadataRoute.Sitemap = [
   },
   {
     url: `${siteUrl}/termos-de-uso`,
-    lastModified: pagesUpdatedAt,
+    lastModified: new Date('2026-11-26'),
     changeFrequency: 'yearly',
     priority: 0.4,
   },

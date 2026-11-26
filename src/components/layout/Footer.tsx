@@ -109,6 +109,10 @@ export function Footer() {
             <Link href="/termos-de-uso" className="text-slate-400 hover:text-white text-sm transition-colors">
               Termos de Uso
             </Link>
+            <span className="text-slate-700">•</span>
+            <Link href="/remocao-de-conteudo" className="text-slate-400 hover:text-white text-sm transition-colors">
+              Remoção de conteúdo
+            </Link>
           </div>
         </div>
       </div>
